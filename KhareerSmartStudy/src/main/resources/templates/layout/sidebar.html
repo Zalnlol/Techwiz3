@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+
+<head>
+
+</head>
+
+<body>
+
+
+<aside class=" main-sidebar elevation-4 " th:fragment="sidebar">
+    <!-- Brand Logo -->
+    <a th:href="@{/home/index}" class="brand-link ">
+        <img src="/images/Website/Logo1.png" alt="Product Demo" style="max-width:120px ">
+
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar ">
+        <!-- Sidebar user panel (optional) -->
+
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2 ">
+            <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu "
+                data-accordion="false ">
+                <!-- Add icons to the links using the .nav-icon class
+       with font-awesome or any other icon font library -->
+                <li class="nav-item sd ">
+                    <a th:href="@{/home/index}" class="nav-link active-link ">
+                        <div class="nav-item-color-active ">
+                            <!-- <i class="nav-icon " style="color:white "></i> -->
+                            <!-- <img src="images/icon/adminhome.svg " width="20px " srcset=" "> -->
+                            <i class="fas fa-home "></i>
+                            <p style="margin-left: 8% ">
+                                Trang chủ
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a href="/account/index" class="nav-link ">
+                        <div class="nav-item-color ">
+                            <i class="fas fa-user "></i>
+
+                            <p style="margin-left: 8% ">
+                                Tài khoản
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a href="/position/index" class="nav-link ">
+                        <div class="nav-item-color ">
+                            <i class="fas fa-user-plus "></i>
+
+                            <p style="margin-left: 8% ">
+                                Vị trí làm việc
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a th:href="@{/timeline/index}" class="nav-link ">
+                        <div class="nav-item-color ">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-calendar "></i>
+
+                            <p style="margin-left: 8% ">
+                                Lịch làm việc
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a th:href="@{/timekeeping/index}" class="nav-link ">
+                        <div class="nav-item-color ">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-clock "></i>
+
+                            <p style="margin-left: 8% ">
+                                Chấm công
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a href="# " class="nav-link ">
+                        <div class="nav-item-color ">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-edit "></i>
+
+                            <p style="margin-left: 8% ">
+                                Tiền lương
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item sd ">
+                    <a th:href="@{/notification}" class="nav-link ">
+                        <div class="nav-item-color ">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-comments "></i>
+
+                            <p style="margin-left: 8% ">
+                                Thông báo
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item sd ">
+                    <a th:href="@{/dayoff}" class="nav-link ">
+                        <div class="nav-item-color ">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-business-time"></i>
+
+                            <p style="margin-left: 8% ">
+                                Nghỉ phép
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+
+
+
+                <li class="nav-item sd " style="margin-top:35% ">
+                    <a href="/redirectlogout" class="nav-link ">
+                        <div class="nav-item-color ">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-sign-out-alt "></i>
+
+                            <p style="margin-left: 8% ">
+                                Đăng xuất
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+
+</body>
+
+</html>
