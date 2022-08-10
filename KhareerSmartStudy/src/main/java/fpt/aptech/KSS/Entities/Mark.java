@@ -50,7 +50,7 @@ public class Mark implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "remark")
     private String remark;
-    @JoinColumn(name = "id_user", referencedColumnName = "mail")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Account idUser;
     @JoinColumn(name = "id_course", referencedColumnName = "id")

@@ -40,7 +40,7 @@ public class ClassroomUser implements Serializable {
     @JoinColumn(name = "id_classroom", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Classroom idClassroom;
-    @JoinColumn(name = "id_user", referencedColumnName = "mail")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Account idUser;
 

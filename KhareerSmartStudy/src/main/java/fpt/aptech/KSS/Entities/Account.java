@@ -7,18 +7,24 @@ package fpt.aptech.KSS.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,17 +35,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
+    @NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id"),
     @NamedQuery(name = "Account.findByMail", query = "SELECT a FROM Account a WHERE a.mail = :mail"),
     @NamedQuery(name = "Account.findByName", query = "SELECT a FROM Account a WHERE a.name = :name"),
-    @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password"),
+    @NamedQuery(name = "Account.findByPhone", query = "SELECT a FROM Account a WHERE a.phone = :phone"),
     @NamedQuery(name = "Account.findByDob", query = "SELECT a FROM Account a WHERE a.dob = :dob"),
+    @NamedQuery(name = "Account.findByGender", query = "SELECT a FROM Account a WHERE a.gender = :gender"),
     @NamedQuery(name = "Account.findByRole", query = "SELECT a FROM Account a WHERE a.role = :role"),
     @NamedQuery(name = "Account.findByAvatar", query = "SELECT a FROM Account a WHERE a.avatar = :avatar"),
-    @NamedQuery(name = "Account.findByCode", query = "SELECT a FROM Account a WHERE a.code = :code")})
+    @NamedQuery(name = "Account.findByCode", query = "SELECT a FROM Account a WHERE a.code = :code"),
+    @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -50,14 +63,16 @@ public class Account implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 250)
-    @Column(name = "password")
-    private String password;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 20)
+    @Column(name = "phone")
+    private String phone;
     @Column(name = "dob")
     @Temporal(TemporalType.DATE)
     private Date dob;
+    @Size(max = 20)
+    @Column(name = "gender")
+    private String gender;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -71,20 +86,42 @@ public class Account implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "code")
     private String code;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 250)
+    @Column(name = "password")
+    private String password;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    private List<ClassroomUser> classroomUserList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    private List<NotificationUser> notificationUserList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTeacher")
+    private List<Schedule> scheduleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    private List<Mark> markList;
 
     public Account() {
     }
 
-    public Account(String mail) {
-        this.mail = mail;
+    public Account(Integer id) {
+        this.id = id;
     }
 
-    public Account(String mail, String name, String password, String role, String code) {
+    public Account(Integer id, String mail, String name, String role, String code, String password) {
+        this.id = id;
         this.mail = mail;
         this.name = name;
-        this.password = password;
         this.role = role;
         this.code = code;
+        this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getMail() {
@@ -103,12 +140,12 @@ public class Account implements Serializable {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Date getDob() {
@@ -117,6 +154,14 @@ public class Account implements Serializable {
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getRole() {
@@ -143,10 +188,54 @@ public class Account implements Serializable {
         this.code = code;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @XmlTransient
+    public List<ClassroomUser> getClassroomUserList() {
+        return classroomUserList;
+    }
+
+    public void setClassroomUserList(List<ClassroomUser> classroomUserList) {
+        this.classroomUserList = classroomUserList;
+    }
+
+    @XmlTransient
+    public List<NotificationUser> getNotificationUserList() {
+        return notificationUserList;
+    }
+
+    public void setNotificationUserList(List<NotificationUser> notificationUserList) {
+        this.notificationUserList = notificationUserList;
+    }
+
+    @XmlTransient
+    public List<Schedule> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(List<Schedule> scheduleList) {
+        this.scheduleList = scheduleList;
+    }
+
+    @XmlTransient
+    public List<Mark> getMarkList() {
+        return markList;
+    }
+
+    public void setMarkList(List<Mark> markList) {
+        this.markList = markList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (mail != null ? mail.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -157,7 +246,7 @@ public class Account implements Serializable {
             return false;
         }
         Account other = (Account) object;
-        if ((this.mail == null && other.mail != null) || (this.mail != null && !this.mail.equals(other.mail))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -165,7 +254,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "fpt.aptech.KSS.Entities.Account[ mail=" + mail + " ]";
+        return "fpt.aptech.KSS.Entities.Account[ id=" + id + " ]";
     }
     
 }

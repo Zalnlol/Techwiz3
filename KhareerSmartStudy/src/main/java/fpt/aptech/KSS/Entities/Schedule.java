@@ -61,7 +61,7 @@ public class Schedule implements Serializable {
     @JoinColumn(name = "id_classroom", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Classroom idClassroom;
-    @JoinColumn(name = "id_teacher", referencedColumnName = "mail")
+    @JoinColumn(name = "id_teacher", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Account idTeacher;
     @JoinColumn(name = "id_course", referencedColumnName = "id")

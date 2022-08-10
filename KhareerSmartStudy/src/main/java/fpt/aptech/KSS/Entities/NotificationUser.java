@@ -40,7 +40,7 @@ public class NotificationUser implements Serializable {
     @JoinColumn(name = "id_notification", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Notification idNotification;
-    @JoinColumn(name = "id_user", referencedColumnName = "mail")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Account idUser;
 

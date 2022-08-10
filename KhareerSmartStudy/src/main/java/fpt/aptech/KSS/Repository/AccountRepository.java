@@ -15,10 +15,15 @@ import org.springframework.web.bind.annotation.PathVariable;
  *
  * @author jthie
  */
-public interface AccountRepository extends JpaRepository<Account, String> {
+public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     @Query("SELECT a FROM Account a WHERE a.mail = :mail")
     Account findByEmail(@PathVariable("mail") String mail);
 
+    @Query("SELECT a FROM Account a WHERE CONCAT(a.mail,' ', a.name,' ', a.phone) LIKE %?1%")
+    public List<Account> search(String keyword);
+
+    @Query("SELECT a FROM Account a WHERE a.code = :code")
+    Account checkUniqueCode(@PathVariable("code") String code);
 
 }
