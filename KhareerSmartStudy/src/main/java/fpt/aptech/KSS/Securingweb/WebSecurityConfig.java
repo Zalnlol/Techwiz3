@@ -23,29 +23,31 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
  *
  * @author jthie
  */
-
 @Configuration
 @EnableWebSecurity
 @Import(SwaggerConfig.class)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-        @Override
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
                 .authorizeRequests()
                 .antMatchers("/plugins/**", "/dist/**", "/css/**", "/images/**", "/script/**", "/api/**")
                 .permitAll()
+                .antMatchers("/**")
+                .permitAll()
                 .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
-//                .antMatchers("/account/**","/notification/**"")
-//                .access("hasAnyRole('ROLE_ADMIN')")
+                //                .antMatchers("/account/**","/notification/**"")
+                //                .access("hasAnyRole('ROLE_ADMIN')")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginProcessingUrl("/j_spring_security_check")
-                .loginPage("/login")
+                //                .loginProcessingUrl("/j_spring_security_check")
+                //                .loginPage("/login")
                 .defaultSuccessUrl("/home/index", true)
                 .failureUrl("/login?error")
                 .usernameParameter("email")
