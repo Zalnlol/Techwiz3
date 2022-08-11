@@ -12,7 +12,7 @@
 <aside class=" main-sidebar elevation-4 " th:fragment="sidebar">
     <!-- Brand Logo -->
     <a th:href="@{/home/index}" class="brand-link ">
-        <img src="/images/Website/Logo1.png" alt="Product Demo" style="max-width:120px ">
+        <img src="/images/Website/Logo1.png" alt="Product Demo" style="max-width:230px ">
 
     </a>
 
@@ -34,7 +34,7 @@
                             <!-- <img src="images/icon/adminhome.svg " width="20px " srcset=" "> -->
                             <i class="fas fa-home "></i>
                             <p style="margin-left: 8% ">
-                                Trang chủ
+                                Main Dashboard
 
                             </p>
                         </div>
@@ -48,7 +48,7 @@
                             <i class="fas fa-user "></i>
 
                             <p style="margin-left: 8% ">
-                                Tài khoản
+                                Account
 
                             </p>
                         </div>
@@ -56,28 +56,15 @@
                     </a>
 
                 </li>
+
                 <li class="nav-item sd ">
-                    <a href="/position/index" class="nav-link ">
-                        <div class="nav-item-color ">
-                            <i class="fas fa-user-plus "></i>
-
-                            <p style="margin-left: 8% ">
-                                Vị trí làm việc
-
-                            </p>
-                        </div>
-
-                    </a>
-
-                </li>
-                <li class="nav-item sd ">
-                    <a th:href="@{/timeline/index}" class="nav-link ">
+                    <a th:href="@{/classroom/index}" class="nav-link ">
                         <div class="nav-item-color ">
                             <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
                             <i class="fas fa-calendar "></i>
 
                             <p style="margin-left: 8% ">
-                                Lịch làm việc
+                                Classroom
 
                             </p>
                         </div>
@@ -86,13 +73,13 @@
 
                 </li>
                 <li class="nav-item sd ">
-                    <a th:href="@{/timekeeping/index}" class="nav-link ">
+                    <a th:href="@{/course/index}" class="nav-link ">
                         <div class="nav-item-color ">
                             <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
                             <i class="fas fa-clock "></i>
 
                             <p style="margin-left: 8% ">
-                                Chấm công
+                                Course
 
                             </p>
                         </div>
@@ -100,21 +87,7 @@
                     </a>
 
                 </li>
-                <li class="nav-item sd ">
-                    <a href="# " class="nav-link ">
-                        <div class="nav-item-color ">
-                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
-                            <i class="fas fa-edit "></i>
 
-                            <p style="margin-left: 8% ">
-                                Tiền lương
-
-                            </p>
-                        </div>
-
-                    </a>
-
-                </li>
 
                 <li class="nav-item sd ">
                     <a th:href="@{/notification}" class="nav-link ">
@@ -123,7 +96,7 @@
                             <i class="fas fa-comments "></i>
 
                             <p style="margin-left: 8% ">
-                                Thông báo
+                                Notification
 
                             </p>
                         </div>
@@ -132,21 +105,7 @@
 
                 </li>
 
-                <li class="nav-item sd ">
-                    <a th:href="@{/dayoff}" class="nav-link ">
-                        <div class="nav-item-color ">
-                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
-                            <i class="fas fa-business-time"></i>
 
-                            <p style="margin-left: 8% ">
-                                Nghỉ phép
-
-                            </p>
-                        </div>
-
-                    </a>
-
-                </li>
 
 
 
@@ -157,7 +116,7 @@
                             <i class="fas fa-sign-out-alt "></i>
 
                             <p style="margin-left: 8% ">
-                                Đăng xuất
+                                Logout
 
                             </p>
                         </div>

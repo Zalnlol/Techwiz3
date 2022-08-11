@@ -54,12 +54,10 @@ public class Account implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "mail")
     private String mail;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
@@ -74,7 +72,6 @@ public class Account implements Serializable {
     @Column(name = "gender")
     private String gender;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "role")
     private String role;
@@ -82,12 +79,10 @@ public class Account implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "code")
     private String code;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "password")
     private String password;

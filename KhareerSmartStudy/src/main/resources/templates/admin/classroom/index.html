@@ -1,0 +1,140 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout}">
+
+    <head>
+        <title>Quản lý chấm công</title>
+
+        <style>
+
+            .title-card {
+                padding-top: 11%;
+                padding-bottom: 11%;
+                margin-left: 4%;
+                font-weight: bold
+            }
+
+            .title-page {
+                text-align: center;
+                margin-top: 2%;
+                margin-bottom: 3%;
+                font-weight: bold
+            }
+
+
+        </style>
+        <link rel="stylesheet"
+              href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#searchBox").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "http://localhost:7777/timekeeping/autocomplete",
+                            dataType: "json",
+                            data: {
+                                value: request.term
+                            },
+                            success: function (data) {
+                                //alert(data);
+                                console.log(data);
+                                response(data);
+                            }
+                        });
+                    },
+                    minLength: 2
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+
+        <div layout:fragment="content">
+
+            <h3 class="title-page">Quản lý lớp học</h3>        
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col background-table">
+
+
+                    <div class="row" style="margin-bottom:2% ;">
+
+                        <div class="col-sm-3">
+                            <form th:action="@{/classroom/search}" th:method="get">
+                                <input type="text" class="form-control input" placeholder="Enter name" name="mail" id="searchBox">
+                                </div>
+                                <div class="col-sm-1">
+                                    <input type="submit" class="btn btn-success form-control button-defualt" value="Filter">
+                                </div>
+                            </form>
+                            
+                            <div class="col-sm-6"></div>
+                            
+                            <div class="col-sm-2">
+                                    <a th:href="@{/classroom/doCreate}">
+                                        <input type="button" class="btn btn-success form-control button-defualt" value="Create new">
+                                    </a>
+                                </div>
+
+                        </div>
+
+
+                        <table class="table" style="text-align: center;">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Duration</th>
+                                    <th scope="col">Semester</th>
+                                    <!--<th scope="col">Ca</th>-->
+                                    <th scope="col">Action</th>
+
+                                </tr>
+                            </thead>                     
+                            <tbody>
+                                <tr th:each="item:${list}">
+                                    <td th:text="${item.getId()}"></td>
+                                    <td th:text="${item.getName().getMail()}"></td> 
+                                    <td th:text="${item.getDuration()}"></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="button-envent
+                                            dropdown-toggle" style="margin-right:
+                                            10px;" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-edit"
+                                           style="color:
+                                           #6667AB"></i>
+                                    </button>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" th:href="@{'/classroom/edit/' + ${item.getId()}}">Edit</a>
+                                    </div>
+
+                                </div>
+
+                            </td>                            
+
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+                    <div class="col-sm-1"></div>
+
+                </div>
+
+
+            </div>
+
+
+    </body>
+
+</html>
