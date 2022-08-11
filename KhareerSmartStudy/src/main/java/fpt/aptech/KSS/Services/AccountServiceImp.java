@@ -16,18 +16,19 @@ import org.springframework.stereotype.Service;
  * @author jthie
  */
 @Service
-public class AccountServiceImp implements IAccountRepository{
+public class AccountServiceImp implements IAccountRepository {
+
     @Autowired
     private AccountRepository repository;
-    
+
     @Override
     public List<Account> findAll() {
-         return repository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public void save(Account account) {
-       repository.save(account);
+        repository.save(account);
     }
 
     @Override
@@ -39,5 +40,15 @@ public class AccountServiceImp implements IAccountRepository{
     public Account checkUniqueCode(String code) {
         return repository.checkUniqueCode(code);
     }
-    
+
+    @Override
+    public Account lastCreateAccount(Account account) {
+        return repository.selectLatestRecord(account);
+    }
+
+    @Override
+    public Account findById(int id) {
+        return repository.findById(id);
+    }
+
 }

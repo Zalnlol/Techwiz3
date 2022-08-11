@@ -2,76 +2,74 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/layout/_layout}"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Quản lý tài khoản</title>
+    <head>
+        <title>Quản lý tài khoản</title>
 
-    <style>
-        .title-card {
-            padding-top: 11%;
-            padding-bottom: 11%;
-            margin-left: 4%;
-            font-weight: bold
-        }
+        <style>
+            .title-card {
+                padding-top: 11%;
+                padding-bottom: 11%;
+                margin-left: 4%;
+                font-weight: bold
+            }
 
-        .title-page {
-            text-align: center;
-            margin-top: 2%;
-            margin-bottom: 3%;
-            font-weight: bold
-        }
-    </style>
+            .title-page {
+                text-align: center;
+                margin-top: 2%;
+                margin-bottom: 3%;
+                font-weight: bold
+            }
+        </style>
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-<div layout:fragment="content">
+        <div layout:fragment="content">
 
-    <h3 class="title-page">Add new account</h3>
+            <h3 class="title-page">Add new account</h3>
 
-    <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col background-table">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col background-table">
 
-            <form action="/account/createNonAdmin" method="POST">
-                <b>Basic info</b>
-                <br>
+                    <form action="/account/createNonAdmin" method="POST">
+                        <b>Basic info</b>
+                        <br>
 
 
-                <div class="row" style="margin-top: 3%;">
-                    <div class="col-sm-1"></div>
-                    <div class="col">
-                        Role
-                    </div>
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                Role
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <select name="txtRole" id="txtRole">
+                                    <option value="Student">Student</option>
+                                    <option value="Teacher">Teacher</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 5%;">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-2" style="text-align: center ;">
+                                <input type="submit" class="btn btn-success form-control button-defualt" value="Save">
+                            </div>
+                            <div class="col-sm-5"></div>
+                        </div>
+
+                    </form>
                 </div>
-
-
-                <div class="row" style="margin-top: 1%;">
-                    <div class="col-sm-1"></div>
-                    <div class="col">
-                        <select name="txtRole" id="txtRole">
-                            <option value="Student">Student</option>
-                            <option value="Teacher">Teacher</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-1"></div>
-                </div>
-
-
-                <div class="row" style="margin-top: 5%;">
-                    <div class="col-sm-5"></div>
-                    <div class="col-sm-2" style="text-align: center ;">
-                        <input type="submit" class="btn btn-success form-control button-defualt"
-                               value="Save">
-                    </div>
-                    <div class="col-sm-5"></div>
-                </div>
-
-
-            </form>
+                <div class="col-sm-2"></div>
+            </div>
         </div>
-        <div class="col-sm-2"></div>
-    </div>
-</div>
-</body>
+    </body>
 </html>
