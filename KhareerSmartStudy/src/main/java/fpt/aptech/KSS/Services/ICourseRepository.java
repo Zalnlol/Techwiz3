@@ -12,13 +12,13 @@ import java.util.List;
  *
  * @author backs
  */
-public interface ICourseServices {
+public interface ICourseRepository {
 
     public List<Course> findAll();
 
     public Course findOne(int id);
 
-    public void saveCourse(Course newCourse);
+    public void saveCourse(Course course);
 
     public void removeCourse(int id);
 }

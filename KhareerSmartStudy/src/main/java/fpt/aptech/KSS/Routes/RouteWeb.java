@@ -22,13 +22,22 @@ public class RouteWeb {
 
     //Route Account
     public final static String accountManageURL = "/account/index";
-    
+
     public final static String AccountGetCreateURL = "/account/create";
-    
+
     public final static String AccountShowQRURL = "/account/showQrCode";
-    
+
     public final static String AccountGetCreateNonAdminURL = "/account/createNonAdmin";
-    
+
     public final static String AccountGetQRURL = "/account/showQrCode";
+
+    //Route Account
+    public final static String courseManageURL = "/course/index";
+
+    public final static String CourseGetCreateURL = "/course/create";
+    
+    public final static String CourseGetUpdateURL = "/course/update";
+    
+    
 
 }

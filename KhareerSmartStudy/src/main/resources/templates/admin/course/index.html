@@ -3,7 +3,7 @@
       layout:decorate="~{layout/_layout}">
 
     <head>
-        <title>Quản lý chấm công</title>
+        <title>Course Management</title>
 
         <style>
 
@@ -23,19 +23,104 @@
 
 
         </style>
-        
+
     </head>
 
     <body>
 
         <div layout:fragment="content">
 
-            <h3 class="title-page">Quản lý chấm công</h3>        
+            <h3 class="title-page">Course Management</h3>
 
-            
 
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col background-table">
+
+
+                    <div class="row" style="margin-bottom:2% ;">
+                        <form class="col-sm-3" th:action="@{/course/index}">
+                            <input class="form-control input" placeholder="Input email or name..." type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+                            &nbsp;
+                            <input class="btn btn-success button-defualt" type="submit" value="Search" />
+                            &nbsp;
+                            <input class="btn btn-success button-defualt" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+                        </form>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-7"></div>
+                                <div class="col-sm-5" style="margin-bottom:2% ;">
+                                    <a href="/course/create">
+                                        <input type="button" class="btn btn-success form-control button-defualt" value="Add a course">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody th:if="${check == false}">
+                            <tr>
+                                <td colspan="5" style="text-align: center"> No data available </td>
+                            </tr>
+
+                        </tbody>
+
+                        <tbody th:if="${check == true}">
+                            <tr th:each="item,stt:${list}">
+                                <th scope="row" th:text="${stt.Count}"></th>
+                                <td th:text="${item.getName()}" th:id="${item.getName()}" ></td>
+                                <td th:text="${item.getDescription()}" ></td>
+                                <td th:text="${item.getDuration() + ' months'}"></td>
+                                <td align="center">
+
+                                    <div class="dropdown">
+                                        <button class="button-envent
+                                                dropdown-toggle" style="margin-right:
+                                                10px;" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-edit"
+                                               style="color:
+                                               #6667AB"></i>
+                                        </button>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" th:href="'/course/update?id='+${item.getId()}">Edit</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="col-sm-1"></div>
 
             </div>
+
+            <script type="text/javascript">
+                function clearSearch() {
+                    window.location = "[[@{/course/index}]]";
+                }
+            </script>
+
+        </div>
 
 
     </body>

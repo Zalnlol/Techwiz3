@@ -46,7 +46,7 @@ public class Course implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
@@ -76,6 +76,12 @@ public class Course implements Serializable {
 
     public Course(Integer id, String name, String description, int duration) {
         this.id = id;
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+    }
+    
+    public Course(String name, String description, int duration) {
         this.name = name;
         this.description = description;
         this.duration = duration;

@@ -7,17 +7,17 @@ package fpt.aptech.KSS.ImpServices;
 
 import fpt.aptech.KSS.Entities.Course;
 import fpt.aptech.KSS.Repository.CourseRepository;
-import fpt.aptech.KSS.Services.ICourseServices;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import fpt.aptech.KSS.Services.ICourseRepository;
 
 /**
  *
  * @author backs
  */
 @Service
-public class CourseServices implements ICourseServices{
+public class CourseServices implements ICourseRepository{
 
     @Autowired
     CourseRepository courseRepository;
