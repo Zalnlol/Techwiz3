@@ -20,4 +20,6 @@ public interface IAccountRepository {
     public void save(Account account);
     
     public List<Account> listAll(String keyword);
+    
+    public Account checkUniqueCode(String code);
 }

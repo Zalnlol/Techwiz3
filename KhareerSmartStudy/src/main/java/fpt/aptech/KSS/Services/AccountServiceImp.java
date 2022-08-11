@@ -34,5 +34,10 @@ public class AccountServiceImp implements IAccountRepository{
     public List<Account> listAll(String keyword) {
         return repository.search(keyword);
     }
+
+    @Override
+    public Account checkUniqueCode(String code) {
+        return repository.checkUniqueCode(code);
+    }
     
 }

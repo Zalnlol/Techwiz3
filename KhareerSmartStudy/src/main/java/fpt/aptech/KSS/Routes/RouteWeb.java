@@ -24,5 +24,10 @@ public class RouteWeb {
     public final static String accountManageURL = "/account/index";
     
     public final static String AccountGetCreateURL = "/account/create";
+    
+    public final static String AccountCreateShowQRURL = "/account/showQrCode";
+    
+    public final static String AccountGetCreateNonAdminURL = "/account/createNonAdmin";
+    
 
 }
