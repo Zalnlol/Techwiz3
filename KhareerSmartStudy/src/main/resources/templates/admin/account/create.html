@@ -27,14 +27,14 @@
 
 <div layout:fragment="content">
 
-    <h3 class="title-page">Thêm tài khoản mới</h3>
+    <h3 class="title-page">Add new account</h3>
 
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col background-table">
 
             <form action="/account/create" method="POST" enctype="multipart/form-data">
-                <b>Thông tin cơ bản</b>
+                <b>Basic info</b>
                 <br>
 
 
@@ -49,9 +49,9 @@
                 <div class="row" style="margin-top: 1%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        <input type="email" class="form-control input" placeholder="Địa chỉ email" id="txtAccountMail"
+                        <input type="email" class="form-control input" placeholder="Email Address" id="txtAccountMail"
                                name="txtAccountMail">
-                        <span hidden class="error-text" id="txtAccountMail-Error">Vui lòng nhập email</span>
+                        <span hidden class="error-text" id="txtAccountMail-Error">Email Address</span>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        Họ tên
+                        Fullname
                     </div>
                 </div>
 
@@ -67,9 +67,9 @@
                 <div class="row" style="margin-top: 1%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        <input type="text" class="form-control input" placeholder="Họ tên" id="txtFullName"
+                        <input type="text" class="form-control input" placeholder="Full name" id="txtFullName"
                                name="txtFullName">
-                        <span hidden class="error-text" id="txtFullName-Error">Vui lòng nhập họ tên</span>
+                        <span hidden class="error-text" id="txtFullName-Error">Fullname</span>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -77,16 +77,16 @@
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        Số điện thoại
+                        Phone
                     </div>
                 </div>
 
                 <div class="row" style="margin-top: 1%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        <input type="text" class="form-control input" placeholder="Số điện thoại" id="txtPhone"
+                        <input type="text" class="form-control input" placeholder="Phone" id="txtPhone"
                                name="txtPhone">
-                        <span hidden class="error-text" id="txtPhone-Error">Vui lòng nhập SĐT</span>
+                        <span hidden class="error-text" id="txtPhone-Error">Phone</span>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -94,17 +94,17 @@
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        Giới tính
+                        Gender
                     </div>
                 </div>
 
                 <div class="row" style="margin-top: 1%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        <input type="radio" id="Male" value="1" name="radioGender">
-                        <label for="Male">Nam</label><br>
-                        <input type="radio" id="Female" value="0" name="radioGender">
-                        <label for="Female">Nữ</label><br>
+                        <input type="radio" id="Male" value="Male" name="radioGender">
+                        <label for="Male">Male</label><br>
+                        <input type="radio" id="Female" value="Female" name="radioGender">
+                        <label for="Female">Female</label><br>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -112,7 +112,7 @@
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        Ngày sinh
+                        Date of birth
                     </div>
                 </div>
 
@@ -122,7 +122,7 @@
                     <div class="col">
                         <input type="date" class="form-control input" id="txtBirthDay"
                                name="txtBirthDay">
-                        <span hidden class="error-text" id="txtBirthDay-Error">Vui lòng chọn ngày sinh</span>
+                        <span hidden class="error-text" id="txtBirthDay-Error">Date of birth</span>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -130,7 +130,7 @@
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        Ảnh đại diện
+                        Profile image
                     </div>
                 </div>
 
@@ -146,7 +146,7 @@
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-sm-1"></div>
                     <div class="col">
-                        Quyền
+                        Role
                     </div>
                 </div>
 
@@ -155,54 +155,8 @@
                     <div class="col-sm-1"></div>
                     <div class="col">
                         <select name="txtRole" id="txtRole">
-                            <option value="0">User</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Scan Machine</option>
+                            <option value="Admin">Admin</option>
                         </select>
-                    </div>
-                    <div class="col-sm-1"></div>
-                </div>
-
-                <div class="row" style="margin-top: 3%;">
-                    <div class="col-sm-1"></div>
-                    <div class="col">
-                        Vị trí làm việc
-                    </div>
-                </div>
-
-                <div class="row" style="margin-top: 1%;">
-                    <div class="col-sm-1"></div>
-                    <div class="col">
-                        <table class="table">
-                            <thead class="thead-light">
-                            <tr style="text-align: center ;">
-                                <th scope="col">Lựa chọn</th>
-                                <th scope="col">Vị trí</th>
-                                <th scope="col">Lương năng suất (VNĐ/giờ)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="item,stt:${positions}">
-                                <td style="text-align: center ;">
-                                    <div class="pretty p-default p-curve">
-                                        <input type="checkbox" class="checkbox" th:value="${item.getId()}"
-                                               th:name="'check'+${stt.count}">
-
-                                        <div class="state">
-                                            <label></label>
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td th:text="${item.getPositionname()}"></td>
-                                <td style="text-align: center ;">
-                                    <input type="number" class="form-control input input-number" min="0"
-                                           th:name="'checkvalue'+${stt.count} " th:value="${item.getSalarydefault()}"
-                                           id="txtSalary">
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -212,7 +166,7 @@
                     <div class="col-sm-5"></div>
                     <div class="col-sm-2" style="text-align: center ;">
                         <input type="submit" class="btn btn-success form-control button-defualt"
-                               value="Lưu dữ liệu">
+                               value="Save">
                     </div>
                     <div class="col-sm-5"></div>
                 </div>

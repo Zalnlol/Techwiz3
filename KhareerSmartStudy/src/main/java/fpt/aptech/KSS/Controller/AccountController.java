@@ -68,55 +68,80 @@ public class AccountController {
         return "admin/account/create";
     }
 
-//    @RequestMapping(value = {RouteWeb.AccountGetCreateURL}, method = RequestMethod.POST)
-//    public String PostCreate(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-//
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        String mail = request.getParameter("txtAccountMail");
-//        String name = request.getParameter("txtFullName");
-//        String phone = request.getParameter("txtPhone");
-//        String gender = request.getParameter("radioGender");
-//        String strBday = request.getParameter("txtBirthDay");
-//        if (strBday.equals("") || strBday == null) {
-//            strBday = "2000-01-01";
-//        }
-//
-//        Date bday = null;
-//        try {
-//            bday = new SimpleDateFormat("yyyy-mm-dd").parse(strBday);
-//        } catch (ParseException e) {
-//            throw new RuntimeException(e);
-//        }
-//        String role = request.getParameter("txtRole");
-//
-//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-////        Account account = new Account(mail, encoder.encode("123"), name, phone, bday, gender, encoder.encode(mail), role, true, fileName);
-//        Account account = new Account(mail, name, encoder.encode("123"), phone, gender, dob, role, fileName, code);
-//        if (fileName.equals("") || fileName == null) {
-//            account.setAvatar("defaultUserIcon.png");
-//        } else {
-//            String uploadDir = "src/main/resources/images/user-photos/";
-//            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-//
-//        }
-//
-//        accountRepository.save(account);
-//        String redirectUrl = "/account/index";
-//        return "redirect:" + redirectUrl;
-//    }
+    @RequestMapping(value = {RouteWeb.AccountGetCreateURL}, method = RequestMethod.POST)
+    public String PostCreate(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String mail = request.getParameter("txtAccountMail");
+        String name = request.getParameter("txtFullName");
+        String phone = request.getParameter("txtPhone");
+        String gender = request.getParameter("radioGender");
+        String strBday = request.getParameter("txtBirthDay");
+        if (strBday.equals("") || strBday == null) {
+            strBday = "2000-01-01";
+        }
+
+        Date bday = null;
+        try {
+            bday = new SimpleDateFormat("yyyy-mm-dd").parse(strBday);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        String role = request.getParameter("txtRole");
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        Account account = new Account(mail, name, phone, bday, gender, role, fileName, accountCodeGenerator(), encoder.encode("123"));
+        if (fileName.equals("") || fileName == null) {
+            account.setAvatar("defaultUserIcon.png");
+        } else {
+            String uploadDir = "src/main/resources/images/user-photos/";
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        }
+        accountRepository.save(account);
+        String redirectUrl = "/account/index";
+        return "redirect:" + redirectUrl;
+    }
 
     public String accountCodeGenerator() {
-        // It will generate 6 digit random Number.
-        // from 0 to 999999
+//        It will generate 6 digit random Number.
+//        from 0 to 999999
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
-        String code = "Smart"+ number;
+//        this will convert any number sequence into 6 character.
+        String sixNumDigit = String.format("%06d", number);
+//        Personalize digit
+        String code = "SmartStudy" + sixNumDigit;
         //check if database already contain code;
-        out.println(code);
+        if (accountRepository.checkUniqueCode(code) != null) {
+            out.println(code + " is already existed in DB!");
+            return accountCodeGenerator();
+        } else {
+            out.println(code + " is unique");
+        }
         return code;
+    }
 
-        // this will convert any number sequence into 6 character.
-//        return String.format("%06d", number);
+    @RequestMapping(value = {RouteWeb.AccountGetCreateNonAdminURL}, method = RequestMethod.GET)
+    public String GetCreateNonAdmin(Model model) {
+        return "admin/account/createNonAdmin";
+    }
+
+    @RequestMapping(value = {RouteWeb.AccountGetCreateNonAdminURL}, method = RequestMethod.POST)
+    public String PostCreateNonAdmin(Model model, HttpServletRequest request, HttpServletResponse response) {
+        
+        String role = request.getParameter("txtRole");
+//        Account account = new Account(role, accountCodeGenerator());
+//        accountRepository.save(account);
+        out.println(role);
+        String redirectUrl = "/account/showQrCode";
+        return "redirect:" + redirectUrl;
+    }
+
+    @RequestMapping(value = {RouteWeb.AccountCreateShowQRURL}, method = RequestMethod.GET)
+    public String showQRCode(String qrContent, Model model) {
+        
+        model.addAttribute("qrCodeContent", "/generateQRCode?qrContent=" + qrContent);
+        return "showQrCode";
     }
 
 }
