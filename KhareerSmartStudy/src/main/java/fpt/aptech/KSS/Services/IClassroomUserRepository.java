@@ -6,12 +6,19 @@
 package fpt.aptech.KSS.Services;
 
 import fpt.aptech.KSS.Entities.ClassroomUser;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 /**
  *
  * @author jthie
  */
-public interface IClassroomUserRepository extends JpaRepository<ClassroomUser, Integer> {
+public interface IClassroomUserRepository{
+    public List<ClassroomUser> findAll();
+
+    public void save(ClassroomUser classroomUser);
     
+    public ClassroomUser findById(int id);
+    
+    public void delete(ClassroomUser classroomUser);
+
 }

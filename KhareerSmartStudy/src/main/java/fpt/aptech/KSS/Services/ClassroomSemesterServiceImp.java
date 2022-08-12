@@ -32,7 +32,7 @@ public class ClassroomSemesterServiceImp implements IClassroomSemesterRepository
     }
 
     @Override
-    public ClassroomSemester findById(int id) {
+    public ClassroomSemester findOne(int id) {
         return classroomSemesterRepository.findOne(id);
     }
 

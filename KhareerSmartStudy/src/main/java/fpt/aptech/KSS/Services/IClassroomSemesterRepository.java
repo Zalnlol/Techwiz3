@@ -17,7 +17,7 @@ public interface IClassroomSemesterRepository {
 
     public void save(ClassroomSemester classroomSemester);
     
-    public ClassroomSemester findById(int id);
+    public ClassroomSemester findOne(int id);
     
     public void delete(ClassroomSemester classroomSemester);
 }
