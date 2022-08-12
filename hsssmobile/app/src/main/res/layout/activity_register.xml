@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#178E72"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Screen.RegisterActivity">
+
+    <ScrollView
+        android:layout_marginTop="20dp"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_scrollUp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="520dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign up for free"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12pt"
+                android:layout_marginBottom="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="9pt" />
+
+            <EditText
+                android:id="@+id/Regist_Name"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@xml/duongvien_goctron"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="#808080" />
+
+
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:text="Mail"
+                android:textColor="@color/white"
+                android:textSize="9pt" />
+
+            <EditText
+                android:id="@+id/Regist_Mail"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@xml/duongvien_goctron"
+                android:ems="10"
+                android:hint="Mail"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textColor="#808080" />
+
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textColor="@color/white"
+                android:textSize="9pt" />
+
+            <EditText
+                android:id="@+id/Regist_Password"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@xml/duongvien_goctron"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColor="#808080" />
+
+
+
+            <TextView
+                android:id="@+id/Regist_DOB"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:text="Date of Birth"
+                android:textColor="@color/white"
+                android:textSize="9pt" />
+
+            <EditText
+                android:id="@+id/Register_DOBB"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@xml/duongvien_goctron"
+                android:ems="10"
+                android:hint="Date of Birth"
+                android:inputType="text|date"
+                android:padding="10dp"
+                android:textColor="#808080" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:text="Role"
+                android:textColor="@color/white"
+                android:textSize="9pt" />
+
+            <Spinner
+                android:id="@+id/Register_Role"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@xml/duongvien_goctron"
+                android:ems="10"
+                android:padding="15dp"
+                android:textColor="#808080" />
+            <Button
+                android:id="@+id/btn_Register"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#29303E"
+                android:text="Get Started"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
