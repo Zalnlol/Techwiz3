@@ -15,5 +15,5 @@ public class RouteAPI {
 
     public final static String APILogin = "api/account/login";
 
-
+    public final static String CallMyclass = "api/myclass";
 }

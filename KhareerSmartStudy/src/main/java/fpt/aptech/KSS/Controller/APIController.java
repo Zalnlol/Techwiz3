@@ -6,7 +6,9 @@
 package fpt.aptech.KSS.Controller;
 
 import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.Classroom;
 import fpt.aptech.KSS.Entities.ModelString;
+import fpt.aptech.KSS.ImpServices.ClassroomServices;
 import fpt.aptech.KSS.Routes.RouteAPI;
 import fpt.aptech.KSS.Routes.RouteWeb;
 import fpt.aptech.KSS.Services.IAccountRepository;
@@ -33,6 +35,9 @@ import java.util.List;
 public class APIController {
     @Autowired
     private IAccountRepository accountRepository;
+
+    @Autowired
+    private ClassroomServices classroomServices;
 
     @RequestMapping(value = {RouteAPI.APICreateAccount}, method = RequestMethod.POST)
     public String AccountList(Model model, HttpServletResponse response, HttpServletRequest request) {
@@ -126,6 +131,22 @@ public class APIController {
         }else {
             modelString.setData1("Mail or Password incorect!!");
             JsonServices.dd(JsonServices.ParseToJson(modelString),response);
+        }
+
+        return "admin/account/index";
+    }
+
+    @RequestMapping(value = {RouteAPI.CallMyclass}, method = RequestMethod.POST)
+    public String CallMyclass(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        String mail= request.getParameter("mail");
+
+     List<Classroom> classroom= classroomServices.findAll();
+
+        for (int i = 0; i <classroom.size() ; i++) {
+
+            if (classroom.get(i).get)
+
         }
 
         return "admin/account/index";
