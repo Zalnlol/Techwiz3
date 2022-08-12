@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class NotifiactionController {
-    
-        @RequestMapping("api/notifacation/create")
-    public String adminPage(Model model) {
-        //model.addAttribute("attribute", "value");
-        return "admin/notification/create";
-    }
-    @RequestMapping("api/notifacation/teacher/create")
-    public String teacherPage(Model model) {
-        //model.addAttribute("attribute", "value");
-        return "admin/notification/teachercreate";
-    }
-    @RequestMapping("api/notifacation/teacher/create")
-    public String NextPage(Model model) {
-        //model.addAttribute("attribute", "value");
-        return "admin/notification/teachercreate";
-    }
+//    
+//        @RequestMapping("api/notifacation/create")
+//    public String adminPage(Model model) {
+//        //model.addAttribute("attribute", "value");
+//        return "admin/notification/create";
+//    }
+//    @RequestMapping("api/notifacation/teacher/create")
+//    public String teacherPage(Model model) {
+//        //model.addAttribute("attribute", "value");
+//        return "admin/notification/teachercreate";
+//    }
+//    @RequestMapping("api/notifacation/teacher/create")
+//    public String NextPage(Model model) {
+//        //model.addAttribute("attribute", "value");
+//        return "admin/notification/teachercreate";
+//    }
     
 }
