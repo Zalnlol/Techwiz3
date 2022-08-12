@@ -6,8 +6,11 @@
 package fpt.aptech.KSS.Controller;
 
 import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.ModelString;
 import fpt.aptech.KSS.Routes.RouteAPI;
 import fpt.aptech.KSS.Routes.RouteWeb;
+import fpt.aptech.KSS.Services.IAccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,32 +23,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Admin
  */
 @Controller
 public class APIController {
+    @Autowired
+    private IAccountRepository accountRepository;
 
-//    @RequestMapping(value = {RouteAPI.APIAdminHomeURL}, method = RequestMethod.GET)
-//    public String AccountList(Model model, @Param("keyword") String keyword, HttpServletResponse response, HttpServletRequest request) {
-//        List<Account> list = new ArrayList<>();
-//        list = accountRepository.findAll();
-//
-//        model.addAttribute("list", list);
-//
-//        boolean check = false;
-//        for (Account item : list) {
-//            if (item.getMail() != null) {
-//
-//                check = true;
-//                break;
-//            }
-//        }
-//
-//        model.addAttribute("keyword", keyword);
-//        model.addAttribute("check", check);
-//        return "admin/account/index";
-//    }
+    @RequestMapping(value = {RouteAPI.APICreateAccount}, method = RequestMethod.POST)
+    public String AccountList(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        ModelString modelString = new ModelString();
+        ModelString modelStringout= new ModelString();
+
+
+        modelString.setData1(request.getParameter("mail"));
+        modelString.setData2(request.getParameter("password"));
+        modelString.setData3(request.getParameter("code"));
+        modelString.setData4(request.getParameter("role"));
+        modelString.setData5(request.getParameter("name"));
+        modelString.setData6(request.getParameter("dob"));
+
+        Account account = accountRepository.checkUniqueCode(modelString.getData3());
+
+        if (account !=null){
+            if(!account.getRole().equals(modelString.getData4())){
+                modelStringout.setData1("Registered wrong Role");
+                JsonServices.dd(JsonServices.ParseToJson(modelStringout),response);
+            }
+
+        }else {
+            modelStringout.setData1("Invalid QR");
+
+        }
+
+
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelString),response);
+
+
+        return "admin/account/index";
+    }
 
 
 }
