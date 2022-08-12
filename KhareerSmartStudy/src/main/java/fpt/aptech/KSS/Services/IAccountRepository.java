@@ -27,6 +27,8 @@ public interface IAccountRepository {
     
     public Account findById(int id);
     
+    public Account findByMail(String mail);
+    
     public Account findByMailAdmin(String mail);
     
     public Account findByMailStudent(String mail);

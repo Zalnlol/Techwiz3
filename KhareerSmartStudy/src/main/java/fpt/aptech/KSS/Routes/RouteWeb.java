@@ -43,6 +43,8 @@ public class RouteWeb {
     
     public final static String SemesterGetCreateURL = "/semester/create";
     
+    public final static String RedirectLogout = "redirectlogout";
+    
     
     
 
