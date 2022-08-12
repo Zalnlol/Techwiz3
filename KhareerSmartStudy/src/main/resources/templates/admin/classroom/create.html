@@ -67,77 +67,48 @@
                             <div class="col-sm-1"></div>
                         </div>
 
-                        <!--                        <div class="row" style="margin-top: 3%;">
-                                                    <div class="col-sm-1"></div>
-                                                    <div class="col-sm-3">
-                                                        <input type="submit" class="btn btn-success form-control button-defualt" value="New semester">
-                                                    </div>
-                                                </div>-->
 
                         <div class="row" style="margin-top: 3%;">
                             <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <input type="submit" class="btn btn-success form-control button-defualt" id="" value="New semester" onclick="addSemester();"> 
+                            <div class="col-sm-5">
+                                Add semester
                             </div>
                         </div>
 
-                        <div id="content">
-                            <div class="row" style="margin-top: 3%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-5">
-                                    Semester name
-                                </div>
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                <tr th:each="item:${semesters}">
+                                    <input type="checkbox" th:value="${item.getId()}"> <td th:text="${item.getName()}" style="margin-right: 2%;"></td>
+                                </tr>
                             </div>
+                            <div class="col-sm-1"></div>
+                        </div>
 
-                            <div class="row" style="margin-top: 1%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col">
-                                    <input type="text" class="form-control input" name="semesterName">
-                                </div>
-                                <div class="col-sm-1"></div>
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                Begin date
                             </div>
-
-                            <div class="row" style="margin-top: 3%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-5">
-                                    Begin date
-                                </div>
-                                <div class="col-sm-5">
-                                    End date
-                                </div>
-                            </div>
-
-
-                            <div class="row" style="margin-top: 1%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control input" id="beginDate" oninput="validateBeginDate();"
-                                           name="beginDate">
-                                </div>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control input" id="endDate" oninput="validateEndDate();"
-                                           name="endDate">
-                                </div>
-                                <div class="col-sm-1"></div>
-                            </div>  
-
-                            <div class="row" style="margin-top: 3%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-5">
-                                    Select course
-                                </div>
-
-                            </div>
-
-                            <div class="row" style="margin-top: 1%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-10">
-                                    <tr th:each="item:${courses}">
-                                        <input type="checkbox" th:value="${item.getId()}"> <td th:text="${item.getName()}" style="margin-right: 2%;"></td>
-                                    </tr>
-                                </div>
+                            <div class="col-sm-5">
+                                End date
                             </div>
                         </div>
+
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input" id="beginDate" oninput="validateBeginDate();"
+                                       name="beginDate">
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input" id="endDate" oninput="validateEndDate();"
+                                       name="endDate">
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>  
+
 
                         <div class="row" style="margin-top: 4%;">
                             <div class="col-sm-1"></div>
@@ -232,68 +203,6 @@
     _form.addEventListener('submit', addSemester());
 
 
-    function addSemester() {
-        event.preventDefault();
 
-        text +=
-                `  <div class="row" style="margin-top: 3%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-5">
-                                    Semester name
-                                </div>
-                            </div>
-
-                            <div class="row" style="margin-top: 1%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col">
-                                    <input type="text" class="form-control input" name="semesterName">
-                                </div>
-                                <div class="col-sm-1"></div>
-                            </div>
-
-                            <div class="row" style="margin-top: 3%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-5">
-                                    Begin date
-                                </div>
-                                <div class="col-sm-5">
-                                    End date
-                                </div>
-                            </div>
-
-
-                            <div class="row" style="margin-top: 1%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control input" id="beginDate" oninput="validateBeginDate();"
-                                           name="beginDate">
-                                </div>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control input" id="endDate" oninput="validateEndDate();"
-                                           name="endDate">
-                                </div>
-                                <div class="col-sm-1"></div>
-                            </div>  
-
-                            <div class="row" style="margin-top: 3%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-5">
-                                    Select course
-                                </div>
-
-                            </div>
-        
-                            <div class="row" style="margin-top: 1%;">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-10">
-                                    <tr th:each="` + ${courses} + `">
-                                    
-                                    </tr>
-                                </div>
-                            </div> `;
-
-        document.getElementById('content').innerHTML = text;
-        count += 1;
-    }
 
 </script>

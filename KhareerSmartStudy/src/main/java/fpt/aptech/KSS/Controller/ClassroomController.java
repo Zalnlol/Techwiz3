@@ -6,9 +6,12 @@
 package fpt.aptech.KSS.Controller;
 
 import fpt.aptech.KSS.Entities.Course;
+import fpt.aptech.KSS.Entities.Semester;
 import fpt.aptech.KSS.ImpServices.ClassroomServices;
 import fpt.aptech.KSS.ImpServices.CourseServices;
 import fpt.aptech.KSS.Services.IClassroomRepository;
+import fpt.aptech.KSS.Services.SemesterServiceImp;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,9 @@ public class ClassroomController {
     ClassroomServices classroomServices;
     
     @Autowired
+    SemesterServiceImp semesterServices;
+    
+    @Autowired
     CourseServices courseServices;
     
     @RequestMapping(value = "classroom/index", method = RequestMethod.GET)
@@ -37,8 +43,8 @@ public class ClassroomController {
     
     @RequestMapping(value = "classroom/doCreate", method = RequestMethod.GET)
     public String doCreate(Model model) {
-        //List<Course> courses = courseServices.findAll();
-        model.addAttribute("courses", courseServices.findAll());
+        List<Semester> semesters = semesterServices.findAll();
+        model.addAttribute("semesters", semesters);
         return "admin/classroom/create";
     }
     
