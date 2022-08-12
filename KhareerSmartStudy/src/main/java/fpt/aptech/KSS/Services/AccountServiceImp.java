@@ -33,7 +33,10 @@ public class AccountServiceImp implements IAccountRepository {
 
     @Override
     public List<Account> listAll(String keyword) {
-        return repository.search(keyword);
+        if (keyword != null) {
+            return repository.search(keyword);
+        }
+        return repository.findAll();
     }
 
     @Override
