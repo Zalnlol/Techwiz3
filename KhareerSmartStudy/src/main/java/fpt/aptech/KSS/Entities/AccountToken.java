@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -19,15 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author jthie
+ * @author backs
  */
 @Entity
 @Table(name = "account_token")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AccountToken.findAll", query = "SELECT a FROM AccountToken a"),
-    @NamedQuery(name = "AccountToken.findByToken", query = "SELECT a FROM AccountToken a WHERE a.token = :token"),
-    @NamedQuery(name = "AccountToken.findById", query = "SELECT a FROM AccountToken a WHERE a.id = :id")})
+    @NamedQuery(name = "AccountToken.findByToken", query = "SELECT a FROM AccountToken a WHERE a.token = :token")})
 public class AccountToken implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,8 +38,9 @@ public class AccountToken implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "token")
     private String token;
-    @Column(name = "id")
-    private Integer id;
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @ManyToOne
+    private Account id;
 
     public AccountToken() {
     }
@@ -55,11 +57,11 @@ public class AccountToken implements Serializable {
         this.token = token;
     }
 
-    public Integer getId() {
+    public Account getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Account id) {
         this.id = id;
     }
 

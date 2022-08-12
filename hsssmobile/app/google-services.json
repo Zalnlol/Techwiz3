@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1009469656425",
+    "project_id": "khareersmartstudy",
+    "storage_bucket": "khareersmartstudy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009469656425:android:983499fd181f1ef9c9c1f8",
+        "android_client_info": {
+          "package_name": "fpt.aptech.hss"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009469656425-t1d8cq66bri0ov0ash0rrtdf4vub6gur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfiC_dBWFT3S1QtPBAJocyVoAk4Yn27DU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009469656425-t1d8cq66bri0ov0ash0rrtdf4vub6gur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

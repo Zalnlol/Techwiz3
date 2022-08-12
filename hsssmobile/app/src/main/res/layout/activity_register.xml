@@ -44,7 +44,7 @@
                 android:textSize="9pt" />
 
             <EditText
-                android:id="@+id/Regist_txtUsername"
+                android:id="@+id/Regist_Name"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -58,7 +58,6 @@
 
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="Mail"
@@ -66,7 +65,7 @@
                 android:textSize="9pt" />
 
             <EditText
-                android:id="@+id/Login_txtUsername"
+                android:id="@+id/Regist_Mail"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -79,7 +78,6 @@
                 android:textColor="#808080" />
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="Password"
@@ -87,7 +85,7 @@
                 android:textSize="9pt" />
 
             <EditText
-                android:id="@+id/Login_txtUsername"
+                android:id="@+id/Regist_Password"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -99,29 +97,10 @@
                 android:padding="10dp"
                 android:textColor="#808080" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:text="Confirm Password"
-                android:textColor="@color/white"
-                android:textSize="9pt" />
 
-            <EditText
-                android:id="@+id/Login_txtUsername"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@xml/duongvien_goctron"
-                android:ems="10"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                android:textColor="#808080" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/Regist_DOB"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="Date of Birth"
@@ -129,7 +108,7 @@
                 android:textSize="9pt" />
 
             <EditText
-                android:id="@+id/Login_txtUsername"
+                android:id="@+id/Register_DOBB"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

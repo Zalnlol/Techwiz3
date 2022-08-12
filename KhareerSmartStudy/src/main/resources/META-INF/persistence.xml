@@ -14,8 +14,6 @@
     <class>fpt.aptech.KSS.Entities.Course</class>
     <class>fpt.aptech.KSS.Entities.Mark</class>
     <class>fpt.aptech.KSS.Entities.AccountToken</class>
-    <class>fpt.aptech.KSS.Entities.SemesterCourse</class>
-    <class>fpt.aptech.KSS.Entities.ClassroomSemester</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://14.225.192.224:3306/techwiz3db?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="khareerserver"/>
