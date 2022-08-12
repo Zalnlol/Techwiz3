@@ -32,6 +32,20 @@
             android:label="@string/title_activity_notification"
             android:theme="@style/Theme.Hss.NoActionBar" />
         <activity
+            android:name=".Screen.ScheduleDetailActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/duongvien_gocbo" />
+
+        <activity
+            android:name=".Screen.MyclasroomDetail"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.ScheduleActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screen.ClassroomListActivity"
             android:exported="false" />
         <activity

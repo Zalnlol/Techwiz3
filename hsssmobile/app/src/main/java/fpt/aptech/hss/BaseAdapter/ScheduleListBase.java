@@ -6,23 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import fpt.aptech.hss.R;
 import java.util.List;
 
 import fpt.aptech.hss.Model.ModelString;
+import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.MyclasroomDetail;
+import fpt.aptech.hss.Screen.ScheduleDetailActivity;
 
-public class ClassroomListBase extends BaseAdapter {
+public class ScheduleListBase extends BaseAdapter {
     Context context ;
     List<ModelString> list;
 
-    public ClassroomListBase(Context context, List<ModelString> list) {
+    public ScheduleListBase(Context context, List<ModelString> list) {
         this.context = context;
         this.list = list;
     }
@@ -65,7 +64,7 @@ public class ClassroomListBase extends BaseAdapter {
         Classroomitem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MyclasroomDetail.class);
+                Intent intent = new Intent(context, ScheduleDetailActivity.class);
                 String text = list.get(i).getData2().toString();
                 String idSelect=modelString.getData3();
 

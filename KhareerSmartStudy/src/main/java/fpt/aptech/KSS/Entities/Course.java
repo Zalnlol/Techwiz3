@@ -59,11 +59,13 @@ public class Course implements Serializable {
     @Column(name = "duration")
     private int duration;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
+    private List<Document> documentList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
+    private List<SemesterCourse> semesterCourseList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
     private List<Exam> examList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
     private List<Schedule> scheduleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
-    private List<Document> documentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
     private List<Mark> markList;
 
@@ -118,6 +120,24 @@ public class Course implements Serializable {
     }
 
     @XmlTransient
+    public List<Document> getDocumentList() {
+        return documentList;
+    }
+
+    public void setDocumentList(List<Document> documentList) {
+        this.documentList = documentList;
+    }
+
+    @XmlTransient
+    public List<SemesterCourse> getSemesterCourseList() {
+        return semesterCourseList;
+    }
+
+    public void setSemesterCourseList(List<SemesterCourse> semesterCourseList) {
+        this.semesterCourseList = semesterCourseList;
+    }
+
+    @XmlTransient
     public List<Exam> getExamList() {
         return examList;
     }
@@ -133,15 +153,6 @@ public class Course implements Serializable {
 
     public void setScheduleList(List<Schedule> scheduleList) {
         this.scheduleList = scheduleList;
-    }
-
-    @XmlTransient
-    public List<Document> getDocumentList() {
-        return documentList;
-    }
-
-    public void setDocumentList(List<Document> documentList) {
-        this.documentList = documentList;
     }
 
     @XmlTransient
