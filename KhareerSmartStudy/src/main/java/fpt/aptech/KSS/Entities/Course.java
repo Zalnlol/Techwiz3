@@ -46,7 +46,7 @@ public class Course implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
@@ -79,6 +79,10 @@ public class Course implements Serializable {
         this.name = name;
         this.description = description;
         this.duration = duration;
+    }
+
+    public Course(String name, String description, int duration) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public Integer getId() {

@@ -13,9 +13,8 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 
 /**
  *
@@ -23,20 +22,18 @@ import org.slf4j.Logger;
  */
 @Service
 public class QRCodeServiceImp implements QRCodeService{
-    Logger logger = LoggerFactory.getLogger(QRCodeServiceImp.class);
 
     @Override
     public byte[] generateQRCode(String qrContent, int width, int height) {
         try {
-            QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix bitMatrix = qrCodeWriter.encode(qrContent, BarcodeFormat.QR_CODE, width, height);
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            QRCodeWriter qrCodeWrite = new QRCodeWriter();
+            BitMatrix bitMatrix = qrCodeWrite.encode(qrContent, BarcodeFormat.QR_CODE, width, height);
+            ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
             MatrixToImageWriter.writeToStream(bitMatrix, "PNG", byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
-        } catch (WriterException e) {
-            logger.error(e.getMessage(), e);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
+            } 
+        catch (WriterException | IOException ex) {
+            Logger.getLogger(QRCodeServiceImp.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -10,7 +10,9 @@ import fpt.aptech.KSS.FileUpload.FileUploadUtil;
 import fpt.aptech.KSS.Routes.RouteWeb;
 import fpt.aptech.KSS.Services.AccountServiceImp;
 import fpt.aptech.KSS.Services.IAccountRepository;
+import fpt.aptech.KSS.Services.QRCodeService;
 import java.io.IOException;
+import java.io.OutputStream;
 import static java.lang.System.out;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,6 +31,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +43,9 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class AccountController {
+
+    @Autowired
+    private QRCodeService qrCodeService;
 
     @Autowired
     private IAccountRepository accountRepository;
@@ -113,10 +121,10 @@ public class AccountController {
         String code = "SmartStudy" + sixNumDigit;
         //check if database already contain code;
         if (accountRepository.checkUniqueCode(code) != null) {
-            out.println(code + " is already existed in DB!");
+//            out.println(code + " is already existed in DB!");
             return accountCodeGenerator();
         } else {
-            out.println(code + " is unique");
+//            out.println(code + " is unique");
         }
         return code;
     }
@@ -128,20 +136,30 @@ public class AccountController {
 
     @RequestMapping(value = {RouteWeb.AccountGetCreateNonAdminURL}, method = RequestMethod.POST)
     public String PostCreateNonAdmin(Model model, HttpServletRequest request, HttpServletResponse response) {
-        
         String role = request.getParameter("txtRole");
-//        Account account = new Account(role, accountCodeGenerator());
-//        accountRepository.save(account);
-        out.println(role);
-        String redirectUrl = "/account/showQrCode";
+        String id = accountCodeGenerator();
+        out.println(id);
+        Account account = new Account(role, id);
+        accountRepository.save(account);
+
+        String redirectUrl = "/account/index";
         return "redirect:" + redirectUrl;
     }
 
-    @RequestMapping(value = {RouteWeb.AccountCreateShowQRURL}, method = RequestMethod.GET)
-    public String showQRCode(String qrContent, Model model) {
-        
-        model.addAttribute("qrCodeContent", "/generateQRCode?qrContent=" + qrContent);
-        return "showQrCode";
-    }
 
+    @RequestMapping(value = {RouteWeb.AccountGetQRURL}, method = RequestMethod.GET)
+    public void showQRCode(Model model, HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Account account = accountRepository.findById(id);
+        model.addAttribute("Account", account);
+        try {
+            response.setContentType("image/png");
+            byte[] qrCode = qrCodeService.generateQRCode(account.getCode(), 400, 400);
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(qrCode);
+        } catch (IOException ex) {
+            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        return "admin/account/showQrCode";
+    }
 }

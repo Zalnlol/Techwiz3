@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/logo1" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnLogin"
         android:layout_marginTop="200dp"
         android:backgroundTint="@color/white"
         android:textColor="#29303E"
@@ -28,7 +28,7 @@
         android:text="Login" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnRegister"
         android:layout_width="300dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="#29303E"

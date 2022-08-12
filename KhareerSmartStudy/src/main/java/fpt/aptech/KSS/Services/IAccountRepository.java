@@ -22,4 +22,18 @@ public interface IAccountRepository {
     public List<Account> listAll(String keyword);
     
     public Account checkUniqueCode(String code);
+    
+    public Account lastCreateAccount(Account account);
+    
+    public Account findById(int id);
+    
+    public Account findByMailAdmin(String mail);
+    
+    public Account findByMailStudent(String mail);
+    
+    public Account findByMailTeacher(String mail);
+    
+    
+    
+    
 }

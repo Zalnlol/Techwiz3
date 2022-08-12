@@ -1,0 +1,24 @@
+<?xml version ="1.0" encoding ="utf-8"?><!--  Learn More about how to use App Actions: https://developer.android.com/guide/actions/index.html -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_1"
+        android:enabled="true"
+        android:icon="@drawable/iconhome"/>
+
+    <item
+        android:id="@+id/page_2"
+        android:enabled="true"
+        android:icon="@drawable/iconlearning"/>
+
+    <item
+        android:id="@+id/page_3"
+        android:enabled="true"
+        android:color="@color/purple_200"
+        android:icon="@drawable/iconnoti"/>
+    <item
+        android:id="@+id/page_4"
+        android:enabled="true"
+        android:color="@color/purple_200"
+        android:icon="@drawable/iconaccount"/>
+
+</menu>

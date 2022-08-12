@@ -59,6 +59,11 @@
                                         <input type="button" class="btn btn-success form-control button-defualt" value="Add mobile account">
                                     </a>
                                 </div>
+<!--                                <div class="col-sm-5" style="margin-bottom:2% ;">
+                                    <a href="/account/showQrCode">
+                                        <input type="button" class="btn btn-success form-control button-defualt" value="View QR code">
+                                    </a>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -103,9 +108,11 @@
                                         </button>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" th:href="'/account/update?id='+${item.getMail()}">Edit</a>
+                                            <a class="dropdown-item" th:href="'/account/update?id='+${item.getId()}">Edit</a>
+                                            
+                                            <a class="dropdown-item" th:href="'/account/showQrCode?id='+${item.getId()}">Show QR</a>
 
-                                            <a class="dropdown-item" th:href="'/account/resetpass?id='+${item.getMail()}">Reset Password</a>
+                                            <a class="dropdown-item" th:href="'/account/resetpass?id='+${item.getId()}">Reset Password</a>
                                         </div>
                                     </div>
                                 </td>
