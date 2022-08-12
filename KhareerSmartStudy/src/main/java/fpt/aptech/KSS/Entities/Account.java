@@ -47,12 +47,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")})
 public class Account implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
     @Size(max = 50)
     @Column(name = "mail")
     private String mail;
@@ -63,9 +57,6 @@ public class Account implements Serializable {
     @Size(max = 20)
     @Column(name = "phone")
     private String phone;
-    @Column(name = "dob")
-    @Temporal(TemporalType.DATE)
-    private Date dob;
     @Size(max = 20)
     @Column(name = "gender")
     private String gender;
@@ -85,6 +76,18 @@ public class Account implements Serializable {
     @Size(max = 250)
     @Column(name = "password")
     private String password;
+    @OneToMany(mappedBy = "id")
+    private List<AccountToken> accountTokenList;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "dob")
+    @Temporal(TemporalType.DATE)
+    private Date dob;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private List<ClassroomUser> classroomUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
@@ -129,29 +132,6 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public Date getDob() {
         return dob;
@@ -161,45 +141,6 @@ public class Account implements Serializable {
         this.dob = dob;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @XmlTransient
     public List<ClassroomUser> getClassroomUserList() {
@@ -260,6 +201,79 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "fpt.aptech.KSS.Entities.Account[ id=" + id + " ]";
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @XmlTransient
+    public List<AccountToken> getAccountTokenList() {
+        return accountTokenList;
+    }
+
+    public void setAccountTokenList(List<AccountToken> accountTokenList) {
+        this.accountTokenList = accountTokenList;
     }
     
 }

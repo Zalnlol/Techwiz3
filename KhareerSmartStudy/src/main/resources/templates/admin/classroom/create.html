@@ -79,12 +79,11 @@
                             <div class="col-sm-1"></div>
                             <div class="col-sm-5">
                                 <tr th:each="item:${semesters}">
-                                <input type="checkbox" th:value="${item.getId()}"> <td th:text="${item.getName()}" style="margin-right: 2%;"></td>
+                                    <input type="checkbox" th:value="${item.getId()}"> <td th:text="${item.getName()}"></td>
                                 </tr>
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
-
 
 
 
@@ -130,13 +129,5 @@
 
 
 <script>
-    data = [];
-    count = 0;
-    text = "";
-    var _form = document.getElementById('_form');
-    _form.addEventListener('submit', addSemester());
-
-
-
 
 </script>
