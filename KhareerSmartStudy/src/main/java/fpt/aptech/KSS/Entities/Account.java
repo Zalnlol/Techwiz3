@@ -97,10 +97,6 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(Integer id) {
-        this.id = id;
-    }
-
     public Account(Integer id, String role, String code) {
         this.id = id;
         this.role = role;

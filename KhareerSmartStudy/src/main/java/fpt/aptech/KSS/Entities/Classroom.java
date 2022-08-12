@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -56,14 +54,13 @@ public class Classroom implements Serializable {
     @Column(name = "duration")
     private String duration;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
-    private List<Exam> examList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
     private List<ClassroomUser> classroomUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
+    private List<ClassroomSemester> classroomSemesterList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
+    private List<Exam> examList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
     private List<Schedule> scheduleList;
-    @JoinColumn(name = "id_semester", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Semester idSemester;
 
     public Classroom() {
     }
@@ -103,15 +100,6 @@ public class Classroom implements Serializable {
     }
 
     @XmlTransient
-    public List<Exam> getExamList() {
-        return examList;
-    }
-
-    public void setExamList(List<Exam> examList) {
-        this.examList = examList;
-    }
-
-    @XmlTransient
     public List<ClassroomUser> getClassroomUserList() {
         return classroomUserList;
     }
@@ -121,20 +109,30 @@ public class Classroom implements Serializable {
     }
 
     @XmlTransient
+    public List<ClassroomSemester> getClassroomSemesterList() {
+        return classroomSemesterList;
+    }
+
+    public void setClassroomSemesterList(List<ClassroomSemester> classroomSemesterList) {
+        this.classroomSemesterList = classroomSemesterList;
+    }
+
+    @XmlTransient
+    public List<Exam> getExamList() {
+        return examList;
+    }
+
+    public void setExamList(List<Exam> examList) {
+        this.examList = examList;
+    }
+
+    @XmlTransient
     public List<Schedule> getScheduleList() {
         return scheduleList;
     }
 
     public void setScheduleList(List<Schedule> scheduleList) {
         this.scheduleList = scheduleList;
-    }
-
-    public Semester getIdSemester() {
-        return idSemester;
-    }
-
-    public void setIdSemester(Semester idSemester) {
-        this.idSemester = idSemester;
     }
 
     @Override
