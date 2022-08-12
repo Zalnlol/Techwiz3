@@ -3,6 +3,7 @@ package fpt.aptech.hss.Screen;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -22,6 +23,14 @@ public class QRActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
         getSupportActionBar().hide();
+
+        String[] data =new String[5];
+        Intent intent = getIntent();
+        data  = intent.getStringArrayExtra("data");
+
+
+
+
         GetDataFromQR();
     }
 

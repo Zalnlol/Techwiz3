@@ -11,7 +11,7 @@ package fpt.aptech.KSS.Routes;
 public class RouteAPI {
 
 
-    public final static String APIAdminHomeURL = "api/test";
+    public final static String APICreateAccount = "api/account/create";
 
 
 }

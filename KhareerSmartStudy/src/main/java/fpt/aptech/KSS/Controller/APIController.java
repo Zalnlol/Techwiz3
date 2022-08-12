@@ -6,8 +6,11 @@
 package fpt.aptech.KSS.Controller;
 
 import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.ModelString;
 import fpt.aptech.KSS.Routes.RouteAPI;
 import fpt.aptech.KSS.Routes.RouteWeb;
+import fpt.aptech.KSS.Services.IAccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,30 +23,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Admin
  */
 @Controller
 public class APIController {
+    @Autowired
+    private IAccountRepository accountRepository;
 
-    @RequestMapping(value = {RouteAPI.APIAdminHomeURL}, method = RequestMethod.GET)
-    public String AccountList(Model model, @Param("keyword") String keyword, HttpServletResponse response, HttpServletRequest request) {
-        List<Account> list = new ArrayList<>();
-        list = accountRepository.findAll();
+    @RequestMapping(value = {RouteAPI.APICreateAccount}, method = RequestMethod.POST)
+    public String AccountList(Model model, HttpServletResponse response, HttpServletRequest request) {
 
-        model.addAttribute("list", list);
 
-        boolean check = false;
-        for (Account item : list) {
-            if (item.getMail() != null) {
 
-                check = true;
-                break;
-            }
-        }
+       String name = request.getParameter("name");
+        String mail = request.getParameter("mail");
+        String name = request.getParameter("name");
+        String name = request.getParameter("name");
+        String name = request.getParameter("name");
+        String name = request.getParameter("name");
 
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("check", check);
+
         return "admin/account/index";
     }
 
