@@ -33,14 +33,35 @@ public class APIController {
     @RequestMapping(value = {RouteAPI.APICreateAccount}, method = RequestMethod.POST)
     public String AccountList(Model model, HttpServletResponse response, HttpServletRequest request) {
 
+        ModelString modelString = new ModelString();
+        ModelString modelStringout= new ModelString();
 
 
-       String name = request.getParameter("name");
-        String mail = request.getParameter("mail");
-        String name = request.getParameter("name");
-        String name = request.getParameter("name");
-        String name = request.getParameter("name");
-        String name = request.getParameter("name");
+        modelString.setData1(request.getParameter("mail"));
+        modelString.setData2(request.getParameter("password"));
+        modelString.setData3(request.getParameter("code"));
+        modelString.setData4(request.getParameter("role"));
+        modelString.setData5(request.getParameter("name"));
+        modelString.setData6(request.getParameter("dob"));
+
+        Account account = accountRepository.checkUniqueCode(modelString.getData3());
+
+        if (account !=null){
+            if(!account.getRole().equals(modelString.getData4())){
+                modelStringout.setData1("Registered wrong Role");
+                JsonServices.dd(JsonServices.ParseToJson(modelStringout),response);
+            }
+
+        }else {
+            modelStringout.setData1("Invalid QR");
+
+        }
+
+
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelString),response);
 
 
         return "admin/account/index";
