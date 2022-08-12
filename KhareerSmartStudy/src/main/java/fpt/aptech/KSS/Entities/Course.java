@@ -83,6 +83,10 @@ public class Course implements Serializable {
         this.duration = duration;
     }
 
+    public Course(String name, String description, int duration) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public Integer getId() {
         return id;
     }
