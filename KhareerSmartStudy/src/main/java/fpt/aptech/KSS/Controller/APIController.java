@@ -26,26 +26,26 @@ import java.util.List;
 @Controller
 public class APIController {
 
-    @RequestMapping(value = {RouteAPI.APIAdminHomeURL}, method = RequestMethod.GET)
-    public String AccountList(Model model, @Param("keyword") String keyword, HttpServletResponse response, HttpServletRequest request) {
-        List<Account> list = new ArrayList<>();
-        list = accountRepository.findAll();
-
-        model.addAttribute("list", list);
-
-        boolean check = false;
-        for (Account item : list) {
-            if (item.getMail() != null) {
-
-                check = true;
-                break;
-            }
-        }
-
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("check", check);
-        return "admin/account/index";
-    }
+//    @RequestMapping(value = {RouteAPI.APIAdminHomeURL}, method = RequestMethod.GET)
+//    public String AccountList(Model model, @Param("keyword") String keyword, HttpServletResponse response, HttpServletRequest request) {
+//        List<Account> list = new ArrayList<>();
+//        list = accountRepository.findAll();
+//
+//        model.addAttribute("list", list);
+//
+//        boolean check = false;
+//        for (Account item : list) {
+//            if (item.getMail() != null) {
+//
+//                check = true;
+//                break;
+//            }
+//        }
+//
+//        model.addAttribute("keyword", keyword);
+//        model.addAttribute("check", check);
+//        return "admin/account/index";
+//    }
 
 
 }
