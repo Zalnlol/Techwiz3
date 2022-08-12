@@ -5,13 +5,15 @@
  */
 package fpt.aptech.KSS.Services;
 
-import fpt.aptech.KSS.Entities.Notification;
+import fpt.aptech.KSS.Entities.AccountToken;
 import java.util.List;
 
 /**
  *
  * @author LÊ HỮU TÂM
  */
-public interface INotification {
-    List<Notification> findAll();
+public interface IAccountToken {
+    AccountToken NewToken(AccountToken accountToken);
+    List<AccountToken> GetTokenById(int id);
+    AccountToken GetToken(String token);
 }

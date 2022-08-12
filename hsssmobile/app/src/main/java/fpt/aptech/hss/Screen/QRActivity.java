@@ -13,7 +13,7 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import fpt.aptech.hss.R;
-public class QRActivity extends AppCompatActivity {
+public class    QRActivity extends AppCompatActivity {
     String data = "";
     private CodeScanner mCodeScanner;
 
