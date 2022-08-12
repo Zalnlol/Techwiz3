@@ -6,9 +6,8 @@
 package fpt.aptech.KSS.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,16 +15,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author jthie
+ * @author backs
  */
 @Entity
 @Table(name = "semester")
@@ -34,7 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Semester.findAll", query = "SELECT s FROM Semester s"),
     @NamedQuery(name = "Semester.findById", query = "SELECT s FROM Semester s WHERE s.id = :id"),
     @NamedQuery(name = "Semester.findByName", query = "SELECT s FROM Semester s WHERE s.name = :name"),
-    @NamedQuery(name = "Semester.findByDescription", query = "SELECT s FROM Semester s WHERE s.description = :description")})
+    @NamedQuery(name = "Semester.findByDescription", query = "SELECT s FROM Semester s WHERE s.description = :description"),
+    @NamedQuery(name = "Semester.findByStartDate", query = "SELECT s FROM Semester s WHERE s.startDate = :startDate"),
+    @NamedQuery(name = "Semester.findByEndDate", query = "SELECT s FROM Semester s WHERE s.endDate = :endDate")})
 public class Semester implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,10 +54,16 @@ public class Semester implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSemester")
-    private List<ClassroomSemester> classroomSemesterList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSemester")
-    private List<SemesterCourse> semesterCourseList;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "start_date")
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "end_date")
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
 
     public Semester() {
     }
@@ -65,10 +72,12 @@ public class Semester implements Serializable {
         this.id = id;
     }
 
-    public Semester(Integer id, String name, String description) {
+    public Semester(Integer id, String name, String description, Date startDate, Date endDate) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Integer getId() {
@@ -95,22 +104,20 @@ public class Semester implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
-    public List<ClassroomSemester> getClassroomSemesterList() {
-        return classroomSemesterList;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setClassroomSemesterList(List<ClassroomSemester> classroomSemesterList) {
-        this.classroomSemesterList = classroomSemesterList;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    @XmlTransient
-    public List<SemesterCourse> getSemesterCourseList() {
-        return semesterCourseList;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setSemesterCourseList(List<SemesterCourse> semesterCourseList) {
-        this.semesterCourseList = semesterCourseList;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     @Override
