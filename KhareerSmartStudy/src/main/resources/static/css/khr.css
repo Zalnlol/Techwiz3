@@ -1,5 +1,5 @@
 .main-sidebar {
-    background-color: #6667AB;
+    background-color: #0d6b55;
 }
 
 .nav-item-color {
@@ -45,15 +45,15 @@
 }
 
 .button-defualt {
-    background-color: #6667AB;
+    background-color: #0d6b55;
     border-color: #6667AB;
     border-radius: 10px;
     font-weight: bolder;
 }
 
 .button-defualt:hover {
-    background-color: #7879b6;
-    border-color: #7879b6;
+    background-color: #34B79F;
+    border-color: #34B79F;
 }
 
 .button-envent {
