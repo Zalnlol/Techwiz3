@@ -58,7 +58,6 @@
 
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="Mail"
@@ -79,7 +78,6 @@
                 android:textColor="#808080" />
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="Password"
