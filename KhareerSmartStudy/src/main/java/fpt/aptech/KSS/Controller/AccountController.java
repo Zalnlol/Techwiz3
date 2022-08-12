@@ -52,10 +52,9 @@ public class AccountController {
 
     @RequestMapping(value = {RouteWeb.accountManageURL}, method = RequestMethod.GET)
     public String AccountList(Model model, @Param("keyword") String keyword, HttpServletResponse response, HttpServletRequest request) {
-        List<Account> list = new ArrayList<>();
-        list = accountRepository.findAll();
 
-        model.addAttribute("list", list);
+        List<Account> list = new ArrayList<>();
+        list = accountRepository.listAll(keyword);
 
         boolean check = false;
         for (Account item : list) {
@@ -65,9 +64,9 @@ public class AccountController {
                 break;
             }
         }
-
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("list", list);
         model.addAttribute("check", check);
+        model.addAttribute("keyword", keyword);
         return "admin/account/index";
     }
 
@@ -146,6 +145,17 @@ public class AccountController {
         return "redirect:" + redirectUrl;
     }
 
+    @RequestMapping(value = {RouteWeb.AccountResetPassURL}, method = RequestMethod.GET)
+    public String ResetPass(Model model, HttpServletRequest request, HttpServletResponse response) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        int id = Integer.parseInt(request.getParameter("id"));
+        Account account = accountRepository.findById(id);
+        account.setPassword(encoder.encode("123"));
+        accountRepository.save(account);
+        String redirectUrl = "/account/index";
+        return "redirect:" + redirectUrl;
+    }
+
     @RequestMapping(value = {RouteWeb.AccountGetQRURL}, method = RequestMethod.GET)
     public void showQRCode(Model model, HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -162,5 +172,37 @@ public class AccountController {
 //        return "admin/account/showQrCode";
     }
 
+    @RequestMapping(value = {RouteWeb.AccountGetUpdateURL}, method = RequestMethod.GET)
+    public String GetUpdate(Model model, HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Account account = accountRepository.findById(id);
+        model.addAttribute("Account", account);
+
+        return "admin/account/update";
+    }
+
+    @RequestMapping(value = {RouteWeb.AccountGetUpdateURL}, method = RequestMethod.POST)
+    public String PostUpdate(Model model, HttpServletRequest request, HttpServletResponse response) {
+        String mail = request.getParameter("txtAccountMail");
+        String name = request.getParameter("txtFullName");
+        String phone = request.getParameter("txtPhone");
+        String gender = request.getParameter("radioGender");
+        String strBday = request.getParameter("txtBirthDay");
+        Date bday = null;
+        try {
+            bday = new SimpleDateFormat("yyyy-mm-dd").parse(strBday);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Account account = accountRepository.findByMail(mail);
+
+        account.setName(name);
+        account.setPhone(phone);
+        account.setGender(gender);
+        account.setDob(bday);
+        accountRepository.save(account);
+        String redirectUrl = "/account/index";
+        return "redirect:" + redirectUrl;
+    }
 
 }
