@@ -17,7 +17,7 @@ public interface IClassroomUserRepository{
 
     public void save(ClassroomUser classroomUser);
     
-    public ClassroomUser findById(int id);
+    public ClassroomUser findOne(int id);
     
     public void delete(ClassroomUser classroomUser);
 

@@ -6,6 +6,7 @@
 package fpt.aptech.KSS.Services;
 
 import fpt.aptech.KSS.Entities.ClassroomUser;
+import fpt.aptech.KSS.Repository.ClassroomUserRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class ClassroomUserServiceImp implements IClassroomUserRepository{
     
     @Autowired
-    IClassroomUserRepository classroomUserRepository;
+    ClassroomUserRepository classroomUserRepository;
 
     @Override
     public List<ClassroomUser> findAll() {
@@ -31,8 +32,8 @@ public class ClassroomUserServiceImp implements IClassroomUserRepository{
     }
 
     @Override
-    public ClassroomUser findById(int id) {
-        return classroomUserRepository.findById(id);
+    public ClassroomUser findOne(int id) {
+        return classroomUserRepository.findOne(id);
     }
 
     @Override
