@@ -31,4 +31,13 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     @Query(value = "SELECT * FROM Account WHERE id = :id order by id DESC limit 1", nativeQuery = true)
     Account selectLatestRecord(@PathVariable("id") Account id);
+
+    @Query("SELECT a FROM Account a WHERE a.mail = :mail AND a.role = 'Admin'")
+    Account findByEmailAdmin(@PathVariable("mail") String mail);
+
+    @Query("SELECT a FROM Account a WHERE a.mail = :mail AND a.role = 'Teacher'")
+    Account findByEmailTeacher(@PathVariable("mail") String mail);
+
+    @Query("SELECT a FROM Account a WHERE a.mail = :mail AND a.role = 'Student'")
+    Account findByEmailStudent(@PathVariable("mail") String mail);
 }

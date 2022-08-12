@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Semester.findById", query = "SELECT s FROM Semester s WHERE s.id = :id"),
     @NamedQuery(name = "Semester.findByName", query = "SELECT s FROM Semester s WHERE s.name = :name"),
     @NamedQuery(name = "Semester.findByStartDate", query = "SELECT s FROM Semester s WHERE s.startDate = :startDate"),
-    @NamedQuery(name = "Semester.findByEndDate", query = "SELECT s FROM Semester s WHERE s.endDate = :endDate")})
+    @NamedQuery(name = "Semester.findByEndDate", query = "SELECT s FROM Semester s WHERE s.endDate = :endDate"),
+    @NamedQuery(name = "Semester.findByLink", query = "SELECT s FROM Semester s WHERE s.link = :link")})
 public class Semester implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,9 +48,10 @@ public class Semester implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 200)
-    @Column(name = "link")
+    @Size(min = 1, max = 250)
+    @Column(name = "name")
     private String name;
     @Basic(optional = false)
     @NotNull
@@ -61,6 +63,11 @@ public class Semester implements Serializable {
     @Column(name = "end_date")
     @Temporal(TemporalType.DATE)
     private Date endDate;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "link")
+    private String link;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSemester")
     private List<Classroom> classroomList;
 
@@ -71,11 +78,12 @@ public class Semester implements Serializable {
         this.id = id;
     }
 
-    public Semester(Integer id, String name, Date startDate, Date endDate) {
+    public Semester(Integer id, String name, Date startDate, Date endDate, String link) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.link = link;
     }
 
     public Integer getId() {
@@ -108,6 +116,14 @@ public class Semester implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     @XmlTransient

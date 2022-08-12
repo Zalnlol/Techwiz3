@@ -6,6 +6,7 @@
 package fpt.aptech.KSS.Entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -35,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Notification.findAll", query = "SELECT n FROM Notification n"),
     @NamedQuery(name = "Notification.findById", query = "SELECT n FROM Notification n WHERE n.id = :id"),
     @NamedQuery(name = "Notification.findByName", query = "SELECT n FROM Notification n WHERE n.name = :name"),
-    @NamedQuery(name = "Notification.findByIsAll", query = "SELECT n FROM Notification n WHERE n.isAll = :isAll")})
+    @NamedQuery(name = "Notification.findByIsAll", query = "SELECT n FROM Notification n WHERE n.isAll = :isAll"),
+    @NamedQuery(name = "Notification.findByCreateDate", query = "SELECT n FROM Notification n WHERE n.createDate = :createDate")})
 public class Notification implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +50,9 @@ public class Notification implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "name")
-    private int name;
+    private String name;
     @Basic(optional = false)
     @NotNull
     @Lob
@@ -58,6 +63,11 @@ public class Notification implements Serializable {
     @NotNull
     @Column(name = "isAll")
     private boolean isAll;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "create_date")
+    @Temporal(TemporalType.DATE)
+    private Date createDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNotification")
     private List<NotificationUser> notificationUserList;
 
@@ -68,11 +78,12 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public Notification(Integer id, int name, String content, boolean isAll) {
+    public Notification(Integer id, String name, String content, boolean isAll, Date createDate) {
         this.id = id;
         this.name = name;
         this.content = content;
         this.isAll = isAll;
+        this.createDate = createDate;
     }
 
     public Integer getId() {
@@ -83,11 +94,11 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -105,6 +116,14 @@ public class Notification implements Serializable {
 
     public void setIsAll(boolean isAll) {
         this.isAll = isAll;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     @XmlTransient
