@@ -111,9 +111,9 @@ public class SemesterController {
         return null;
     }
     
-    @RequestMapping(value = {RouteWeb.SemesterGetCreateURL}, method = RequestMethod.GET)
-    public String edit(Model model) {
-
-        return "admin/semester/update";
-    }   
+//    @RequestMapping(value = {RouteWeb.SemesterGetCreateURL}, method = RequestMethod.GET)
+//    public String edit(Model model) {
+//
+//        return "admin/semester/update";
+//    }
 }

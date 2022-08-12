@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author jthie
+ * @author Admin
  */
 @Entity
 @Table(name = "classroom")
@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Classroom.findAll", query = "SELECT c FROM Classroom c"),
     @NamedQuery(name = "Classroom.findById", query = "SELECT c FROM Classroom c WHERE c.id = :id"),
     @NamedQuery(name = "Classroom.findByName", query = "SELECT c FROM Classroom c WHERE c.name = :name"),
-    @NamedQuery(name = "Classroom.findByDuration", query = "SELECT c FROM Classroom c WHERE c.duration = :duration")})
+    @NamedQuery(name = "Classroom.findByDuration", query = "SELECT c FROM Classroom c WHERE c.duration = :duration"),
+    @NamedQuery(name = "Classroom.findByImage", query = "SELECT c FROM Classroom c WHERE c.image = :image")})
 public class Classroom implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,14 +54,13 @@ public class Classroom implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "duration")
     private String duration;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
-    private List<ClassroomUser> classroomUserList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
-    private List<ClassroomSemester> classroomSemesterList;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "image")
+    private String image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
     private List<Exam> examList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
-    private List<Schedule> scheduleList;
 
     public Classroom() {
     }
@@ -69,10 +69,11 @@ public class Classroom implements Serializable {
         this.id = id;
     }
 
-    public Classroom(Integer id, String name, String duration) {
+    public Classroom(Integer id, String name, String duration, String image) {
         this.id = id;
         this.name = name;
         this.duration = duration;
+        this.image = image;
     }
 
     public Integer getId() {
@@ -99,22 +100,12 @@ public class Classroom implements Serializable {
         this.duration = duration;
     }
 
-    @XmlTransient
-    public List<ClassroomUser> getClassroomUserList() {
-        return classroomUserList;
+    public String getImage() {
+        return image;
     }
 
-    public void setClassroomUserList(List<ClassroomUser> classroomUserList) {
-        this.classroomUserList = classroomUserList;
-    }
-
-    @XmlTransient
-    public List<ClassroomSemester> getClassroomSemesterList() {
-        return classroomSemesterList;
-    }
-
-    public void setClassroomSemesterList(List<ClassroomSemester> classroomSemesterList) {
-        this.classroomSemesterList = classroomSemesterList;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @XmlTransient
@@ -124,15 +115,6 @@ public class Classroom implements Serializable {
 
     public void setExamList(List<Exam> examList) {
         this.examList = examList;
-    }
-
-    @XmlTransient
-    public List<Schedule> getScheduleList() {
-        return scheduleList;
-    }
-
-    public void setScheduleList(List<Schedule> scheduleList) {
-        this.scheduleList = scheduleList;
     }
 
     @Override

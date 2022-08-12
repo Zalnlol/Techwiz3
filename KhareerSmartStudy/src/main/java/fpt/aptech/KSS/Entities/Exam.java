@@ -7,9 +7,7 @@ package fpt.aptech.KSS.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,17 +17,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author jthie
+ * @author Admin
  */
 @Entity
 @Table(name = "exam")
@@ -37,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Exam.findAll", query = "SELECT e FROM Exam e"),
     @NamedQuery(name = "Exam.findById", query = "SELECT e FROM Exam e WHERE e.id = :id"),
-    @NamedQuery(name = "Exam.findByStartDate", query = "SELECT e FROM Exam e WHERE e.startDate = :startDate")})
+    @NamedQuery(name = "Exam.findByStartDate", query = "SELECT e FROM Exam e WHERE e.startDate = :startDate"),
+    @NamedQuery(name = "Exam.findByImage", query = "SELECT e FROM Exam e WHERE e.image = :image")})
 public class Exam implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,14 +49,17 @@ public class Exam implements Serializable {
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
     private Date startDate;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "image")
+    private String image;
     @JoinColumn(name = "id_classroom", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Classroom idClassroom;
     @JoinColumn(name = "id_course", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Course idCourse;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idExam")
-    private List<Mark> markList;
 
     public Exam() {
     }
@@ -67,9 +68,10 @@ public class Exam implements Serializable {
         this.id = id;
     }
 
-    public Exam(Integer id, Date startDate) {
+    public Exam(Integer id, Date startDate, String image) {
         this.id = id;
         this.startDate = startDate;
+        this.image = image;
     }
 
     public Integer getId() {
@@ -88,6 +90,14 @@ public class Exam implements Serializable {
         this.startDate = startDate;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Classroom getIdClassroom() {
         return idClassroom;
     }
@@ -102,15 +112,6 @@ public class Exam implements Serializable {
 
     public void setIdCourse(Course idCourse) {
         this.idCourse = idCourse;
-    }
-
-    @XmlTransient
-    public List<Mark> getMarkList() {
-        return markList;
-    }
-
-    public void setMarkList(List<Mark> markList) {
-        this.markList = markList;
     }
 
     @Override
