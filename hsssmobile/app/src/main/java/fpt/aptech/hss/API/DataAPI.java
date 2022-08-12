@@ -28,6 +28,13 @@ public interface DataAPI {
                                         @Query("role") String role,
                                         @Query("name") String name,
                                         @Query("dob") String dob
+
+
     );
+    @POST("account/login")
+    Call<ModelString> APILogin (@Query("mail") String mail,
+                                @Query("password") String password
+                                );
+
 
 }

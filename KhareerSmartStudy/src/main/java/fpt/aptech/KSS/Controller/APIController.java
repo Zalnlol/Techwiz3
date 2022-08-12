@@ -111,7 +111,9 @@ public class APIController {
 
         if(account!=null){
 
-            if(account.getPassword().equals(encoder.encode(password))){
+//            JsonServices.dd(encoder.matches(password,account.getPassword()),response);
+
+            if(encoder.matches(password,account.getPassword())){
                 modelString.setData1("Done");
                 JsonServices.dd(JsonServices.ParseToJson(modelString),response);
 

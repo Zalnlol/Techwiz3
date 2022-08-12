@@ -67,7 +67,7 @@ public class    QRActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<ModelString> call, Throwable t) {
-                                Toast.makeText(QRActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(QRActivity.this, "Connect error!", Toast.LENGTH_SHORT).show();
                             }
                         });
 
