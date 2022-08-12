@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
+        android:id="@+id/Classroomitem"
         android:gravity="center_horizontal"
         android:background="@xml/duongvien_goctron"
         android:backgroundTint="#56C2FF"

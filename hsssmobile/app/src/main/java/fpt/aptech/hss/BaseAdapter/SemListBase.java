@@ -6,23 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import fpt.aptech.hss.R;
 import java.util.List;
 
 import fpt.aptech.hss.Model.ModelString;
+import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.MyclasroomDetail;
 
-public class ClassroomListBase extends BaseAdapter {
+public class SemListBase extends BaseAdapter {
     Context context ;
     List<ModelString> list;
 
-    public ClassroomListBase(Context context, List<ModelString> list) {
+    public SemListBase(Context context, List<ModelString> list) {
         this.context = context;
         this.list = list;
     }
