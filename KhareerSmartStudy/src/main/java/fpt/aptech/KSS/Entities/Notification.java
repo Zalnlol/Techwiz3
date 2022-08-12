@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Notification.findById", query = "SELECT n FROM Notification n WHERE n.id = :id"),
     @NamedQuery(name = "Notification.findByName", query = "SELECT n FROM Notification n WHERE n.name = :name"),
     @NamedQuery(name = "Notification.findByIsAll", query = "SELECT n FROM Notification n WHERE n.isAll = :isAll"),
-    @NamedQuery(name = "Notification.findByCreateDate", query = "SELECT n FROM Notification n WHERE n.createDate = :createDate")})
+    @NamedQuery(name = "Notification.findByCreateDate", query = "SELECT n FROM Notification n WHERE n.createDate = :createDate"),
+    @NamedQuery(name = "Notification.findByIsAll1", query = "SELECT n FROM Notification n WHERE n.isAll1 = :isAll1")})
 public class Notification implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -68,6 +69,10 @@ public class Notification implements Serializable {
     @Column(name = "create_date")
     @Temporal(TemporalType.DATE)
     private Date createDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "is_all")
+    private boolean isAll1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNotification")
     private List<NotificationUser> notificationUserList;
 
@@ -78,12 +83,13 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public Notification(Integer id, String name, String content, boolean isAll, Date createDate) {
+    public Notification(Integer id, String name, String content, boolean isAll, Date createDate, boolean isAll1) {
         this.id = id;
         this.name = name;
         this.content = content;
         this.isAll = isAll;
         this.createDate = createDate;
+        this.isAll1 = isAll1;
     }
 
     public Integer getId() {
@@ -124,6 +130,14 @@ public class Notification implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public boolean getIsAll1() {
+        return isAll1;
+    }
+
+    public void setIsAll1(boolean isAll1) {
+        this.isAll1 = isAll1;
     }
 
     @XmlTransient

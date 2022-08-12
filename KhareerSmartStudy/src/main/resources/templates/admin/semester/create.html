@@ -3,7 +3,7 @@
       layout:decorate="~{/layout/_layout}"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Quản lý tài khoản</title>
+        <title>Semester Management</title>
 
         <style>
             .title-card {
@@ -27,7 +27,7 @@
 
         <div layout:fragment="content">
 
-            <h3 class="title-page">Add new course</h3>
+            <h3 class="title-page">Add new semester</h3>
 
             <div class="row">
                 <div class="col-sm-2"></div>
@@ -41,7 +41,7 @@
                         <div class="row" style="margin-top: 3%;">
                             <div class="col-sm-1"></div>
                             <div class="col">
-                                Course Name
+                                Semester Name
                             </div>
                         </div>
 
@@ -49,9 +49,9 @@
                         <div class="row" style="margin-top: 1%;">
                             <div class="col-sm-1"></div>
                             <div class="col">
-                                <input type="text" class="form-control input" placeholder="Course Name" id="txtAccountMail"
-                                       name="txtCourseName">
-                                <span hidden class="error-text" id="txtAccountMail-Error">Course Name</span>
+                                <input type="text" class="form-control input" placeholder="Semester Name" id="txtAccountMail"
+                                       name="txtSemesterName">
+                                <span hidden class="error-text" id="txtAccountMail-Error">Semester Name</span>
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
@@ -59,17 +59,16 @@
                         <div class="row" style="margin-top: 3%;">
                             <div class="col-sm-1"></div>
                             <div class="col">
-                                Description
+                                Start date
                             </div>
                         </div>
-
 
                         <div class="row" style="margin-top: 1%;">
                             <div class="col-sm-1"></div>
                             <div class="col">
-                                <input type="text" class="form-control input" placeholder="Description" id="txtDescription"
-                                       name="txtDescription">
-                                <span hidden class="error-text" id="txtFullName-Error">Description</span>
+                                <input type="date" class="form-control input" placeholder="Start date" id="txtStartDate"
+                                       name="txtStartDate">
+                                <span hidden class="error-text" id="txtPhone-Error">Phone</span>
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
@@ -77,15 +76,15 @@
                         <div class="row" style="margin-top: 3%;">
                             <div class="col-sm-1"></div>
                             <div class="col">
-                                Duration
+                                End date
                             </div>
                         </div>
 
                         <div class="row" style="margin-top: 1%;">
                             <div class="col-sm-1"></div>
                             <div class="col">
-                                <input type="text" class="form-control input" placeholder="Duration" id="txtDuration"
-                                       name="txtDuration">
+                                <input type="date" class="form-control input" placeholder="End date" id="txtEndDate"
+                                       name="txtEndDate">
                                 <span hidden class="error-text" id="txtPhone-Error">Phone</span>
                             </div>
                             <div class="col-sm-1"></div>
