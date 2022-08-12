@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -46,10 +47,10 @@ public class Semester implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
     @NotNull
-    @Column(name = "name")
-    private int name;
+    @Size(min = 1, max = 200)
+    @Column(name = "link")
+    private String name;
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_date")
@@ -70,7 +71,7 @@ public class Semester implements Serializable {
         this.id = id;
     }
 
-    public Semester(Integer id, int name, Date startDate, Date endDate) {
+    public Semester(Integer id, String name, Date startDate, Date endDate) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -85,11 +86,11 @@ public class Semester implements Serializable {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
