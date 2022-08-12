@@ -53,12 +53,10 @@ public class Account implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "mail")
     private String mail;
-    @Basic(optional = false)
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "name")
     private String name;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
@@ -72,6 +70,7 @@ public class Account implements Serializable {
     @Column(name = "gender")
     private String gender;
     @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "role")
     private String role;
@@ -79,11 +78,11 @@ public class Account implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "code")
     private String code;
-    @Basic(optional = false)
-    @Size(min = 1, max = 250)
+    @Size(max = 250)
     @Column(name = "password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
@@ -102,13 +101,10 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(Integer id, String mail, String name, String role, String code, String password) {
+    public Account(Integer id, String role, String code) {
         this.id = id;
-        this.mail = mail;
-        this.name = name;
         this.role = role;
         this.code = code;
-        this.password = password;
     }
 
     public Account(String mail, String name, String phone, Date dob, String gender, String role, String avatar, String code, String password) {
@@ -121,14 +117,13 @@ public class Account implements Serializable {
         this.avatar = avatar;
         this.code = code;
         this.password = password;
+        
     }
-    
-        public Account(String role, String code) {
-        this.role = role;
+
+    public Account(String role, String code) {
         this.code = code;
+        this.role = role;
     }
-    
-    
 
     public Integer getId() {
         return id;

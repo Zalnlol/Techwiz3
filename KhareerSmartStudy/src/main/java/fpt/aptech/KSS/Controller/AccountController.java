@@ -146,7 +146,6 @@ public class AccountController {
         return "redirect:" + redirectUrl;
     }
 
-
     @RequestMapping(value = {RouteWeb.AccountGetQRURL}, method = RequestMethod.GET)
     public void showQRCode(Model model, HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -162,4 +161,6 @@ public class AccountController {
         }
 //        return "admin/account/showQrCode";
     }
+
+
 }

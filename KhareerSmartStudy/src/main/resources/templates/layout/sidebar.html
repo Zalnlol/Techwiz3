@@ -2,138 +2,153 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 
-<head>
+    <head>
 
-</head>
+    </head>
 
-<body>
-
-
-<aside class=" main-sidebar elevation-4 " th:fragment="sidebar">
-    <!-- Brand Logo -->
-    <a th:href="@{/home/index}" class="brand-link ">
-        <img src="/images/Website/Logo1.png" alt="Product Demo" style="max-width:230px ">
-
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar ">
-        <!-- Sidebar user panel (optional) -->
+    <body>
 
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2 ">
-            <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu "
-                data-accordion="false ">
-                <!-- Add icons to the links using the .nav-icon class
-       with font-awesome or any other icon font library -->
-                <li class="nav-item sd ">
-                    <a th:href="@{/home/index}" class="nav-link active-link ">
-                        <div class="nav-item-color-active ">
-                            <!-- <i class="nav-icon " style="color:white "></i> -->
-                            <!-- <img src="images/icon/adminhome.svg " width="20px " srcset=" "> -->
-                            <i class="fas fa-home "></i>
-                            <p style="margin-left: 8% ">
-                                Main Dashboard
+        <aside class=" main-sidebar elevation-4 " th:fragment="sidebar">
+            <!-- Brand Logo -->
+            <a th:href="@{/home/index}" class="brand-link ">
+                <img src="/images/Website/Logo1.png" alt="Product Demo" style="max-width:230px ">
 
-                            </p>
-                        </div>
+            </a>
 
-                    </a>
-
-                </li>
-                <li class="nav-item sd ">
-                    <a href="/account/index" class="nav-link ">
-                        <div class="nav-item-color ">
-                            <i class="fas fa-user "></i>
-
-                            <p style="margin-left: 8% ">
-                                Account
-
-                            </p>
-                        </div>
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item sd ">
-                    <a th:href="@{/classroom/index}" class="nav-link ">
-                        <div class="nav-item-color ">
-                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
-                            <i class="fas fa-calendar "></i>
-
-                            <p style="margin-left: 8% ">
-                                Classroom
-
-                            </p>
-                        </div>
-
-                    </a>
-
-                </li>
-                <li class="nav-item sd ">
-                    <a th:href="@{/course/index}" class="nav-link ">
-                        <div class="nav-item-color ">
-                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
-                            <i class="fas fa-clock "></i>
-
-                            <p style="margin-left: 8% ">
-                                Course
-
-                            </p>
-                        </div>
-
-                    </a>
-
-                </li>
+            <!-- Sidebar -->
+            <div class="sidebar ">
+                <!-- Sidebar user panel (optional) -->
 
 
-                <li class="nav-item sd ">
-                    <a th:href="@{/notification}" class="nav-link ">
-                        <div class="nav-item-color ">
-                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
-                            <i class="fas fa-comments "></i>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2 ">
+                    <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu "
+                        data-accordion="false ">
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                        <li class="nav-item sd ">
+                            <a th:href="@{/home/index}" class="nav-link active-link ">
+                                <div class="nav-item-color-active ">
+                                    <!-- <i class="nav-icon " style="color:white "></i> -->
+                                    <!-- <img src="images/icon/adminhome.svg " width="20px " srcset=" "> -->
+                                    <i class="fas fa-home "></i>
+                                    <p style="margin-left: 8% ">
+                                        Main Dashboard
 
-                            <p style="margin-left: 8% ">
-                                Notification
+                                    </p>
+                                </div>
 
-                            </p>
-                        </div>
+                            </a>
 
-                    </a>
+                        </li>
+                        <li class="nav-item sd ">
+                            <a href="/account/index" class="nav-link ">
+                                <div class="nav-item-color ">
+                                    <i class="fas fa-user "></i>
 
-                </li>
+                                    <p style="margin-left: 8% ">
+                                        Account
+
+                                    </p>
+                                </div>
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item sd ">
+                            <a href="/semester/index" class="nav-link ">
+                                <div class="nav-item-color ">
+                                    <i class="fas fa-user "></i>
+
+                                    <p style="margin-left: 8% ">
+                                        Semester
+
+                                    </p>
+                                </div>
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item sd ">
+                            <a th:href="@{/classroom/index}" class="nav-link ">
+                                <div class="nav-item-color ">
+                                    <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                                    <i class="fas fa-calendar "></i>
+
+                                    <p style="margin-left: 8% ">
+                                        Classroom
+
+                                    </p>
+                                </div>
+
+                            </a>
+
+                        </li>
+                        <li class="nav-item sd ">
+                            <a th:href="@{/course/index}" class="nav-link ">
+                                <div class="nav-item-color ">
+                                    <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                                    <i class="fas fa-clock "></i>
+
+                                    <p style="margin-left: 8% ">
+                                        Course
+
+                                    </p>
+                                </div>
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item sd ">
+                            <a th:href="@{/notification}" class="nav-link ">
+                                <div class="nav-item-color ">
+                                    <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                                    <i class="fas fa-comments "></i>
+
+                                    <p style="margin-left: 8% ">
+                                        Notification
+
+                                    </p>
+                                </div>
+
+                            </a>
+
+                        </li>
 
 
 
 
 
-                <li class="nav-item sd " style="margin-top:35% ">
-                    <a href="/redirectlogout" class="nav-link ">
-                        <div class="nav-item-color ">
-                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
-                            <i class="fas fa-sign-out-alt "></i>
+                        <li class="nav-item sd " style="margin-top:35% ">
+                            <a href="/logout" class="nav-link ">
+                                <div class="nav-item-color ">
+                                    <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                                    <i class="fas fa-sign-out-alt "></i>
 
-                            <p style="margin-left: 8% ">
-                                Logout
+                                    <p style="margin-left: 8% ">
+                                        Logout
 
-                            </p>
-                        </div>
+                                    </p>
+                                </div>
 
-                    </a>
+                            </a>
 
-                </li>
-
-
-            </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-</aside>
+                        </li>
 
 
-</body>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+
+    </body>
 
 </html>

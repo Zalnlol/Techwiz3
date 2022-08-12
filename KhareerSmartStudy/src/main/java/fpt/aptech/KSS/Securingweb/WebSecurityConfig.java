@@ -5,6 +5,8 @@
  */
 package fpt.aptech.KSS.Securingweb;
 
+import fpt.aptech.KSS.ImpServices.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -28,6 +30,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 @Import(SwaggerConfig.class)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    
+    @Autowired
+    AccountService accountService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,8 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/plugins/**", "/dist/**", "/css/**", "/images/**", "/script/**", "/api/**")
-                .permitAll()
-                .antMatchers("/**")
                 .permitAll()
                 .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
@@ -46,8 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                //                .loginProcessingUrl("/j_spring_security_check")
-                //                .loginPage("/login")
+                .loginProcessingUrl("/j_spring_security_check")
+                .loginPage("/login")
                 .defaultSuccessUrl("/home/index", true)
                 .failureUrl("/login?error")
                 .usernameParameter("email")
@@ -63,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(accountService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(accountService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

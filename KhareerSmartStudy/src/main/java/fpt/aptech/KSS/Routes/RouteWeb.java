@@ -31,12 +31,20 @@ public class RouteWeb {
 
     public final static String AccountGetQRURL = "/account/showQrCode";
 
-    //Route Account
+    //Route Course
     public final static String courseManageURL = "/course/index";
 
     public final static String CourseGetCreateURL = "/course/create";
     
     public final static String CourseGetUpdateURL = "/course/update";
+    
+        //Route Course
+    public final static String SemesterManageURL = "/semester/index";
+    
+    public final static String SemesterGetCreateURL = "/semester/create";
+    
+    public final static String RedirectLogout = "redirectlogout";
+    
     
     
 

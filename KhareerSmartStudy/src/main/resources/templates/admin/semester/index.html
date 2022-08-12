@@ -1,0 +1,116 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout}">
+
+    <head>
+        <title>Semester Management</title>
+
+        <style>
+
+            .title-card {
+                padding-top: 11%;
+                padding-bottom: 11%;
+                margin-left: 4%;
+                font-weight: bold
+            }
+
+            .title-page {
+                text-align: center;
+                margin-top: 2%;
+                margin-bottom: 3%;
+                font-weight: bold
+            }
+
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div layout:fragment="content">
+
+            <h3 class="title-page">Semester Management</h3>
+
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col background-table">
+
+
+                    <div class="row" style="margin-bottom:2% ;">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-7"></div>
+                                <div class="col-sm-5" style="margin-bottom:2% ;">
+                                    <a href="/course/create">
+                                        <input type="button" class="btn btn-success form-control button-defualt" value="Add a semester">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Start date</th>
+                                <th scope="col">End date</th>
+                                <!--<th scope="col">Link</th>-->
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody th:if="${check == false}">
+                            <tr>
+                                <td colspan="5" style="text-align: center"> No data available </td>
+                            </tr>
+
+                        </tbody>
+
+                        <tbody th:if="${check == true}">
+                            <tr th:each="item,stt:${list}">
+                                <th scope="row" th:text="${stt.Count}"></th>
+                                <td th:text="${item.getName()}" th:id="${item.getName()}" ></td>
+                                <td th:text="${item.getStartDate()}" ></td>
+                                <td th:text="${item.getEndDate()}"></td>
+                                <td align="center">
+
+                                    <div class="dropdown">
+                                        <button class="button-envent
+                                                dropdown-toggle" style="margin-right:
+                                                10px;" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-edit"
+                                               style="color:
+                                               #6667AB"></i>
+                                        </button>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" th:href="'/semester/update?id='+${item.getId()}">Edit</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="col-sm-1"></div>
+
+            </div>
+
+        </div>
+
+
+    </body>
+
+</html>
