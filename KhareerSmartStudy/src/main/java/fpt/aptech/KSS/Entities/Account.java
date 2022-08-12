@@ -107,12 +107,22 @@ public class Account implements Serializable {
         this.code = code;
     }
 
-    public Account(String mail, String name, String phone, Date bday, String gender, String role, String fileName, String accountCodeGenerator, String encode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Account(String mail, String name, String phone, Date dob, String gender, String role, String avatar, String code, String password) {
+        this.mail = mail;
+        this.name = name;
+        this.phone = phone;
+        this.dob = dob;
+        this.gender = gender;
+        this.role = role;
+        this.avatar = avatar;
+        this.code = code;
+        this.password = password;
+        
     }
 
-    public Account(String role, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Account(String role, String code) {
+        this.code = code;
+        this.role = role;
     }
 
     public Integer getId() {
