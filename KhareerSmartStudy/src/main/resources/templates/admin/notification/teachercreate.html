@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout}">
+
+    <head>
+        <title>AdminLTE 3 | Dashboard</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div layout:fragment="content">
+            <h3 class="title-page">Thêm thông báo mới</h3>
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col background-table">
+
+                    <form action="/../notification/save" method="POST"\\\
+                          >
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                Tiêu đề
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <input type="text" class="form-control input" placeholder="Tiêu đề" id="NotificationName"
+                                       name="NotificationName">
+
+                                <!--                                <span hidden class="error-text" id="TimelineName-Eror">Vui lòng nhập tên lịch làm việc</span>-->
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                Nội dung
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <textarea type="date" class="form-control input" id="NotificationContent" placeholder="Nội dung"
+                                          name="NotificationContent" onchange="" ></textarea>
+                                <!--                                <span hidden class="error-text" id="TimelineStartDay-Eror">Vui lòng chọn ngày bắt đầu</span>-->
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                Chọn kiểu gửi
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <select type="date" class="form-control input" id="TypeSend"
+                                        name="TypeSend">
+                                    <option class="form-control input" value="non">
+                                    <p>Vui lòng chọn người gửi</p>
+                                    </option>
+                                    <option class="form-control input" value="parent">Student</option>
+                                    <option class="form-control input" value="student">Parent</option>
+                                </select>
+                                <!--                                <span hidden class="error-text" id="TimelineEndDay-Eror">Vui lòng chọn ngày kết thúc</span>-->
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row" style="margin-top: 1%;">
+                                <div class="col-sm-1"></div>
+                                <div class="col">
+                                   <div id="div1"></div>
+                                </select>
+                                </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col" style="text-align:center ;">
+                                <!--                                <span hidden class="error-text" id="StartAndEnd-Error">Ngày bắt đầu phải là thứ 2 và kết thúc phải là thứ 7</span>-->
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+                        <br>
+                        <div id="areaAdd">
+                            
+                            <br>
+                            <div class="row" style="margin-top: 1%;">
+                                <div class="col-sm-1"></div>
+                                <div class="col">
+                                </select>   
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="row" style="margin-top: 4%;">
+                                <div class="col-sm-1"></div>
+                                <div class="col">
+
+                                    <div class="row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-6" style="text-align: center ;">
+
+
+
+                                        </div>
+                                        <div class="col-sm-2"></div>
+
+
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 4%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6" style="text-align: center ;">
+
+
+                                        <input type="submit" class="btn btn-success form-control button-defualt"
+                                               value="Tiếp theo">
+                                    </div>
+                                    <div class="col-sm-2"></div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+                        <!--                        <input type="text" th:value="+${stt}" name="number"/>-->
+
+
+                    </form>
+                </div>
+            </div>
+
+    </body>
+<!--    <script>
+$(document).ready(function(){
+//    $("#parent").hide();
+//    $("#student").hide();
+  $("#TypeSend").change(function(){
+   if($("#TypeSend").val()==="parent"){
+   $("#div1").replaceWith("<div id='div1'><select type='date' class='form-control input'name='TypeSend' ><option class='form-control input' value='non'><p>Vui lòng chọn người gửi</p></option><option class='form-control input' value='any'>All Student</option><option class='form-control input' value='any'>Any Student</option></select></div>")
+  }
+  else if($("#TypeSend").val()==="student"){
+   $("#div1").replaceWith("<div id='div1'><select type='date' class='form-control input'name='TypeSend' ><option class='form-control input' value='non'><p>Vui lòng chọn người gửi</p></option><option class='form-control input' value='any'>All Parent</option><option class='form-control input' value='any'>Any Parent</option></select></div>")
+  }}
+  );
+});
+</script>-->
+
+</html>
