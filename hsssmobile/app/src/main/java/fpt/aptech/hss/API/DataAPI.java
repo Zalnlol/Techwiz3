@@ -37,4 +37,8 @@ public interface DataAPI {
                                 );
 
 
+    @GET("getMyClasses")
+    Call<List<ModelString>> GetMyClasses (@Query("mail") String mail);
+
+
 }

@@ -23,9 +23,25 @@ public class LoginActivity extends AppCompatActivity {
     EditText Login_mail,Login_password;
     public static final String profilePreferences = "login";
     SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferencesProfile;
     SharedPreferences.Editor editor;
     final static String USERNAME_KEY = "user";
-    final  static String PASSWORD_KEY = "password";
+    final static String PASSWORD_KEY = "password";
+
+
+
+    public static final String accountProfilePreferences = "profilepref";
+    public static final String sharedclasspreference = "classprofilepref";
+
+    public static final String LoginStatus = "loginStatusKey";
+    public static final String Id = "idKey";
+    public static final String Mail = "mailKey";
+    public static final String Name = "nameKey";
+    public static final String Phone = "phoneKey";
+    public static final String Birthday = "birthKey";
+    public static final String Gender = "genderKey";
+    public static final String Role = "roleKey";
+    public static final String Avatar = "avatarKey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +71,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
                 boolean check = true;
+
 
                 if (Login_mail.getText().toString().trim().equals("")) {
 
@@ -73,10 +88,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ModelString> call, Response<ModelString> response) {
                         if (response.body().getData1().equals("Done")) {
-
-
                             String user = Login_mail.getText().toString();
                             String password = Login_password.getText().toString();
+
 
                             sharedPreferences = getSharedPreferences(profilePreferences, Context.MODE_PRIVATE);
                             editor = sharedPreferences.edit();
@@ -84,12 +98,21 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(PASSWORD_KEY, password);
                             editor.commit();
 
+                            sharedPreferencesProfile = getSharedPreferences(accountProfilePreferences, Context.MODE_PRIVATE);
+                            editor = sharedPreferencesProfile.edit();
+                            editor.putString(LoginStatus,response.body().getData1());
+                            editor.putString(Id, response.body().getData2());
+                            editor.putString(Name, response.body().getData3());
+                            editor.putString(Phone,response.body().getData4());
+                            editor.putString(Birthday, response.body().getData5());
+                            editor.putString(Gender, response.body().getData6());
+                            editor.putString(Role, response.body().getData7());
+                            editor.putString(Avatar, response.body().getData8());
+                            editor.commit();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {
                             Toast.makeText(LoginActivity.this, response.body().getData1(), Toast.LENGTH_SHORT).show();
                         }
-
-
                     }
 
                     @Override
@@ -97,8 +120,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Connect error!", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
             }
         });
     }

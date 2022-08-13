@@ -5,9 +5,11 @@
  */
 package fpt.aptech.KSS.Services;
 
+import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.ClassroomUser;
 import fpt.aptech.KSS.Repository.ClassroomUserRepository;
 import java.util.List;
+import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +42,11 @@ public class ClassroomUserServiceImp implements IClassroomUserRepository{
     public void delete(ClassroomUser classroomUser) {
         classroomUserRepository.delete(classroomUser);
     }
-    
+
+    @Override
+    public List<ClassroomUser> findClassesByUser(Account id) {
+        return classroomUserRepository.findidUser(id);
+    }
+
+
 }

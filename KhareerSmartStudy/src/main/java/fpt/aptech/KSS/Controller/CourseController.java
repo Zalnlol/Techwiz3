@@ -48,6 +48,8 @@ public class CourseController {
         List<Course> list = new ArrayList<>();
         list = courseRepository.findAll();
 
+
+
         model.addAttribute("list", list);
 
         boolean check = false;

@@ -85,6 +85,16 @@
                             <div class="col-sm-1"></div>
                         </div>
 
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                <tr th:each="item:${semesters}">
+                                    <input type="checkbox" th:value="${item.getId()}"> <td th:text="${item.getName()}"></td>
+                                </tr>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
 
 
                         <div class="row" style="margin-top: 4%;">

@@ -1,0 +1,130 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout}">
+
+<head>
+    <title>Create classroom</title>
+
+    <style>
+
+        .title-card {
+            padding-top: 11%;
+            padding-bottom: 11%;
+            margin-left: 4%;
+            font-weight: bold
+        }
+
+        .title-page {
+            text-align: center;
+            margin-top: 2%;
+            margin-bottom: 3%;
+            font-weight: bold
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <h3 class="title-page">Create new classroom</h3>
+
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col background-table">
+
+            <form  method="post" id="_form">
+
+                <div class="row" style="margin-top: 3%;">
+                    <div class="col-sm-1"></div>
+                    <div class="col">
+                        Name
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 1%;">
+                    <div class="col-sm-1"></div>
+                    <div class="col">
+                        <input type="text" required class="form-control input" name="name">
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <div class="row" style="margin-top: 3%;">
+                    <div class="col-sm-1"></div>
+                    <div class="col">Duration</div>
+                </div>
+
+                <div class="row" style="margin-top: 1%;">
+                    <div class="col-sm-1"></div>
+                    <div class="col">
+                        <input type="range" name="duration" value="24" min="1" max="48" oninput="this.nextElementSibling.value = this.value">
+                        <output id="duration">24</output> Months
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+
+                <div class="row" style="margin-top: 3%;">
+                    <div class="col-sm-1"></div>
+                    <div class="col">Sem</div>
+                </div>
+
+                <div class="row" style="margin-top: 1%;">
+                    <div class="col-sm-1"></div>
+                    <div class="col">
+                        <input type="range" name="sem" value="2" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
+                        <output id="sem">2</output> Sem
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+
+
+                <div class="row" style="margin-top: 4%;">
+                    <div class="col-sm-1"></div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-3" style="text-align: center ;">
+
+                                <input type="submit" id="btnSubmit" class="btn btn-success form-control button-defualt" name="action"
+                                       value="Save">
+                            </div>
+                            <div class="col-sm-3" style="text-align: center ;">
+                                <input type="submit" class="btn btn-success form-control button-defualt" name="action"
+                                       value="Back">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+
+
+            </form>
+
+        </div>
+
+        <div class="col-sm-3"></div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
+
+
+
+<script>
+
+</script>
