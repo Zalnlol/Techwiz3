@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private MainClassroomBase  mAdapter1;
     private  MainTestBase mAdapter ;
     private MainReourceBase mAdapter2 ;
+    TextView username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

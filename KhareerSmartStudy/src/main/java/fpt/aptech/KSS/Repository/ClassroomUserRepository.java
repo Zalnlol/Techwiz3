@@ -5,7 +5,9 @@
  */
 package fpt.aptech.KSS.Repository;
 
+import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.ClassroomUser;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author jthie
  */
 public interface ClassroomUserRepository extends JpaRepository<ClassroomUser, Integer> {
+
     @Query("SELECT c FROM ClassroomUser c WHERE c.id = :id")
     ClassroomUser findOne(@PathVariable("id") int id);
+    
+    @Query("SELECT c FROM ClassroomUser c WHERE c.idUser = :idUser")
+    List<ClassroomUser> findidUser(@PathVariable("idUser") Account idUser);
+
+//    @Query(value = "SELECT * FROM ClassroomUser WHERE user_id = ?1", nativeQuery = true)
+//    List<ClassroomUser> findClassesByUser(int id);
+    
+//    @Query(value = "SELECT * FROM check_in_out WHERE staff_id = ?1 and check_in_day BETWEEN ?2 AND ?3 GROUP BY staff_id", nativeQuery=true)
+    
 }
