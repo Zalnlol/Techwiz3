@@ -5,10 +5,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private MainClassroomBase  mAdapter1;
     private  MainTestBase mAdapter ;
     private MainReourceBase mAdapter2 ;
-    TextView username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
         ScrollView scrollView = findViewById(R.id.scrollView);
         callNav.setDisplay(scrollView, MainActivity.this, 0.88);
+
+        TextView username = findViewById(R.id.textView4);
+
+        SharedPreferences sharedPreferencesProfile = getSharedPreferences("profilepref", MODE_PRIVATE);
+        String nameKey = sharedPreferencesProfile.getString("nameKey",null);
+        username.setText("Hello " + nameKey);
+
+
+
 
 
         AddClassroom();

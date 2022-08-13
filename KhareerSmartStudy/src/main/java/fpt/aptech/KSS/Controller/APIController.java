@@ -119,6 +119,13 @@ public class APIController {
 //            JsonServices.dd(encoder.matches(password,account.getPassword()),response);
             if (encoder.matches(password, account.getPassword())) {
                 modelString.setData1("Done");
+                modelString.setData2(account.getId().toString());
+                modelString.setData3(account.getName());
+                modelString.setData4(account.getPhone());
+                modelString.setData5(account.getDob().toString());
+                modelString.setData6(account.getGender());
+                modelString.setData7(account.getRole());
+                modelString.setData8(account.getAvatar());
                 JsonServices.dd(JsonServices.ParseToJson(modelString), response);
 
             } else {
@@ -146,51 +153,28 @@ public class APIController {
 //
 //        return "admin/account/index";
 //    }
-    @RequestMapping(value = {RouteAPI.GetProfileInfo}, method = RequestMethod.GET)
-    public void GetProfileInfo(Model model, HttpServletResponse response, HttpServletRequest request) {
-        ModelString modelString = new ModelString();
-        String mail = request.getParameter("mail");
-        Account account = new Account();
-        account = accountRepository.findByMail(mail);
-        if (account != null) {
-            modelString.setData1(account.getId().toString());
-            modelString.setData2(account.getName());
-            modelString.setData3(account.getPhone());
-            modelString.setData4(account.getDob().toString());
-            modelString.setData5(account.getGender());
-            modelString.setData6(account.getRole());
-            modelString.setData7(account.getAvatar());
-            JsonServices.dd(JsonServices.ParseToJson(modelString), response);
-        } else {
-            modelString.setData1("Mail does not exist");
-            JsonServices.dd(JsonServices.ParseToJson(modelString), response);
-        }
-    }
+
 
     @RequestMapping(value = {RouteAPI.GetMyClasses}, method = RequestMethod.GET)
     public void GetMyClasses(Model model, HttpServletResponse response, HttpServletRequest request) {
         ModelString modelString = new ModelString();
         String mail = request.getParameter("mail");
         Account account = accountRepository.findByMail(mail);
-        int accountId = account.getId();
-//        JsonServices.dd(JsonServices.ParseToJson(accountId), response);
-        
+
         List<ClassroomUser> listClassesByUsers = new ArrayList<>();
-        
+
         listClassesByUsers = classroomUserServiceImp.findClassesByUser(account);
-        
-        JsonServices.dd(JsonServices.ParseToJson(listClassesByUsers), response);
-        
-        
-//        listClassesByUsers = classroomUserRepository.findClassesByUser(accountId);
-//        if (listClassesByUsers != null) {
-//            
-//            modelString.setData1("Có dữ liệu");
-//            JsonServices.dd(JsonServices.ParseToJson(modelString), response);
-//        } else {
-//            modelString.setData1("No data");
-//            JsonServices.dd(JsonServices.ParseToJson(modelString), response);
-//        }
+
+        List<ModelString> modelStrings = new ArrayList<>();
+
+        for (ClassroomUser item : listClassesByUsers) {
+            ModelString modelString1 = new ModelString();
+            modelString1.setData1(item.getIdClassroom().getId().toString());
+            modelString1.setData2(item.getIdClassroom().getName());
+            modelString1.setData3(item.getIdClassroom().getImage());
+            modelStrings.add(modelString1);
+        }
+        JsonServices.dd(JsonServices.ParseToJson(modelStrings), response);
     }
 
 }
