@@ -18,7 +18,6 @@ import com.google.firebase.messaging.RemoteMessage;
 //import fpt.aptech.hss.API.TokenAPI;
 import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.MainActivity;
-import fpt.aptech.hss.Model.AccountToken;
 
 public class MessageFirebaseService extends FirebaseMessagingService {
     @Override

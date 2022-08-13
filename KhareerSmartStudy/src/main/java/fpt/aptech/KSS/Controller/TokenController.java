@@ -32,51 +32,21 @@ public class TokenController {
     IAccountToken accToken;
     @Autowired
     IAccountRepository accountRepository;
-//    @RequestMapping(value = "/api/token", method = RequestMethod.POST)
-//    public String sendNotification() throws FirebaseMessagingException {
-//       
-//       firebaseService.sendNotification("fR2HKA40SfOcVmKiYcLhEc:APA91bFlPTzjyWZiJO9rptAabFw3-sxhQ2KRf2q2Yqy5H14C5u9F-1AWRIrlRrDrI4FMZZnWGO024hzDLjbYAZ9U8anK5_VccbFQhlXVdJ0GzTB-HfNbU-B4UVaAGA7zwMn_W6ZoeP0g", "Okela", "dươc chưa");
-//       return "Thanh Cong";
-//    }
-//    @RequestMapping(value = "/api/token/get", method = RequestMethod.GET)
-//    public ResponseEntity<AccountToken> GetToken(HttpServletRequest request,HttpServletResponse response){
-//        String token = request.getParameter("token");
-//        AccountToken at = accToken.GetToken(token);
-//        if (at != null) {
-//            return new ResponseEntity<>(at, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-//        }
-//        
-//    }
-//    @RequestMapping(value = "/api/token/add", method = RequestMethod.POST)
-//    public ResponseEntity<AccountToken> addon(@RequestBody AccountToken accountToken){
-//        AccountToken at = accToken.NewToken(accountToken);
-//        if (at != null) {
-//            return new ResponseEntity<>(at, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-//        }
-//        
-//    }
-//    @RequestMapping(value = "/api/token/get/demo", method = RequestMethod.GET)
-//    public void demo(HttpServletRequest request,HttpServletResponse response){
-//        String token = request.getParameter("token");
-//        AccountToken at = accToken.GetToken(token);
-//       JsonServices.dd(JsonServices.ParseToJson(at), response);
-//        
-//    }
     @RequestMapping(value = "/api/token/add", method = RequestMethod.GET)
     public void Test(HttpServletRequest request,HttpServletResponse response){
         ModelString modelString = new ModelString();
         ModelString modelStringout= new ModelString();
         modelString.setData1(request.getParameter("token"));
         modelString.setData2(request.getParameter("id"));
-        int id = Integer.valueOf(modelString.getData2());
         AccountToken accountToken = new AccountToken();
-        Account a = accountRepository.findById(id);
         accountToken.setToken(modelString.getData1());
+        if (modelString.getData2().equals("null")) {
+         accountToken.setId(null);
+        }else{
+        int id = Integer.valueOf(modelString.getData2());
+        Account a = accountRepository.findById(id);
         accountToken.setId(a);
+        }
         accToken.NewToken(accountToken);
         if (accountToken !=null){
             if(!accountToken.getToken().equals(modelString.getData1())){
@@ -91,28 +61,4 @@ public class TokenController {
         JsonServices.dd(JsonServices.ParseToJson(modelString),response);
        
     }
-//    @RequestMapping(value = "/api/token/add", method = RequestMethod.GET)
-//    public String (HttpServletRequest request,HttpServletResponse response){
-//        ModelString modelString = new ModelString();
-//        ModelString modelStringout= new ModelString();
-//        modelString.setData1(request.getParameter("token"));
-//        modelString.setData2(request.getParameter("id"));
-//        int id = Integer.valueOf(modelString.getData2());
-//        AccountToken accountToken = new AccountToken();
-//        Account a = accountRepository.findById(id);
-//        accountToken.setToken(modelString.getData1());
-//        accountToken.setId(a);
-//        if (accountToken !=null){
-//            if(!accountToken.getToken().equals(modelString.getData1())){
-//                modelStringout.setData1("Registered token Susssess");
-//                JsonServices.dd(JsonServices.ParseToJson(modelStringout),response);
-//            }
-//
-//        }else {
-//            modelStringout.setData1("Registered token Unsusssess");
-//
-//        }
-//        JsonServices.dd(JsonServices.ParseToJson(modelString),response);
-//        return "admin/account/index";
-//    }
 }

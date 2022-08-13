@@ -60,7 +60,6 @@ public class Exam implements Serializable {
     @JoinColumn(name = "id_course", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Course idCourse;
-
     public Exam() {
     }
 

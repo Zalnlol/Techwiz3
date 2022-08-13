@@ -11,7 +11,11 @@ import fpt.aptech.KSS.Entities.ModelString;
 import fpt.aptech.KSS.Entities.NotificationUser;
 import fpt.aptech.KSS.Services.IAccountRepository;
 import fpt.aptech.KSS.Services.INotification;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +36,7 @@ public class NotifiactionController {
     @Autowired
     IAccountRepository accountRepository;
     @RequestMapping(value = "/api/notification/get", method = RequestMethod.GET)
-    public String Test(HttpServletRequest request,HttpServletResponse response){
+    public void Test(HttpServletRequest request,HttpServletResponse response) throws ParseException{
         ModelString modelString = new ModelString();
         List<ModelString> modelStringout= new ArrayList<ModelString>();
         modelString.setData1(request.getParameter("id"));
@@ -41,12 +45,33 @@ public class NotifiactionController {
         List<NotificationUser>  list = iNotification.findListNotifacationByAccount(a);
         for (int i = 0; i < list.size(); i++) {
             ModelString modelOut = new ModelString();
+            
+            Date date = new Date() ;
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String strDate= formatter.format(date);
+            
             modelOut.setData1(list.get(i).getIdNotification().getName());
             modelOut.setData2(list.get(i).getIdNotification().getContent());
-            modelOut.setData3(list.get(i).getIdNotification().getCreateDate().toString());
+            String datel = list.get(i).getIdNotification().getCreateDate().toString();
+            Date dateStart = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+            Date dateEnd = new SimpleDateFormat("yyyy-MM-dd").parse(datel);
+            modelOut.setData3(String.valueOf(Numday(dateEnd, dateStart)));
+            modelOut.setData4(list.get(i).getId().toString());
+            modelOut.setData5(strDate);
+            modelOut.setData6(datel.toString());
+            modelOut.setData7(String.valueOf("false"));
+            
             modelStringout.add(modelOut);
         }
         JsonServices.dd(JsonServices.ParseToJson(modelStringout),response);
-        return "admin/account/index";
+        
+    }
+       private int Numday(Date st,Date end){
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(st);
+        c2.setTime(end);
+        int noDay = (int) ((c2.getTime().getTime() - c1.getTime().getTime()) / (24 * 3600 * 1000));
+        return noDay;
     }
 }
