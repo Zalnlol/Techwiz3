@@ -1,0 +1,216 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout}">
+
+<head>
+    <title>Classroom step 2</title>
+
+    <style>
+
+        .title-card {
+            padding-top: 11%;
+            padding-bottom: 11%;
+            margin-left: 4%;
+            font-weight: bold
+        }
+
+        .title-page {
+            text-align: center;
+            margin-top: 2%;
+            margin-bottom: 3%;
+            font-weight: bold
+        }
+
+        .add_course{
+            color: lightskyblue;
+        }
+        .add_course:hover{
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <!--CND VueJs-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"></script>
+
+    <h3 class="title-page">Step 2</h3>
+
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col background-table">
+            <div id="myApp">
+
+
+                <div class="row" v-for="(value,index) in data" :key="index" style="margin-bottom: 5%">
+                    <div class="col">
+                        <b >Sem {{index+1}}</b>
+                        <br/>
+                        <br/>
+
+
+                        <input type="text" class="form-control input" placeholder="Semester name" v-model="value.name" id="semname"
+                               name="semname">
+
+                        <br>
+                        <textarea class="form-control input" placeholder="Description" id="description"
+                               name="description" v-model="value.duration"></textarea>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <b>Start day</b>
+                                <br/>
+                                <input type="date" class="form-control input" id="startday"
+                                       name="startday" v-model="value.startday">
+                            </div>
+                            <div class="col">
+                                <b>End day</b>
+                                <br/>
+                                <input type="date" class="form-control input" id="endday"
+                                       name="endday" v-model="value.enddate">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <div v-for="(value2,index2) in value.course" :key="index" >
+                            <br/>
+
+                            <div> <b> Course {{index2+1}} </b></div>
+
+                            <select class="form-control input" v-model="value2.idcoursse">
+                                <option v-for="(value1,index1) in CouseList" :key="index" :value="value1.id" >{{value1.name}}</option>
+
+                            </select>
+
+
+                        </div>
+
+
+                        <div style="text-align: center">
+                            <span class="add_course" v-on:click="addcourse(index)" >Add Course</span>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col" >
+
+
+
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6" style="text-align: center ;">
+
+                                <input type="submit" v-on:click="submit" id="btnSubmit" class="btn btn-success form-control button-defualt" name="action"
+                                       value="Save">
+                            </div>
+
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <textarea id="sem"  hidden th:text="${sem}"></textarea>
+                <textarea id="text" hidden th:text="${courseListString}"></textarea>
+
+                <form method="post" hidden>
+
+                    <textarea name="data" id="submit-text"></textarea>
+                    <input type="submit" id="btn-submit">
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-3"></div>
+
+
+    </div>
+
+    <script>
+        var App = new Vue({
+            el: "#myApp",
+            created() {
+                this.load();
+            },
+            data() {
+                return {
+                    data: [],
+                    CouseList:[]
+
+
+
+                }
+
+            },
+            methods: {
+                load: function () {
+
+                    CouseList = JSON.parse(document.getElementById("text").value);
+                    sem = document.getElementById("sem").value
+
+                    this.CouseList = CouseList;
+
+                    console.log(CouseList);
+
+                    for (let i = 0; i < sem; i++) {
+                        this.data.push({name:"", duration:"",startday:"",enddate:"",course:[]})
+                    }
+
+
+
+
+                },
+
+                addcourse:function (index){
+                    this.data[index].course.push({idcoursse:0})
+
+
+                },
+
+
+                submit: function () {
+
+
+                    document.getElementById("submit-text").value = JSON.stringify(this.data);
+                    document.getElementById("btn-submit").click();
+                    console.log(this.data);
+
+
+
+                }
+            }
+
+        })
+    </script>
+
+
+</div>
+
+
+</body>
+
+</html>
+
+
+
+<script>
+
+</script>

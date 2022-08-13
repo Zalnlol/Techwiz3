@@ -64,8 +64,7 @@ public class Course implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "image")
     private String image;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
-    private List<Exam> examList;
+
 
     public Course() {
     }
@@ -122,14 +121,6 @@ public class Course implements Serializable {
         this.image = image;
     }
 
-    @XmlTransient
-    public List<Exam> getExamList() {
-        return examList;
-    }
-
-    public void setExamList(List<Exam> examList) {
-        this.examList = examList;
-    }
 
     @Override
     public int hashCode() {

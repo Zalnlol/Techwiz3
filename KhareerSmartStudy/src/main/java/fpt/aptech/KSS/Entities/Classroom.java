@@ -6,9 +6,7 @@
 package fpt.aptech.KSS.Entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,12 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Classroom.findById", query = "SELECT c FROM Classroom c WHERE c.id = :id"),
     @NamedQuery(name = "Classroom.findByName", query = "SELECT c FROM Classroom c WHERE c.name = :name"),
     @NamedQuery(name = "Classroom.findByDuration", query = "SELECT c FROM Classroom c WHERE c.duration = :duration"),
+    @NamedQuery(name = "Classroom.findByIdSemester", query = "SELECT c FROM Classroom c WHERE c.idSemester = :idSemester"),
     @NamedQuery(name = "Classroom.findByImage", query = "SELECT c FROM Classroom c WHERE c.image = :image")})
 public class Classroom implements Serializable {
 
@@ -56,11 +53,13 @@ public class Classroom implements Serializable {
     private String duration;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "id_semester")
+    private int idSemester;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "image")
     private String image;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClassroom")
-    private List<Exam> examList;
 
     public Classroom() {
     }
@@ -69,10 +68,11 @@ public class Classroom implements Serializable {
         this.id = id;
     }
 
-    public Classroom(Integer id, String name, String duration, String image) {
+    public Classroom(Integer id, String name, String duration, int idSemester, String image) {
         this.id = id;
         this.name = name;
         this.duration = duration;
+        this.idSemester = idSemester;
         this.image = image;
     }
 
@@ -100,21 +100,20 @@ public class Classroom implements Serializable {
         this.duration = duration;
     }
 
+    public int getIdSemester() {
+        return idSemester;
+    }
+
+    public void setIdSemester(int idSemester) {
+        this.idSemester = idSemester;
+    }
+
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    @XmlTransient
-    public List<Exam> getExamList() {
-        return examList;
-    }
-
-    public void setExamList(List<Exam> examList) {
-        this.examList = examList;
     }
 
     @Override
