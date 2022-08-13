@@ -2,9 +2,9 @@
 //
 //import java.io.Serializable;
 //
-//public class AccountToken extends Serializable {
+//public class AccountToken implements Serializable {
 //    private String token;
-//    private Integer id;
+//    private Account id;
 //
 //    public String getToken() {
 //        return token;
@@ -14,11 +14,11 @@
 //        this.token = token;
 //    }
 //
-//    public Integer getId() {
+//    public Account getId() {
 //        return id;
 //    }
 //
-//    public void setId(Integer id) {
+//    public void setId(Account id) {
 //        this.id = id;
 //    }
 //}

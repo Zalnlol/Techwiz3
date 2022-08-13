@@ -42,5 +42,10 @@ public class ClassroomServices implements IClassroomRepository{
         Classroom classroom = classroomRepository.findOne(id);
         classroomRepository.delete(classroom);
     }
+
+    @Override
+    public Classroom findOneByName(String name) {
+       return  classroomRepository.findByName(name);
+    }
     
 }

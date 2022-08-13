@@ -6,16 +6,14 @@
 package fpt.aptech.KSS.Services;
 
 import fpt.aptech.KSS.Entities.Classroom;
+import fpt.aptech.KSS.Entities.Exam;
 import java.util.List;
 
 /**
  *
- * @author backs
+ * @author LÊ HỮU TÂM
  */
-public interface IClassroomRepository {
-    public List<Classroom> findAll();
-    public Classroom findOne(int id);
-    public void saveClassroom(Classroom newClassroom);
-    public void removeClassroom(int id);
-    public Classroom findOneByName(String name);
+public interface IExam {
+  List<Exam> findListByClass(Classroom classroom); 
+//    List<Exam> findListExamByIdStudent()
 }

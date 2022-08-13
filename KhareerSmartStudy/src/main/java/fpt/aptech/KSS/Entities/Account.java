@@ -5,6 +5,8 @@
  */
 package fpt.aptech.KSS.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -91,6 +93,7 @@ public class Account implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private List<ClassroomUser> classroomUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    //@JsonBackReference
     private List<NotificationUser> notificationUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTeacher")
     private List<Schedule> scheduleList;
@@ -266,7 +269,7 @@ public class Account implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    @JsonBackReference
     @XmlTransient
     public List<AccountToken> getAccountTokenList() {
         return accountTokenList;
