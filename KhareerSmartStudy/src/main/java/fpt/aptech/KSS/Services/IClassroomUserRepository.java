@@ -5,6 +5,7 @@
  */
 package fpt.aptech.KSS.Services;
 
+import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.ClassroomUser;
 import java.util.List;
 
@@ -12,13 +13,16 @@ import java.util.List;
  *
  * @author jthie
  */
-public interface IClassroomUserRepository{
+public interface IClassroomUserRepository {
+
     public List<ClassroomUser> findAll();
 
     public void save(ClassroomUser classroomUser);
-    
+
     public ClassroomUser findOne(int id);
-    
+
     public void delete(ClassroomUser classroomUser);
+
+    public List<ClassroomUser> findClassesByUser(Account id);
 
 }
