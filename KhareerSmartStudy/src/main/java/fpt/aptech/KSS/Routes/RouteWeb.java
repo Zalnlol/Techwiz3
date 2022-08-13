@@ -51,5 +51,7 @@ public class RouteWeb {
 
     public final static String ClassroomCreate = "classroom/manager/create";
 
+    public final static String ClassroomList = "classroom/manager/list";
+
     public final static String ClassroomCreateStep2 = "classroom/manager/addsem";
 }

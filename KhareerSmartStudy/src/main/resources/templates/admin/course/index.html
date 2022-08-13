@@ -78,6 +78,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Duration</th>
+                                <th scope="col">Teacher</th>
                                 <th scope="col">Actions</th>
 
                             </tr>
@@ -95,6 +96,7 @@
                                 <td th:text="${item.getName()}" th:id="${item.getName()}" ></td>
                                 <td th:text="${item.getDescription()}" ></td>
                                 <td th:text="${item.getDuration() + ' months'}"></td>
+                                <td th:text="${item.getTeacher().getName()}"></td>
                                 <td align="center">
 
                                     <div class="dropdown">

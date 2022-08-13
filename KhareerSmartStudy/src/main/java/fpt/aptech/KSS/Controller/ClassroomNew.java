@@ -4,15 +4,13 @@ import fpt.aptech.KSS.ImpServices.ClassroomServices;
 import fpt.aptech.KSS.ImpServices.CourseServices;
 import fpt.aptech.KSS.ImpServices.ImageServices;
 import fpt.aptech.KSS.Routes.RouteWeb;
-import fpt.aptech.KSS.Services.IAccountRepository;
+import fpt.aptech.KSS.Services.*;
+
 import static java.lang.System.out;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fpt.aptech.KSS.Services.ICourseRepository;
-import fpt.aptech.KSS.Services.SemesterCourseServiceImp;
-import fpt.aptech.KSS.Services.SemesterServiceImp;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +34,7 @@ public class ClassroomNew {
     private CourseServices courseServices;
 
     @Autowired
-    private Sem courseServices;
+    private ClassroomSemesterServiceImp classroomSemesterService;
 
     @Autowired
     private SemesterCourseServiceImp semesterCourseServiceImp;
@@ -149,6 +147,10 @@ public class ClassroomNew {
                 SemesterService.save(semester);
 
 
+                ClassroomSemester classroomSemester = new ClassroomSemester();
+                classroomSemester.setIdSemester(semester);
+                classroomSemester.setIdClassroom(new Classroom(classroom.getId()));
+                classroomSemesterService.save(classroomSemester);
 
 
                 List<Course> CourseList = new ArrayList<>();
@@ -164,7 +166,7 @@ public class ClassroomNew {
 
                     SemesterCourse semesterCourse = new SemesterCourse();
                     semesterCourse.setIdCourse(new Course(course));
-
+                    semesterCourse.setIdSemester(new Semester(semester.getId()));
                     semesterCourseServiceImp.save(semesterCourse);
 
 
@@ -178,10 +180,18 @@ public class ClassroomNew {
         }
 
 
-
-        return "admin/classroommaneger/createstep2";
+        String redirectUrl = "/classroom/manager/addsem";
+        return "redirect:" + redirectUrl;
     }
 
+    @RequestMapping(value = RouteWeb.ClassroomList, method = RequestMethod.GET)
+    public String ClassroomList(Model model, HttpServletRequest request, HttpServletResponse response) {
 
+        List<Classroom> list = classroomServices.findAll();
+
+        request.setAttribute("list",list);
+
+        return "admin/classroommaneger/index";
+    }
 
 }

@@ -7,17 +7,7 @@ package fpt.aptech.KSS.Entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -64,6 +54,10 @@ public class Course implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "image")
     private String image;
+
+    @JoinColumn(name = "teacher ", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Account teacher;
 
 
     public Course() {
@@ -119,6 +113,15 @@ public class Course implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+
+    public Account getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Account idCourse) {
+        this.teacher = idCourse;
     }
 
 
