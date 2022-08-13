@@ -89,8 +89,8 @@
                         <div class="row" style="margin-top: 1%;">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10" style="text-align: center ;">
-                                <input type="textarea" class="form-control textarea" rows="10"
-                                       name="description">
+                                <textarea class="form-control input"
+                                          name="txtDescription"></textarea>
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
@@ -106,7 +106,7 @@
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10">
                                 <div class="col-sm-5" th:each="item:${courses}">
-                                    <input type="checkbox" th:value="${item.getId()}"> <td th:text="${item.getName()}"></td>
+                                    <input type="checkbox" name="courses" th:value="${item.getId()}"> <td th:text="${item.getName()}"></td>
                                 </div>
                             </div>
                             <div class="col-sm-1"></div>

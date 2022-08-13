@@ -13,9 +13,15 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
+import fpt.aptech.hss.API.DataAPI;
+import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class    QRActivity extends AppCompatActivity {
-    String data = "";
+    String[] data ;
     private CodeScanner mCodeScanner;
 
     @Override
@@ -24,7 +30,7 @@ public class    QRActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scanner);
         getSupportActionBar().hide();
 
-        String[] data =new String[5];
+         data =new String[5];
         Intent intent = getIntent();
         data  = intent.getStringArrayExtra("data");
 
@@ -44,7 +50,27 @@ public class    QRActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(QRActivity.this, ""+result.getText().toString(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(QRActivity.this, ""+result.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                        DataAPI.api.APICreateAccount(data[1],data[2],result.getText().toString(),data[4],data[0],data[3]).enqueue(new Callback<ModelString>() {
+                            @Override
+                            public void onResponse(Call<ModelString> call, Response<ModelString> response) {
+                                Toast.makeText(QRActivity.this, ""+response.body().getData1(), Toast.LENGTH_SHORT).show();
+
+                                if(response.body().getData1().equals("Done")){
+
+                                    startActivity(new Intent(QRActivity.this, SuccessActivity.class));
+                                }
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<ModelString> call, Throwable t) {
+                                Toast.makeText(QRActivity.this, "Connect error!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     }
                 });
             }

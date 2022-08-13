@@ -10,11 +10,15 @@ import fpt.aptech.hss.R;
 
 public class FlashActivity extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash);
         getSupportActionBar().hide();
+
+
 
         new Handler().postDelayed(new Runnable() {
             @Override

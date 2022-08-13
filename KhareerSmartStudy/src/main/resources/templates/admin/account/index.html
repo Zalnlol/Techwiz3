@@ -40,21 +40,21 @@
                     <div class="row" style="margin-bottom:2% ;">
 
                         <div class="col-sm-3">
-                            <form th:action="@{/account/index}">
-                                <input class="form-control input" placeholder="Search email or name..." type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
-                        </div>
+                            <form th:action="@{/account/index}" id="myForm">
+                                    <input class="form-control input" placeholder="Search email or name..." type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" />
+                            </div>
 
-                        <div class="col-sm-1">
-                            <input class="btn btn-success button-defualt" type="submit" value="Search" />
-                        </div>
-                        
-                        <div class="col-sm-1">
-                            <input class="btn btn-success button-defualt" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-                        </div>
+                            <div class="col-sm-1">
+                                <input class="btn btn-success button-defualt" type="submit" value="Search" />
+                            </div>
 
+                            <div class="col-sm-1">
+                                <input class="btn btn-success button-defualt" type="button" value="Clear" onclick="clearSearch()" />
+                            </div>
                         </form>
-                            
-                            
+
+
+
                         <div class="col-sm-2"></div>        
                         <div class="col-sm-5">
                             <div class="row">
@@ -71,6 +71,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
@@ -131,15 +133,14 @@
 
         </div>
 
-        <script type="text/javascript">
-            function clearSearch() {
-                window.location = "[[@{/account/index}]]";
-            }
-        </script>
+    </body>
 
-    </div>
-
-
-</body>
 
 </html>
+
+
+<script type="text/javascript">
+                        function clearSearch() {
+                            document.getElementById('keyword').value = '';
+                        }
+</script>

@@ -28,8 +28,12 @@ public class RouteWeb {
     public final static String AccountShowQRURL = "/account/showQrCode";
 
     public final static String AccountGetCreateNonAdminURL = "/account/createNonAdmin";
+    
+    public final static String AccountGetUpdateURL = "/account/update";
 
     public final static String AccountGetQRURL = "/account/showQrCode";
+    
+    public final static String AccountResetPassURL = "/account/resetpass";
 
     //Route Course
     public final static String courseManageURL = "/course/index";

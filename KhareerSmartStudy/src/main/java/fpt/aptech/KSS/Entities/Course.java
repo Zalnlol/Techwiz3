@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author jthie
+ * @author Admin
  */
 @Entity
 @Table(name = "course")
@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id"),
     @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name"),
     @NamedQuery(name = "Course.findByDescription", query = "SELECT c FROM Course c WHERE c.description = :description"),
-    @NamedQuery(name = "Course.findByDuration", query = "SELECT c FROM Course c WHERE c.duration = :duration")})
+    @NamedQuery(name = "Course.findByDuration", query = "SELECT c FROM Course c WHERE c.duration = :duration"),
+    @NamedQuery(name = "Course.findByImage", query = "SELECT c FROM Course c WHERE c.image = :image")})
 public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,16 +59,13 @@ public class Course implements Serializable {
     @NotNull
     @Column(name = "duration")
     private int duration;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
-    private List<Document> documentList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
-    private List<SemesterCourse> semesterCourseList;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "image")
+    private String image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
     private List<Exam> examList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
-    private List<Schedule> scheduleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCourse")
-    private List<Mark> markList;
 
     public Course() {
     }
@@ -76,15 +74,12 @@ public class Course implements Serializable {
         this.id = id;
     }
 
-    public Course(Integer id, String name, String description, int duration) {
+    public Course(String name, String description, int duration) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.duration = duration;
-    }
-
-    public Course(String name, String description, int duration) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.image = image;
     }
 
     public Integer getId() {
@@ -119,22 +114,12 @@ public class Course implements Serializable {
         this.duration = duration;
     }
 
-    @XmlTransient
-    public List<Document> getDocumentList() {
-        return documentList;
+    public String getImage() {
+        return image;
     }
 
-    public void setDocumentList(List<Document> documentList) {
-        this.documentList = documentList;
-    }
-
-    @XmlTransient
-    public List<SemesterCourse> getSemesterCourseList() {
-        return semesterCourseList;
-    }
-
-    public void setSemesterCourseList(List<SemesterCourse> semesterCourseList) {
-        this.semesterCourseList = semesterCourseList;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @XmlTransient
@@ -144,24 +129,6 @@ public class Course implements Serializable {
 
     public void setExamList(List<Exam> examList) {
         this.examList = examList;
-    }
-
-    @XmlTransient
-    public List<Schedule> getScheduleList() {
-        return scheduleList;
-    }
-
-    public void setScheduleList(List<Schedule> scheduleList) {
-        this.scheduleList = scheduleList;
-    }
-
-    @XmlTransient
-    public List<Mark> getMarkList() {
-        return markList;
-    }
-
-    public void setMarkList(List<Mark> markList) {
-        this.markList = markList;
     }
 
     @Override
