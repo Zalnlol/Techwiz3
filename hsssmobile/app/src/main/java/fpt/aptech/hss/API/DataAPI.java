@@ -36,9 +36,6 @@ public interface DataAPI {
                                 @Query("password") String password
                                 );
 
-    @GET("getProfileInfo")
-    Call<ModelString> GetProfileInfo(@Query("mail") String mail
-    );
 
     @GET("getMyClasses")
     Call<ModelString> GetMyClasses (@Query("mail") String mail

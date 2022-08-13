@@ -73,7 +73,7 @@
                     android:text="My Class" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycleviewList"
+                    android:id="@+id/recycleviewListClass"
                     android:layout_width="match_parent"
                     android:layout_height="106dp"
                     android:layout_gravity="center_vertical"

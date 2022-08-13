@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public static final String accountProfilePreferences = "profilepref";
+    public static final String sharedclasspreference = "classprofilepref";
 
     public static final String LoginStatus = "loginStatusKey";
     public static final String Id = "idKey";
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 boolean check = true;
+
 
                 if (Login_mail.getText().toString().trim().equals("")) {
 
@@ -118,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Connect error!", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         });
     }

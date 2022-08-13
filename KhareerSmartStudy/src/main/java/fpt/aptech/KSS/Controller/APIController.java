@@ -157,7 +157,6 @@ public class APIController {
 
     @RequestMapping(value = {RouteAPI.GetMyClasses}, method = RequestMethod.GET)
     public void GetMyClasses(Model model, HttpServletResponse response, HttpServletRequest request) {
-        ModelString modelString = new ModelString();
         String mail = request.getParameter("mail");
         Account account = accountRepository.findByMail(mail);
 
@@ -168,11 +167,12 @@ public class APIController {
         List<ModelString> modelStrings = new ArrayList<>();
 
         for (ClassroomUser item : listClassesByUsers) {
-            ModelString modelString1 = new ModelString();
-            modelString1.setData1(item.getIdClassroom().getId().toString());
-            modelString1.setData2(item.getIdClassroom().getName());
-            modelString1.setData3(item.getIdClassroom().getImage());
-            modelStrings.add(modelString1);
+            ModelString modelString = new ModelString();
+            modelString.setData1("Done");
+            modelString.setData2(item.getIdClassroom().getId().toString());
+            modelString.setData3(item.getIdClassroom().getName());
+            modelString.setData4(item.getIdClassroom().getImage());
+            modelStrings.add(modelString);
         }
         JsonServices.dd(JsonServices.ParseToJson(modelStrings), response);
     }

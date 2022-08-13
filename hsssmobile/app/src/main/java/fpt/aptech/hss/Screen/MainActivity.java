@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,18 +17,25 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.aptech.hss.API.DataAPI;
 import fpt.aptech.hss.BaseAdapter.MainClassroomBase;
 import fpt.aptech.hss.BaseAdapter.MainReourceBase;
 import fpt.aptech.hss.BaseAdapter.MainTestBase;
 import fpt.aptech.hss.Controller.CallNav;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     private MainClassroomBase  mAdapter1;
-    private  MainTestBase mAdapter ;
+    private MainTestBase mAdapter;
     private MainReourceBase mAdapter2 ;
+    SharedPreferences sharedPreferencesProfile;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -51,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
         String nameKey = sharedPreferencesProfile.getString("nameKey",null);
         username.setText("Hello " + nameKey);
 
-
-
-
+        showClasses();
 
         AddClassroom();
         AddTest();
@@ -97,13 +101,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showClasses(){
+        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferencesProfile.getString("user",null);
+        DataAPI.api.GetMyClasses(email).enqueue(new Callback<ModelString>() {
+            @Override
+            public void onResponse(Call<ModelString> call, Response<ModelString> response) {
+                if (response.body().getData1().equals("Done")) {
+                    sharedPreferences = getSharedPreferences("profilepref", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    editor.putString("getClassAPIStatus",response.body().getData1());
+                    editor.putString("ID",response.body().getData2());
+                    editor.putString("Classname", response.body().getData3());
+                    editor.putString("Image", response.body().getData4());
+                    editor.commit();
+                } else {
+                    Toast.makeText(MainActivity.this, response.body().getData1(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelString> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Connect error, unable to find classes!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void AddClassroom() {
-
         List<ModelString> data = new ArrayList<>();
-
         int d = 0;
         for (int i = 0; i < 4; i++) {
-
             switch (i) {
                 case 0:
                     d = R.drawable.icon0;
@@ -126,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        RecyclerView recyclerView = findViewById(R.id.recycleviewList);
+        RecyclerView recyclerView = findViewById(R.id.recycleviewListClass);
         mAdapter1 = new MainClassroomBase(data);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
