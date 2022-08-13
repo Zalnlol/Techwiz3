@@ -5,7 +5,9 @@
  */
 package fpt.aptech.KSS.Services;
 
+import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.Notification;
+import fpt.aptech.KSS.Entities.NotificationUser;
 import java.util.List;
 
 /**
@@ -14,4 +16,6 @@ import java.util.List;
  */
 public interface INotification {
     List<Notification> findAll();
+    List<NotificationUser> findListNotifacationByAccount(Account acccount);
+    List<NotificationUser> findListNotifacationByNotification(Notification notification);
 }

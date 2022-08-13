@@ -2,6 +2,9 @@ package fpt.aptech.hss.Screen;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -9,16 +12,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+
+import fpt.aptech.hss.API.DataAPI;
+import fpt.aptech.hss.BaseAdapter.MainClassroomBase;
 import fpt.aptech.hss.Controller.CallNav;
+import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyclasroomDetail extends AppCompatActivity {
     String idSelect="";
     Button btn_Schedule;
+    TextView participantsNum;
+    TextView subjectNum;
+    TextView duration;
+    ImageView classImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +67,26 @@ public class MyclasroomDetail extends AppCompatActivity {
 
 
     }
+
+//    private void showClasses(){
+//        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+//        String email = sharedPreferencesProfile.getString("user",null);
+//        DataAPI.api.GetMyClasses(email).enqueue(new Callback<List<ModelString>>() {
+//
+//            @Override
+//            public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
+//                List<ModelString> list = response.body();
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<ModelString>> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, "Connect error, unable to find classes!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+
+
 
     private void btn_Schedule() {
         btn_Schedule.setOnClickListener(new View.OnClickListener() {

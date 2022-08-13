@@ -15,6 +15,7 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+//import fpt.aptech.hss.API.TokenAPI;
 import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.MainActivity;
 
@@ -70,8 +71,8 @@ public class MessageFirebaseService extends FirebaseMessagingService {
     private void sendRegistrationToServer(String token) {
 //        AccountToken tk = new AccountToken();
 //        tk.setToken(token);
-//        tk.setMail(null);
-//        tokenServices.AddToken(tk).enqueue(new Callback<AccountToken>() {
+//        tk.setId(null);
+//        TokenAPI.AddToken(tk).enqueue(new Callback<AccountToken>() {
 //            @Override
 //            public void onResponse(Call<AccountToken> call, Response<AccountToken> response) {
 //                System.out.println("thanh cong");

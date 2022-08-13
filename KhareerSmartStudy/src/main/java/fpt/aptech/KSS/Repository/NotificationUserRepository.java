@@ -5,13 +5,22 @@
  */
 package fpt.aptech.KSS.Repository;
 
+import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.Classroom;
+import fpt.aptech.KSS.Entities.Notification;
 import fpt.aptech.KSS.Entities.NotificationUser;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
  * @author LÊ HỮU TÂM
  */
 public interface NotificationUserRepository extends JpaRepository<NotificationUser, Integer> {
-    
+    @Query("SELECT n FROM NotificationUser n WHERE n.idUser = :idUser")
+    List<NotificationUser> findByAccount(@PathVariable("idUser") Account idUser);
+    @Query("SELECT n FROM NotificationUser n WHERE n.idNotification = :idNotification")
+    List<NotificationUser> findByNotificationID(@PathVariable("idNotification") Notification idNotification);
 }

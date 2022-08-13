@@ -6,6 +6,7 @@
 package fpt.aptech.KSS.Services;
 
 import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.Classroom;
 import fpt.aptech.KSS.Entities.ClassroomUser;
 import java.util.List;
 
@@ -24,5 +25,7 @@ public interface IClassroomUserRepository {
     public void delete(ClassroomUser classroomUser);
 
     public List<ClassroomUser> findClassesByUser(Account id);
+
+    public List<ClassroomUser> findUsersByClass(Classroom idClassroom);
 
 }

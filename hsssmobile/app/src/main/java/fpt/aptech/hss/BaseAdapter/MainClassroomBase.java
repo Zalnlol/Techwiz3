@@ -12,19 +12,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 
 public class MainClassroomBase   extends RecyclerView.Adapter<MainClassroomBase.MyViewHolder>{
 
 
+    Context context;
 
     private List<ModelString> modelString;
 
-    public MainClassroomBase(List<ModelString> modelString) {
+    public MainClassroomBase(List<ModelString> modelString, Context context) {
         this.modelString = modelString;
+        this.context = context;
     }
 
     @NonNull
@@ -39,8 +44,17 @@ public class MainClassroomBase   extends RecyclerView.Adapter<MainClassroomBase.
     public void onBindViewHolder(@NonNull MainClassroomBase.MyViewHolder holder, int position) {
 
         ModelString modelStringsa = modelString.get(position);
-        holder.title.setText(modelStringsa.getData2());
-        holder.image.setImageResource(Integer.parseInt(modelStringsa.getData1()));
+        holder.title.setText(modelStringsa.getData3());
+//        holder.image.setImageResource(Integer.parseInt(modelStringsa.getData4()));
+
+
+        Glide.with(context)
+                .load("http://" + ConfigData.IP + ":7777/"+modelStringsa.getData4())
+//                .transform(new RoundedCorners(radius))
+//                .transform(new CircleCrop())
+                .override(600, 600)
+//                .error(R.drawable.icon5)
+                .into(holder.image);
     }
 
     @Override

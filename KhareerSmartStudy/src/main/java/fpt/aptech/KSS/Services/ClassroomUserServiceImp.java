@@ -6,6 +6,7 @@
 package fpt.aptech.KSS.Services;
 
 import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.Classroom;
 import fpt.aptech.KSS.Entities.ClassroomUser;
 import fpt.aptech.KSS.Repository.ClassroomUserRepository;
 import java.util.List;
@@ -46,6 +47,11 @@ public class ClassroomUserServiceImp implements IClassroomUserRepository{
     @Override
     public List<ClassroomUser> findClassesByUser(Account id) {
         return classroomUserRepository.findidUser(id);
+    }
+
+    @Override
+    public List<ClassroomUser> findUsersByClass(Classroom idClassroom) {
+        return classroomUserRepository.findAllUserSameClass(idClassroom);
     }
 
 
