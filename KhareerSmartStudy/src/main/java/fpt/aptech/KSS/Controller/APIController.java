@@ -153,8 +153,6 @@ public class APIController {
 //
 //        return "admin/account/index";
 //    }
-
-
     @RequestMapping(value = {RouteAPI.GetMyClasses}, method = RequestMethod.GET)
     public void GetMyClasses(Model model, HttpServletResponse response, HttpServletRequest request) {
         String mail = request.getParameter("mail");

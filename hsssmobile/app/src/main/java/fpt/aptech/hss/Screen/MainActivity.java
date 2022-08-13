@@ -12,6 +12,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import fpt.aptech.hss.API.DataAPI;
 import fpt.aptech.hss.BaseAdapter.MainClassroomBase;
 import fpt.aptech.hss.BaseAdapter.MainReourceBase;
 import fpt.aptech.hss.BaseAdapter.MainTestBase;
+import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Controller.CallNav;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferencesProfile;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +60,12 @@ public class MainActivity extends AppCompatActivity {
         String nameKey = sharedPreferencesProfile.getString("nameKey",null);
         username.setText("Hello " + nameKey);
 
+
+
+
         showClasses();
 
-        AddClassroom();
+
         AddTest();
         AddResource();
     }
@@ -104,65 +110,66 @@ public class MainActivity extends AppCompatActivity {
     private void showClasses(){
         sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
         String email = sharedPreferencesProfile.getString("user",null);
-        DataAPI.api.GetMyClasses(email).enqueue(new Callback<ModelString>() {
+        DataAPI.api.GetMyClasses(email).enqueue(new Callback<List<ModelString>>() {
+
             @Override
-            public void onResponse(Call<ModelString> call, Response<ModelString> response) {
-                if (response.body().getData1().equals("Done")) {
-                    sharedPreferences = getSharedPreferences("profilepref", Context.MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
-                    editor.putString("getClassAPIStatus",response.body().getData1());
-                    editor.putString("ID",response.body().getData2());
-                    editor.putString("Classname", response.body().getData3());
-                    editor.putString("Image", response.body().getData4());
-                    editor.commit();
-                } else {
-                    Toast.makeText(MainActivity.this, response.body().getData1(), Toast.LENGTH_SHORT).show();
-                }
+            public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
+                List<ModelString> list = response.body();
+
+                RecyclerView recyclerView = findViewById(R.id.recycleviewListClass);
+                mAdapter1 = new MainClassroomBase(list,MainActivity.this);
+                context = getApplicationContext();
+
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(mAdapter1);
             }
 
             @Override
-            public void onFailure(Call<ModelString> call, Throwable t) {
+            public void onFailure(Call<List<ModelString>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Connect error, unable to find classes!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void AddClassroom() {
-        List<ModelString> data = new ArrayList<>();
-        int d = 0;
-        for (int i = 0; i < 4; i++) {
-            switch (i) {
-                case 0:
-                    d = R.drawable.icon0;
-                    break;
-                case 1:
-                    d = R.drawable.icon1;
-                    break;
-                case 2:
-                    d = R.drawable.icon2;
-                    break;
-                default:
-                    d = R.drawable.icon3;
-                    break;
-            }
-
-            ModelString modelString = new ModelString();
-            modelString.setData1(String.valueOf(d));
-            modelString.setData2("PHP " + i);
-            data.add(modelString);
-        }
-
-
-        RecyclerView recyclerView = findViewById(R.id.recycleviewListClass);
-        mAdapter1 = new MainClassroomBase(data);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter1);
-
-
-    }
+//    private void AddClassroom() {
+//        List<ModelString> data = new ArrayList<>();
+//        int d = 0;
+//        for (int i = 0; i < 4; i++) {
+//            switch (i) {
+//                case 0:
+//                    d = R.drawable.icon0;
+//                    break;
+//                case 1:
+//                    d = R.drawable.icon1;
+//                    break;
+//                case 2:
+//                    d = R.drawable.icon2;
+//                    break;
+//                default:
+//                    d = R.drawable.icon3;
+//                    break;
+//            }
+//
+//            ModelString modelString = new ModelString();
+//            modelString.setData1(String.valueOf(d));
+//            modelString.setData2("PHP " + i);
+//            data.add(modelString);
+//        }
+//
+//
+//        RecyclerView recyclerView = findViewById(R.id.recycleviewListClass);
+//        mAdapter1 = new MainClassroomBase(data);
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(mAdapter1);
+//
+//
+//    }
 
     private void AddResource() {
 
