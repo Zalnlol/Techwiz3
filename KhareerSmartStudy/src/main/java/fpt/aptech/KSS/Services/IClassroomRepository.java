@@ -17,4 +17,5 @@ public interface IClassroomRepository {
     public Classroom findOne(int id);
     public void saveClassroom(Classroom newClassroom);
     public void removeClassroom(int id);
+    public Classroom findOneByName(String name);
 }
