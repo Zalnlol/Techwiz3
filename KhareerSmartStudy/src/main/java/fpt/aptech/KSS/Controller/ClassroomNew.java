@@ -1,5 +1,6 @@
 package fpt.aptech.KSS.Controller;
 import fpt.aptech.KSS.Entities.*;
+import fpt.aptech.KSS.ImpServices.AccountService;
 import fpt.aptech.KSS.ImpServices.ClassroomServices;
 import fpt.aptech.KSS.ImpServices.CourseServices;
 import fpt.aptech.KSS.ImpServices.ImageServices;
@@ -46,6 +47,12 @@ public class ClassroomNew {
     private SemesterServiceImp SemesterService;
     @Autowired
     private ImageServices imageServices;
+
+    @Autowired
+    private IAccountRepository accountService;
+
+    @Autowired
+    private ClassroomUserServiceImp classroomUserService;
 
     @RequestMapping(value = RouteWeb.ClassroomCreate, method = RequestMethod.GET)
     public String ClassroomCreate(Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -194,4 +201,123 @@ public class ClassroomNew {
         return "admin/classroommaneger/index";
     }
 
+
+    @RequestMapping(value = RouteWeb.ClassroomAddStudent, method = RequestMethod.GET)
+    public String ClassroomAddStudent(Model model, HttpServletRequest request, HttpServletResponse response) {
+
+     String id = request.getParameter("id");
+
+
+     List<Account> accountList = new ArrayList<>();
+        accountList = accountService.findAll();
+
+        for (int i = 0; i < accountList.size(); i++) {
+            if(!accountList.get(i).getRole().equals("Student")){
+                accountList.remove(accountList.get(i));
+                i-=1;
+            }
+        }
+        List<ModelString> modelStringList = new ArrayList<>();
+        for (Account item:accountList  ) {
+
+            ModelString modelString = new ModelString();
+            modelString.setData1(item.getId().toString());
+            modelString.setData2(item.getName());
+            modelString.setData3("false");
+            modelStringList.add(modelString);
+        }
+
+        for (int j = 0; j < modelStringList.size(); j++) {
+
+                  List<ClassroomUser> list=  classroomUserService.findAll();
+
+            for (int i = 0; i <list.size() ; i++) {
+                if(list.get(i).getIdClassroom().getId().toString().equals(id) && list.get(i).getIdUser().getId().toString().equals(modelStringList.get(j).getData1()) )
+                {}else {
+                    list.remove(list.get(i));
+                    i-=1;
+                }
+
+            }
+
+            if(list.size()>0){
+                modelStringList.get(j).setData3("true");
+            }
+
+        }
+
+
+//        JsonServices.dd(JsonServices.ParseToJson(modelStringList),response);
+
+        request.setAttribute("data",modelStringList);
+        request.setAttribute("id",id);
+
+
+
+        return "admin/classroommaneger/addstudent";
+    }
+
+
+    @RequestMapping(value = RouteWeb.ClassroomAddStudent, method = RequestMethod.POST)
+    public String ClassroomAddStudentPost(Model model, HttpServletRequest request, HttpServletResponse response) {
+
+        String id = request.getParameter("id");
+
+        List<ClassroomUser> classroomUserList = classroomUserService.findAll();
+
+        for (int i = 0; i < classroomUserList.size(); i++) {
+
+            if(classroomUserList.get(i).getIdClassroom().getId().toString().equals(id)){}
+            else {
+                classroomUserList.remove(classroomUserList.get(i));
+                i-=1;
+            }
+
+        }
+
+        for (ClassroomUser item:classroomUserList  ) {
+            if (request.getParameter(item.getIdUser().getId().toString())==null ||request.getParameter(item.getIdUser().getId().toString())==""){
+                classroomUserService.delete(item);
+            }
+
+        }
+
+        List<Account> accountList = new ArrayList<>();
+        accountList = accountService.findAll();
+
+        for (int i = 0; i < accountList.size(); i++) {
+            if(!accountList.get(i).getRole().equals("Student")){
+                accountList.remove(accountList.get(i));
+                i-=1;
+            }
+        }
+
+        for (Account item :accountList  ) {
+
+            List<ClassroomUser> list=  classroomUserService.findAll();
+
+            for (int i = 0; i <list.size() ; i++) {
+                if(list.get(i).getIdClassroom().getId().toString().equals(id) && list.get(i).getIdUser().getId().toString().equals(item.getId()) )
+                {}else {
+                    list.remove(list.get(i));
+                    i-=1;
+                }
+            }
+
+            if(list.size()==0 &&request.getParameter(item.getId().toString())!=null ){
+                ClassroomUser classroomUser = new ClassroomUser();
+                classroomUser.setIdClassroom(new Classroom(Integer.parseInt(id)));
+                classroomUser.setIdUser(new Account(item.getId()));
+                classroomUserService.save(classroomUser);
+            }
+
+
+        }
+
+
+
+
+        String redirectUrl = "/classroom/manager/list";
+        return "redirect:" + redirectUrl;
+    }
 }

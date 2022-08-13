@@ -54,57 +54,52 @@
 
 <div layout:fragment="content">
 
-  <h3 class="title-page">Manager Class</h3>
+  <h3 class="title-page">Add Student</h3>
 
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col background-table">
 
 
-      <div class="row" style="margin-bottom:2% ;">
 
-        <div class="col-sm-2">
-          <a th:href="@{/classroom/manager/create}">
-            <input type="button" class="btn btn-success form-control button-defualt" value="Create new">
-          </a>
+
+
+
+      <form method="post">
+
+
+          <input type="text" name="id" th:value="${id}" hidden>
+          <div class="row"  th:each="item:${data}" style="margin-top: 5%">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-1">
+              <input type="checkbox" th:name="${item.getData1()}" th:checked="${item.getData3()}" >
+
+            </div>
+            <div class="col-sm-3">
+              <span th:text="${item.getData2()}"></span>
+
+            </div>
+
+          </div>
+
+<br>
+
+        <div class="row">
+          <div  class="col-sm-5"></div>
+          <div  class="col-sm-2">
+            <input type="submit" class="btn btn-success form-control button-defualt" value="Add student">
+          </div>
+          <div  class="col-sm-5"></div>
+
         </div>
 
-        <div class="col-sm-6"></div>
+
+
+      </form>
 
 
 
-      </div>
 
-
-      <table class="table" style="text-align: center;">
-        <thead class="thead-light">
-        <tr>
-
-          <th scope="col">Name</th>
-          <th scope="col">Duration</th>
-          <th scope="col">Semester</th>
-          <th scope="col">Action</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item:${list}">
-          <td th:text="${item.getName()}"></td>
-          <td th:text="${item.getDuration()} + ' Month'"></td>
-          <td th:text="${item.getIdSemester()} + ' Sem'"></td>
-
-          <td>
-            <a th:href="'/classroom/addstudent?id='+${item.getId()}">
-              Add Student
-            </a>
-          </td>
-
-
-        </tr>
-
-        </tbody>
-
-      </table>
 
 
     </div>
