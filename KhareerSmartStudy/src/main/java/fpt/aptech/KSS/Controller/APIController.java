@@ -145,7 +145,7 @@ public class APIController {
 
         for (int i = 0; i <classroom.size() ; i++) {
 
-            if (classroom.get(i).get)
+//            if (classroom.get(i).get)
 
         }
 
