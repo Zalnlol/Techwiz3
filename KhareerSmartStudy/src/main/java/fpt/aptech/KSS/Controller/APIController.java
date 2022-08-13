@@ -175,4 +175,34 @@ public class APIController {
         JsonServices.dd(JsonServices.ParseToJson(modelStrings), response);
     }
 
+    @RequestMapping(value = {RouteAPI.GetMyClassesDetails}, method = RequestMethod.GET)
+    public void GetMyClassesDetails(Model model, HttpServletResponse response, HttpServletRequest request) {
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        Classroom classroom = classroomServices.findOne(id);
+        
+        
+        
+        List<ClassroomUser> listUsersByClass = new ArrayList();
+        
+        listUsersByClass = classroomUserServiceImp.findUsersByClass(classroom);
+
+        List<ModelString> modelStrings = new ArrayList<>();
+        int count = modelStrings.size();
+        for (ClassroomUser item : listUsersByClass) {
+            
+            ModelString modelString = new ModelString();
+            modelString.setData1(item.getIdUser().getId().toString());
+            modelString.setData2(item.getIdUser().getName());
+            modelString.setData3(item.getIdClassroom().getDuration());
+            modelString.setData4(item.getIdClassroom().getImage());
+            count++;
+            modelString.setData5(String.valueOf(count));
+            
+            modelStrings.add(modelString);
+            
+        }
+        JsonServices.dd(JsonServices.ParseToJson(modelStrings), response);
+    }
+
 }

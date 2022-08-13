@@ -20,4 +20,6 @@ public class RouteAPI {
     public final static String GetProfileInfo = "api/getProfileInfo";
     
     public final static String GetMyClasses = "api/getMyClasses";
+    
+    public final static String GetMyClassesDetails = "api/getMyClassesDetails";
 }
