@@ -81,9 +81,22 @@
                         <br/>
                         <br/>
 
+                        <div v-for="(value2,index2) in value.course" :key="index" >
+                            <br/>
+
+                            <div> <b> Course {{index2+1}} </b></div>
+
+                            <select class="form-control input" v-model="value2.idcoursse">
+                                <option v-for="(value1,index1) in CouseList" :key="index" :value="value1.id" >{{value1.name}}</option>
+
+                            </select>
+
+
+                        </div>
+
 
                         <div style="text-align: center">
-                            <span class="add_course" >Add Course</span>
+                            <span class="add_course" v-on:click="addcourse(index)" >Add Course</span>
                         </div>
 
 
@@ -92,15 +105,42 @@
 
                 </div>
 
+                <div class="row">
+                    <div class="col" >
+
+
+
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6" style="text-align: center ;">
+
+                                <input type="submit" v-on:click="submit" id="btnSubmit" class="btn btn-success form-control button-defualt" name="action"
+                                       value="Save">
+                            </div>
+
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+
+                </div>
+
 
                 <textarea id="sem"  hidden th:text="${sem}"></textarea>
                 <textarea id="text" hidden th:text="${courseListString}"></textarea>
+
+                <form method="post" hidden>
+
+                    <textarea name="data" id="submit-text"></textarea>
+                    <input type="submit" id="btn-submit">
+
+                </form>
 
             </div>
 
         </div>
 
         <div class="col-sm-3"></div>
+
 
     </div>
 
@@ -113,7 +153,7 @@
             data() {
                 return {
                     data: [],
-
+                    CouseList:[]
 
 
 
@@ -126,11 +166,21 @@
                     CouseList = JSON.parse(document.getElementById("text").value);
                     sem = document.getElementById("sem").value
 
+                    this.CouseList = CouseList;
+
                     console.log(CouseList);
 
+                    for (let i = 0; i < sem; i++) {
+                        this.data.push({name:"", duration:"",startday:"",enddate:"",course:[]})
+                    }
 
-                    this.data.push({name:"", duration:"",startday:"",enddate:"",course:[]})
-                    this.data.push({name:"", duration:"",startday:"",enddate:"",course:[]})
+
+
+
+                },
+
+                addcourse:function (index){
+                    this.data[index].course.push({idcoursse:0})
 
 
                 },
@@ -142,6 +192,7 @@
                     document.getElementById("submit-text").value = JSON.stringify(this.data);
                     document.getElementById("btn-submit").click();
                     console.log(this.data);
+
 
 
                 }

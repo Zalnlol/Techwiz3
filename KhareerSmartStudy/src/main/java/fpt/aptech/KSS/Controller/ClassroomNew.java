@@ -1,8 +1,8 @@
 package fpt.aptech.KSS.Controller;
-import fpt.aptech.KSS.Entities.Account;
-import fpt.aptech.KSS.Entities.Classroom;
-import fpt.aptech.KSS.Entities.Course;
+import fpt.aptech.KSS.Entities.*;
+import fpt.aptech.KSS.ImpServices.ClassroomServices;
 import fpt.aptech.KSS.ImpServices.CourseServices;
+import fpt.aptech.KSS.ImpServices.ImageServices;
 import fpt.aptech.KSS.Routes.RouteWeb;
 import fpt.aptech.KSS.Services.IAccountRepository;
 import static java.lang.System.out;
@@ -11,13 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fpt.aptech.KSS.Services.ICourseRepository;
+import fpt.aptech.KSS.Services.SemesterCourseServiceImp;
+import fpt.aptech.KSS.Services.SemesterServiceImp;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,6 +34,20 @@ public class ClassroomNew {
 
     @Autowired
     private CourseServices courseServices;
+
+    @Autowired
+    private Sem courseServices;
+
+    @Autowired
+    private SemesterCourseServiceImp semesterCourseServiceImp;
+
+    @Autowired
+    private ClassroomServices classroomServices;
+
+    @Autowired
+    private SemesterServiceImp SemesterService;
+    @Autowired
+    private ImageServices imageServices;
 
     @RequestMapping(value = RouteWeb.ClassroomCreate, method = RequestMethod.GET)
     public String ClassroomCreate(Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -61,7 +84,7 @@ public class ClassroomNew {
 
 
         List<Course>  courseList = courseServices.findAll();
-    
+
 
         String sem = session.getAttribute("sem").toString();
 
@@ -71,6 +94,90 @@ public class ClassroomNew {
 
     String courseListString =   JsonServices.ParseToJson(courseList);
         request.setAttribute("courseListString",courseListString);
+
+        return "admin/classroommaneger/createstep2";
+    }
+
+
+    @RequestMapping(value = RouteWeb.ClassroomCreateStep2, method = RequestMethod.POST)
+    public String ClassroomPostStep2(Model model, HttpServletRequest request, HttpServletResponse response,@RequestParam String data) {
+
+        HttpSession session = request.getSession();
+        String sem = session.getAttribute("sem").toString();
+        String name = session.getAttribute("name").toString();
+        String duration = session.getAttribute("duration").toString();
+
+        List<Libraryimage> libraryimageList = new ArrayList<>();
+        libraryimageList = imageServices.findAll();
+        double randomDouble = Math.random();
+        randomDouble = randomDouble * libraryimageList.size() + 1;
+        int randomInt = (int) randomDouble;
+        randomInt -=1;
+
+
+        Classroom classroom = new Classroom();
+        classroom.setName(name);
+        classroom.setDuration(duration);
+        classroom.setIdSemester(Integer.parseInt(sem));
+        classroom.setImage(libraryimageList.get(randomInt).getImage());
+        classroomServices.saveClassroom(classroom);
+
+
+        JSONArray jsonArr;
+
+
+        try {
+            jsonArr = new JSONArray(data);
+
+
+            for (int i = 0; i < jsonArr.length(); i++) {
+
+                Semester semester = new Semester();
+                JSONObject jsonObj = null;
+                jsonObj = jsonArr.getJSONObject(i);
+                semester.setName((String) jsonObj.get("name"));
+                semester.setDescription((String) jsonObj.get("duration"));
+                try {
+                    Date date1=new SimpleDateFormat("MM-dd-yyyy").parse((String) jsonObj.get("startday"));
+                    Date date2=new SimpleDateFormat("MM-dd-yyyy").parse((String) jsonObj.get("enddate"));
+                    semester.setStartDate(date1);
+                    semester.setEndDate(date2);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
+                SemesterService.save(semester);
+
+
+
+
+                List<Course> CourseList = new ArrayList<>();
+                JSONArray jsonArr1 = (JSONArray) jsonObj.get("course");
+
+
+                for (int j = 0; j < jsonArr1.length(); j++) {
+
+
+                    JSONObject PositionObj = jsonArr1.getJSONObject(j);
+
+                  int course = (Integer) PositionObj.get("idcoursse");
+
+                    SemesterCourse semesterCourse = new SemesterCourse();
+                    semesterCourse.setIdCourse(new Course(course));
+
+                    semesterCourseServiceImp.save(semesterCourse);
+
+
+                }
+
+
+
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+
 
         return "admin/classroommaneger/createstep2";
     }
