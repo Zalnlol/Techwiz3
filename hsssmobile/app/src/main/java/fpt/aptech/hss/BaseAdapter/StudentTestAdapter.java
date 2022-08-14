@@ -41,7 +41,7 @@ public class StudentTestAdapter extends RecyclerView.Adapter<StudentTestAdapter.
     @Override
     public void onBindViewHolder(@NonNull StudentTestHolder holder, int position) {
         ModelString modelStringsa = Studentlist.get(position);
-        holder.tvname.setText(modelStringsa.getData1());
+        holder.tvname.setText(modelStringsa.getData6());
 //        holder.image.setImageResource(Integer.parseInt(modelStringsa.getData4()));
 
 

@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.ClassroomListActivity;
 import fpt.aptech.hss.Screen.MainActivity;
+import fpt.aptech.hss.Screen.StudetntAccountActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -46,8 +47,8 @@ public class CallNav {
 //                    context.startActivity(viewProfile);
                     return true;
                 case R.id.page_4:
-//                    Intent viewProfile = new Intent(context, MainAccountActivity.class);
-//                    context.startActivity(viewProfile);
+                    Intent viewProfile = new Intent(context, StudetntAccountActivity.class);
+                    context.startActivity(viewProfile);
                     return true;
 
             }

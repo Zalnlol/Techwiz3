@@ -18,6 +18,7 @@ import java.util.List;
 import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
+import fpt.aptech.hss.Screen.ScheduleDetailActivity;
 import fpt.aptech.hss.Screen.TestDetailsActivity;
 
 public class ChildrenResourchAdapter extends RecyclerView.Adapter<ChildrenResourchAdapter.ChildrenResourchHolder> {
@@ -66,17 +67,18 @@ public class ChildrenResourchAdapter extends RecyclerView.Adapter<ChildrenResour
             super(itemView);
             imageView=itemView.findViewById(R.id.imageView);
             tvtitle=itemView.findViewById(R.id.Title);
-//            imageView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    ModelString classed =Testlist.get(getAdapterPosition());
-//                    String text = classed.getData1().toString();
-//                    String idSelect = classed.getData5();
-////                    Intent intent = new Intent(context, TestDetailsActivity.class);
-//////                    intent.putExtra("idSelect", idSelect);
-////                    context.startActivity(intent);
-//                }
-//            });
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ScheduleDetailActivity.class);
+                    ModelString classed =Testlist.get(getAdapterPosition());
+                    String text = classed.getData1().toString();
+                    String idSelect = classed.getData4();
+                    intent.putExtra("data", text);
+                    intent.putExtra("idSelect", idSelect);
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }

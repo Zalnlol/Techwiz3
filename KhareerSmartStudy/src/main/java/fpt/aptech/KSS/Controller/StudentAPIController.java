@@ -278,6 +278,7 @@ public class StudentAPIController {
                 out.setData3(examlist.get(i2).getIdClassroom().getName());
                 out.setData4(examlist.get(i2).getIdCourse().getImage());
                 out.setData5(examlist.get(i2).getId().toString());
+                out.setData6(examlist.get(i2).getName());
                 modelStringout.add(out);
                 }
                 
