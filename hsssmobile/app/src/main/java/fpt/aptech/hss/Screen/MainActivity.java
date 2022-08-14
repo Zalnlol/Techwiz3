@@ -60,11 +60,7 @@ public class MainActivity extends AppCompatActivity {
         String nameKey = sharedPreferencesProfile.getString("nameKey",null);
         username.setText("Hello " + nameKey);
 
-
-
-
         showClasses();
-
 
         AddTest();
         AddResource();

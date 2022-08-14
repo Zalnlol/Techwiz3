@@ -67,7 +67,7 @@ public class ClassroomListBase extends BaseAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(context, MyclasroomDetail.class);
                 String text = list.get(i).getData2().toString();
-                String idSelect=modelString.getData3();
+                String idSelect = list.get(i).getData3();
 
                 intent.putExtra("data", text);
                 intent.putExtra("idSelect", idSelect);

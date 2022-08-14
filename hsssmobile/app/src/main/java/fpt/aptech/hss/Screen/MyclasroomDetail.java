@@ -61,30 +61,32 @@ public class MyclasroomDetail extends AppCompatActivity {
         n.setText(data_);
 
         btn_Schedule = findViewById(R.id.btn_Schedule);
-
         buttonBack();
         btn_Schedule();
-
-
+        showClassDetails();
     }
 
-//    private void showClasses(){
-//        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
-//        String email = sharedPreferencesProfile.getString("user",null);
-//        DataAPI.api.GetMyClasses(email).enqueue(new Callback<List<ModelString>>() {
-//
-//            @Override
-//            public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
-//                List<ModelString> list = response.body();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<ModelString>> call, Throwable t) {
-//                Toast.makeText(MainActivity.this, "Connect error, unable to find classes!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    private void showClassDetails(){
+        DataAPI.api.GetMyClassesDetails(idSelect).enqueue(new Callback<ModelString>() {
+
+            @Override
+            public void onResponse(Call<ModelString> call, Response<ModelString> response) {
+                ModelString modelString = response.body();
+
+                participantsNum = findViewById(R.id.text1);
+                participantsNum.setText(modelString.getData1());
+                subjectNum = findViewById(R.id.text2);
+                subjectNum.setText(modelString.getData2());
+                duration = findViewById(R.id.text3);
+                duration.setText(modelString.getData3());
+            }
+
+            @Override
+            public void onFailure(Call<ModelString> call, Throwable t) {
+                Toast.makeText(MyclasroomDetail.this, "Connect error, unable to find class!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 

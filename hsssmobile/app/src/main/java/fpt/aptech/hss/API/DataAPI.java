@@ -40,5 +40,8 @@ public interface DataAPI {
     @GET("getMyClasses")
     Call<List<ModelString>> GetMyClasses (@Query("mail") String mail);
 
+    @GET("getMyClassesDetails")
+    Call<ModelString> GetMyClassesDetails (@Query("id") String id);
+
 
 }
