@@ -5,6 +5,11 @@
  */
 package fpt.aptech.KSS.Controller;
 
+import fpt.aptech.KSS.Entities.*;
+import fpt.aptech.KSS.ImpServices.*;
+import fpt.aptech.KSS.Routes.RouteAPI;
+import fpt.aptech.KSS.Routes.RouteWeb;
+import fpt.aptech.KSS.Services.*;
 import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.Classroom;
 import fpt.aptech.KSS.Entities.ClassroomUser;
@@ -26,8 +31,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,12 +57,33 @@ public class APIController {
     private IAccountRepository accountRepository;
 
     @Autowired
+    private MarkService markService;
+
+    @Autowired
+    private SemesterCourseServiceImp semesterCourseServiceImp;
+
+    @Autowired
+    private DocumentService documentService;
+
+    @Autowired
+    private ExamServices examServices;
+
+    @Autowired
     private ClassroomServices classroomServices;
+
+    @Autowired
+    private ImageServices imageServices;
+
+    @Autowired
+    private CourseServices courseServices;
 
     @Autowired
     private ClassroomUserServiceImp classroomUserServiceImp;
 
     @Autowired
+    private ClassroomSemesterServiceImp classroomSemesterService;
+
+
     private IExam examRepository;
 
     @Autowired
@@ -153,24 +181,7 @@ public class APIController {
         }
     }
 
-//    @RequestMapping(value = {RouteAPI.CallMyclass}, method = RequestMethod.POST)
-//    public String CallMyclass(Model model, HttpServletResponse response, HttpServletRequest request) {
-//
-//        String mail= request.getParameter("mail");
-//
-//     List<Classroom> classroom= classroomServices.findAll();
-//
-//        for (int i = 0; i <classroom.size() ; i++) {
-//
-//            if (classroom.get(i).get)
-//
-//        }
-//
-//        return "admin/account/index";
-//    }
-//
-//
-//}
+
     @RequestMapping(value = {RouteAPI.GetMyClasses}, method = RequestMethod.GET)
     public void GetMyClasses(Model model, HttpServletResponse response, HttpServletRequest request) {
         String mail = request.getParameter("mail");
@@ -258,4 +269,457 @@ public class APIController {
         JsonServices.dd(JsonServices.ParseToJson(modelStrings), response);
     }
 
+
+    @RequestMapping(value = {RouteAPI.GetTeacherMyTest}, method = RequestMethod.GET)
+    public void GetTeacherMyTest(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        List<Course> list  = courseServices.findAll();
+
+        for (int i = 0; i <list.size() ; i++) {
+            if(list.get(i).getTeacher().getId() == id){
+
+            }else {
+                list.remove(list.get(i));
+                i-=1;
+            }
+        }
+
+
+
+        List<ModelString> modelStringList = new ArrayList<>();
+        if(list.size()>0){
+
+            for (Course item:list   ) {
+
+                List<Exam> examList = examServices.findAAll();
+
+                for (int i = 0; i < examList.size(); i++) {
+                    if (examList.get(i).getIdCourse().getId().toString().equals(item.getId().toString())){
+                        ModelString modelString = new ModelString();
+                        modelString.setData1(examList.get(i).getImage());
+                        modelString.setData2(examList.get(i).getName());
+                        modelString.setData3(examList.get(i).getStartDate().toString());
+                        modelString.setData4(examList.get(i).getId().toString());
+                        modelString.setData5(examList.get(i).getIdCourse().getName());
+                        modelString.setData6(examList.get(i).getIdCourse().getId().toString());
+//                            examList.set()
+                        modelStringList.add(modelString);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
+    }
+
+
+    @RequestMapping(value = {RouteAPI.GetTeacherMyResource}, method = RequestMethod.GET)
+    public void GetTeacherMyResource(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        List<Course> list  = courseServices.findAll();
+
+        for (int i = 0; i <list.size() ; i++) {
+            if(list.get(i).getTeacher().getId() == id){
+
+            }else {
+                list.remove(list.get(i));
+                i-=1;
+            }
+        }
+
+
+
+        List<ModelString> modelStringList = new ArrayList<>();
+        if(list.size()>0){
+
+            for (Course item:list   ) {
+
+                List<Document> documentsList = documentService.findAll();
+
+                for (int i = 0; i < documentsList.size(); i++) {
+                    if (documentsList.get(i).getIdCourse().getId().toString().equals(item.getId().toString())){
+                        ModelString modelString = new ModelString();
+                        modelString.setData1(documentsList.get(i).getIdCourse().getImage()
+                        );
+                        modelString.setData2(documentsList.get(i).getIdCourse().getName());
+                        modelString.setData3("");
+                        modelString.setData4(item.getId().toString());
+//                            examList.set()
+                        modelStringList.add(modelString);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
+    }
+
+    @RequestMapping(value = {RouteAPI.GetSubject}, method = RequestMethod.GET)
+    public void GetSubject(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Course> list  = courseServices.findAll();
+
+        for (int i = 0; i <list.size() ; i++) {
+            if(list.get(i).getTeacher().getId() == id){
+
+            }else {
+                list.remove(list.get(i));
+                i-=1;
+            }
+        }
+
+        List<ModelString> modelStringList = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+
+                ModelString modelString = new ModelString();
+                modelString.setData1(list.get(i).getImage()
+                );
+                modelString.setData2(list.get(i).getName());
+                modelString.setData3("");
+                modelString.setData4(list.get(i).getId().toString());
+                modelStringList.add(modelString);
+
+        }
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
+    }
+
+    @RequestMapping(value = {RouteAPI.GetSubjectDetail}, method = RequestMethod.GET)
+    public void GetSubjectDetail(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int idCourse = Integer.parseInt(request.getParameter("id"));
+        List<Course> list  = courseServices.findAll();
+
+        for (int i = 0; i <list.size() ; i++) {
+            if(list.get(i).getId() == idCourse){
+
+            }else {
+                list.remove(list.get(i));
+                i-=1;
+            }
+        }
+
+
+
+        ModelString modelString = new ModelString();
+        for (int i = 0; i < list.size(); i++) {
+
+
+            modelString.setData1(list.get(i).getId().toString());
+            modelString.setData2(list.get(i).getName().toString());
+            modelString.setData3(list.get(i).getDescription().toString());
+            modelString.setData4(String.valueOf(list.get(i).getDuration()) +  " Month");
+            modelString.setData5(list.get(i).getImage().toString());
+        }
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelString), response);
+    }
+
+
+    @RequestMapping(value = {RouteAPI.GetReouceDetail}, method = RequestMethod.GET)
+    public void GetReouceDetail(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int idCourse = Integer.parseInt(request.getParameter("id"));
+        List<Document> list  = documentService.findAll();
+
+        for (int i = 0; i <list.size() ; i++) {
+            if(list.get(i).getIdCourse().getId() == idCourse){
+
+            }else {
+                list.remove(list.get(i));
+                i-=1;
+            }
+        }
+
+        ModelString modelString = new ModelString();
+        for (int i = 0; i < list.size(); i++) {
+
+
+            modelString.setData1(list.get(i).getId().toString());
+            modelString.setData2(list.get(i).getLink().toString());
+        }
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelString), response);
+    }
+
+    @RequestMapping(value = {RouteAPI.PostReouceEdit}, method = RequestMethod.POST)
+    public void PostReouceEdit(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int idCourse = Integer.parseInt(request.getParameter("id"));
+        String Content = request.getParameter("content");
+
+        List<Document> list  = documentService.findAll();
+
+        for (int i = 0; i <list.size() ; i++) {
+            if(list.get(i).getIdCourse().getId() == idCourse){
+
+            }else {
+                list.remove(list.get(i));
+                i-=1;
+            }
+        }
+
+        Document document = list.get(0);
+
+        document.setLink(Content);
+
+        documentService.saveCourse(document);
+
+        ModelString modelString = new ModelString();
+        modelString.setData1("Done");
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelString), response);
+    }
+
+    @RequestMapping(value = {RouteAPI.GetExem}, method = RequestMethod.GET)
+    public void GetExem(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+
+        int idCourse = Integer.parseInt(request.getParameter("id"));
+
+        List<Exam> examList = examServices.findAAll();
+
+        for (int i = 0; i <examList.size() ; i++) {
+            if(examList.get(i).getIdCourse().getId() == idCourse){
+
+            }else {
+                examList.remove(examList.get(i));
+                i-=1;
+            }
+        }
+
+      List<ModelString> modelStringList =new ArrayList<>();
+        for (int i = 0; i < examList.size(); i++) {
+            ModelString modelString = new ModelString();
+            modelString.setData2(examList.get(i).getName());
+            modelString.setData1(examList.get(i).getImage());
+            modelString.setData4(examList.get(i).getId().toString());
+            modelStringList.add(modelString);
+
+        }
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
+    }
+
+    @RequestMapping(value = {RouteAPI.Getclassroom}, method = RequestMethod.GET)
+    public void Getclassroom(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int idCourse = Integer.parseInt(request.getParameter("id"));
+
+        List<SemesterCourse> coursesList = semesterCourseServiceImp.findAll();
+        List<ClassroomSemester> classroomSemesterList = classroomSemesterService.findAll();
+
+        for (int i = 0; i <coursesList.size() ; i++) {
+            if(coursesList.get(i).getIdCourse().getId() == idCourse){
+            }else {
+                coursesList.remove(coursesList.get(i));
+                i-=1;
+            }
+        }
+
+        List<ModelString> modelStringList =new ArrayList<>();
+        for (int i = 0; i < coursesList.size(); i++) {
+
+            for (ClassroomSemester item:classroomSemesterList   ) {
+
+                if(coursesList.get(i).getIdSemester().getId() == item.getIdSemester().getId() ){
+
+                    ModelString modelString = new ModelString();
+                    modelString.setData1(item.getIdClassroom().getId().toString());
+                    modelString.setData2(item.getIdClassroom().getName().toString());
+                    modelStringList.add(modelString);
+                }
+
+            }
+
+
+
+        }
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
+    }
+
+
+    @RequestMapping(value = {RouteAPI.CreateExem}, method = RequestMethod.POST)
+    public void CreateExem(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int idCourse = Integer.parseInt(request.getParameter("id"));
+        String NameExam= request.getParameter("name");
+        int IdClassroom = Integer.parseInt(request.getParameter("classroom"));
+        String StartDay = request.getParameter("startday");
+
+        List<Libraryimage> libraryimageList = new ArrayList<>();
+        libraryimageList = imageServices.findAll();
+        double randomDouble = Math.random();
+        randomDouble = randomDouble * libraryimageList.size() + 1;
+        int randomInt = (int) randomDouble;
+        randomInt -=1;
+
+        Exam exam = new Exam();
+
+        exam.setName(NameExam);
+        exam.setIdCourse(new Course(idCourse));
+        exam.setIdClassroom(new Classroom(IdClassroom));
+        exam.setImage(libraryimageList.get(randomInt).getImage());
+
+
+
+
+        try {
+            Date date1 = new SimpleDateFormat("MM-dd-yyyy").parse(StartDay);
+
+            exam.setStartDate(date1);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        examServices.Create(exam);
+
+        ModelString modelString = new ModelString();
+        modelString.setData1("Done");
+
+        JsonServices.dd(JsonServices.ParseToJson(modelString), response);
+    }
+
+    @RequestMapping(value = {RouteAPI.ExemDetail}, method = RequestMethod.GET)
+    public void ExemDetail(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int idExam = Integer.parseInt(request.getParameter("id"));
+
+      Exam examList = examServices.findOne(idExam);
+
+      ModelString modelString =new ModelString();
+        modelString.setData1(examList.getId().toString());
+        modelString.setData2(examList.getName());
+        modelString.setData3(examList.getImage());
+        modelString.setData4(examList.getIdClassroom().getName());
+        modelString.setData5(examList.getIdCourse().getName());
+        modelString.setData6(examList.getStartDate().toString());
+
+        JsonServices.dd(JsonServices.ParseToJson(modelString), response);
+    }
+
+    @RequestMapping(value = {RouteAPI.MarkCreate}, method = RequestMethod.GET)
+    public void MarkCreate(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int idExam = Integer.parseInt(request.getParameter("id"));
+
+        int idCourse = Integer.parseInt(request.getParameter("idcourse"));
+
+        List<Mark> markList = markService.findbyCourseExam(new Course(idCourse),new Exam(idExam));
+
+        if(markList.isEmpty()){
+
+
+            int id_class = examServices.findOne(idExam).getIdClassroom().getId();
+
+            List<ClassroomUser> classroomUser = classroomUserServiceImp.findUsersByClass(new Classroom(id_class));
+
+
+
+
+            for (ClassroomUser item:classroomUser ) {
+                Mark mark = new Mark();
+                mark.setMark(0);
+                mark.setIdCourse(new Course(idCourse));
+                mark.setIdUser(item.getIdUser());
+                mark.setIdExam(new Exam(idExam));
+                mark.setRemark(" ");
+                markService.saveMark(mark);
+                markList.add(mark);
+
+            }
+        }
+
+
+        List<ModelString> modelStringList = new ArrayList<>();
+
+        for (Mark item: markList  ) {
+            ModelString modelString =new ModelString();
+            modelString.setData1(item.getId().toString());
+            modelString.setData2(item.getIdUser().getName().toString());
+            modelString.setData3(String.valueOf(item.getMark()));
+            modelString.setData4(item.getRemark());
+            modelString.setData8(item.getIdUser().getId().toString());
+            modelStringList.add(modelString);
+        }
+
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList),response);
+
+    }
+
+    @RequestMapping(value = {RouteAPI.MarkList}, method = RequestMethod.GET)
+    public void MarkList(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int idExam = Integer.parseInt(request.getParameter("id"));
+
+        int idCourse = Integer.parseInt(request.getParameter("idcourse"));
+
+        List<Mark> markList = markService.findbyCourseExam(new Course(idCourse),new Exam(idExam));
+
+
+
+
+        List<ModelString> modelStringList = new ArrayList<>();
+
+        for (Mark item: markList  ) {
+            ModelString modelString =new ModelString();
+            modelString.setData1(item.getId().toString());
+            modelString.setData2(item.getIdUser().getName().toString());
+            modelString.setData3(String.valueOf(item.getMark()));
+            modelString.setData4(item.getRemark());
+            modelString.setData8(item.getIdUser().getId().toString());
+            modelStringList.add(modelString);
+        }
+
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList),response);
+
+    }
+
+    @RequestMapping(value = {RouteAPI.MarkCreatePost}, method = RequestMethod.POST)
+    public void MarkCreatePost(Model model, HttpServletResponse response, HttpServletRequest request, @RequestBody List<ModelString> data) {
+
+        for (ModelString item:data ) {
+            Mark mark = new Mark();
+            mark.setId(Integer.parseInt(item.getData1()));
+            mark.setIdUser(new Account(Integer.parseInt(item.getData8())));
+            mark.setMark(Integer.parseInt(item.getData3()));
+            mark.setRemark(item.getData4());
+            mark.setIdExam(new Exam(Integer.parseInt(item.getData5())));
+            mark.setIdCourse(new Course(Integer.parseInt(item.getData6())));
+            markService.saveMark(mark);
+        }
+
+
+        ModelString modelString = new ModelString();
+        modelString.setData1("Done");
+        JsonServices.dd(JsonServices.ParseToJson(modelString),response);
+
+    }
 }

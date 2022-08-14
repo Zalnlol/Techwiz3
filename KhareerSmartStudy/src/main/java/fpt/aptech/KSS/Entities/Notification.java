@@ -5,6 +5,8 @@
  */
 package fpt.aptech.KSS.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -126,11 +128,13 @@ public class Notification implements Serializable {
         this.createDate = createDate;
     }
 
+    @JsonBackReference
     @XmlTransient
     public List<NotificationUser> getNotificationUserList() {
         return notificationUserList;
     }
 
+    @JsonBackReference
     public void setNotificationUserList(List<NotificationUser> notificationUserList) {
         this.notificationUserList = notificationUserList;
     }

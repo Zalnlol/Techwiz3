@@ -22,6 +22,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hss"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/goc_bo_mautim" />
+
+        <activity
+            android:name=".Screen.AddMarkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.ExamDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.AddExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.ExamListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditResourceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.ResourceTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.MainTecherScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.SubjectDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.SubjectListTecherActivity"
+            android:exported="false" />
         <activity
             android:name=".Screen.TestDetailsActivity"
             android:exported="false" />
@@ -57,11 +88,6 @@
         <activity
             android:name=".Screen.ScheduleDetailActivity"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/duongvien_gocbo" />
-
         <activity
             android:name=".Screen.MyclasroomDetail"
             android:exported="false" />

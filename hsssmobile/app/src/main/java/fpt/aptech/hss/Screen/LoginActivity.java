@@ -109,7 +109,16 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(Role, response.body().getData7());
                             editor.putString(Avatar, response.body().getData8());
                             editor.commit();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                            if(response.body().getData7().equals("Student")){
+
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            }else {
+
+                                startActivity(new Intent(LoginActivity.this, MainTecherScreenActivity.class));
+                            }
+
+
                         } else {
                             Toast.makeText(LoginActivity.this, response.body().getData1(), Toast.LENGTH_SHORT).show();
                         }
