@@ -15,6 +15,7 @@ import fpt.aptech.hss.Screen.ClassroomListActivity;
 import fpt.aptech.hss.Screen.MainActivity;
 import fpt.aptech.hss.Screen.MainTecherScreenActivity;
 import fpt.aptech.hss.Screen.SubjectListTecherActivity;
+import fpt.aptech.hss.TeacherAccountActivity;
 
 public class CallNavTeacher {
 
@@ -48,8 +49,8 @@ public class CallNavTeacher {
 //                    context.startActivity(viewProfile);
                     return true;
                 case R.id.page_4:
-//                    Intent viewProfile = new Intent(context, MainAccountActivity.class);
-//                    context.startActivity(viewProfile);
+                    Intent viewProfile = new Intent(context, TeacherAccountActivity.class);
+                    context.startActivity(viewProfile);
                     return true;
 
             }

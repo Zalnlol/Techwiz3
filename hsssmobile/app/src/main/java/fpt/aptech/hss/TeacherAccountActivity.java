@@ -1,4 +1,4 @@
-package fpt.aptech.hss.Screen;
+package fpt.aptech.hss;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,23 +17,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Controller.CallNav;
 import fpt.aptech.hss.Controller.CallNavTeacher;
-import fpt.aptech.hss.R;
-public class StudetntAccountActivity extends AppCompatActivity {
+import fpt.aptech.hss.Screen.LoginActivity;
+import fpt.aptech.hss.Screen.StudetntAccountActivity;
+
+public class TeacherAccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_studetnt_account);
-
-        getSupportActionBar().hide();
+        setContentView(R.layout.activity_teacher_account);
 
 
         BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        CallNav callNav = new CallNav();
-        callNav.call(bottom_navigation, R.id.page_4, StudetntAccountActivity.this);
+        CallNavTeacher callNav = new CallNavTeacher();
+        callNav.call(bottom_navigation, R.id.page_4, TeacherAccountActivity.this);
 
         ScrollView scrollView = findViewById(R.id.scrollView);
-        callNav.setDisplay(scrollView, StudetntAccountActivity.this, 0.88);
+        callNav.setDisplay(scrollView, TeacherAccountActivity.this, 0.88);
 
 
         SharedPreferences sharedPreferencesProfile = getSharedPreferences("profilepref", MODE_PRIVATE);
@@ -50,7 +50,7 @@ public class StudetntAccountActivity extends AppCompatActivity {
         tv_ac_dbo.setText("Birthday: "+birthKey);
         tv_ac_mail.setText("Mail: "+mailKey);
 
-        Glide.with(StudetntAccountActivity.this)
+        Glide.with(TeacherAccountActivity.this)
                 .load("http://" + ConfigData.IP + ":7777/"+avatarKey)
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
@@ -59,9 +59,6 @@ public class StudetntAccountActivity extends AppCompatActivity {
                 .into(imageView);
 
         btn_Logout();
-
-
-
     }
 
     private void btn_Logout() {
@@ -75,7 +72,7 @@ public class StudetntAccountActivity extends AppCompatActivity {
                 editor.clear();
                 editor.apply();
                 finish();
-                Intent intent = new Intent(StudetntAccountActivity.this, LoginActivity.class);
+                Intent intent = new Intent(TeacherAccountActivity.this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

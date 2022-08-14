@@ -65,6 +65,8 @@ public class MyclasroomDetail extends AppCompatActivity {
         btn_Schedule = findViewById(R.id.btn_Schedule);
         btn_Student = findViewById(R.id.btn_Student);
         btn_Test=findViewById(R.id.btn_StudentTest);
+
+
         buttonBack();
         btn_Schedule();
         btn_Student();
@@ -86,6 +88,8 @@ public class MyclasroomDetail extends AppCompatActivity {
                 subjectNum.setText(modelString.getData2());
                 duration = findViewById(R.id.text3);
                 duration.setText(modelString.getData3());
+
+
             }
 
             @Override
@@ -104,7 +108,7 @@ public class MyclasroomDetail extends AppCompatActivity {
                 Intent intent = new Intent(MyclasroomDetail.this, ScheduleActivity.class);
 
                 intent.putExtra("data", data_);
-                intent.putExtra("id", data_);
+                intent.putExtra("id", idSelect);
                 startActivity(intent);
             }
         });
@@ -128,6 +132,7 @@ public class MyclasroomDetail extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MyclasroomDetail.this, StudentClassActivity.class);
                 intent.putExtra("data", data_);
+                intent.putExtra("id", idSelect);
                 startActivity(intent);
             }
         });

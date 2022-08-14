@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".Screen.AccountActivity">
-
+    tools:context=".TeacherAccountActivity">
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -23,6 +22,7 @@
             android:layout_height="wrap_content"
 
             android:orientation="vertical">
+
 
 
             <LinearLayout
@@ -79,6 +79,28 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    android:padding="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_Logout"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="#EC1D1D"
+                        android:text="Logout"
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -94,5 +116,6 @@
         android:layout_marginRight="20dp"
         android:background="@xml/duongvien_goctron"
         app:menu="@xml/bottom_navigation_menu" />
+
 
 </LinearLayout>

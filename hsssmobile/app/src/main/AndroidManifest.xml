@@ -23,7 +23,10 @@
         android:theme="@style/Theme.Hss"
         tools:targetApi="31">
         <activity
-            android:name=".StudetntAccountActivity"
+            android:name=".TeacherAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.StudetntAccountActivity"
             android:exported="false" />
 
         <meta-data
