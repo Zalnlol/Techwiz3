@@ -35,6 +35,8 @@ public interface IAccountRepository {
     
     public Account findByMailTeacher(String mail);
     
+    public List<Account> listAllTeacher(String role);
+    
     
     
     

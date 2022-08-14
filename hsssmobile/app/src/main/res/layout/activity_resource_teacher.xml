@@ -58,11 +58,11 @@
                 <Button
                     android:id="@+id/btn_edit_reource"
                     android:layout_width="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="@xml/duongvien_gocbo"
-                    app:backgroundTint="#53E9AA"
-                    android:layout_height="wrap_content"
-                    android:text="Edit Reource" />
+                    android:text="Edit Resource"
+                    app:backgroundTint="#158E72" />
             </LinearLayout>
 
         </LinearLayout>

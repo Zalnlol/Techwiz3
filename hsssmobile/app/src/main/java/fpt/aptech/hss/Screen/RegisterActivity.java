@@ -98,21 +98,21 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (Regist_Name.getText().toString().trim().equals("")){
                     check=false;
-                    Toast.makeText(RegisterActivity.this, "Name canot blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Name cannot blank", Toast.LENGTH_SHORT).show();
                 }
 
                 if (Regist_Mail.getText().toString().trim().equals("")){
                     check=false;
-                    Toast.makeText(RegisterActivity.this, "Mail canot blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Mail cannot blank", Toast.LENGTH_SHORT).show();
                 }
 
                 if (Regist_Password.getText().toString().trim().equals("")){
                     check=false;
-                    Toast.makeText(RegisterActivity.this, "Password canot blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Password cannot blank", Toast.LENGTH_SHORT).show();
                 }
                 if (Register_DOBB.getText().toString().trim().equals("")){
                     check=false;
-                    Toast.makeText(RegisterActivity.this, "Date of birth canot blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Date of birth cannot blank", Toast.LENGTH_SHORT).show();
                 }
 
                String[] modelString =new String[5];

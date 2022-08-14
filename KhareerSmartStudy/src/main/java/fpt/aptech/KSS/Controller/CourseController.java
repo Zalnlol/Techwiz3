@@ -5,11 +5,15 @@
  */
 package fpt.aptech.KSS.Controller;
 
+import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.Course;
+import fpt.aptech.KSS.Entities.ModelString;
 import fpt.aptech.KSS.FileUpload.FileUploadUtil;
 import fpt.aptech.KSS.Routes.RouteWeb;
+import fpt.aptech.KSS.Services.IAccountRepository;
 import fpt.aptech.KSS.Services.ICourseRepository;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +42,9 @@ public class CourseController {
     @Autowired
     private ICourseRepository courseRepository;
 
+    @Autowired
+    private IAccountRepository accountRepository;
+
 //    @RequestMapping(value = "/course/index", method = RequestMethod.GET)
 //    public String index(Model model) {
 //        //model.addAttribute("attribute", "value");
@@ -47,8 +54,6 @@ public class CourseController {
     public String CourseList(Model model, @Param("keyword") String keyword, HttpServletResponse response, HttpServletRequest request) {
         List<Course> list = new ArrayList<>();
         list = courseRepository.findAll();
-
-
 
         model.addAttribute("list", list);
 
@@ -103,6 +108,43 @@ public class CourseController {
         course.setDuration(duration);
 
         courseRepository.saveCourse(course);
+        String redirectUrl = "/course/index";
+        return "redirect:" + redirectUrl;
+    }
+
+    @RequestMapping(value = RouteWeb.CourseSetTeacher, method = RequestMethod.GET)
+    public String CourseSetTeacher(Model model, HttpServletRequest request, HttpServletResponse response) {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        Course course = courseRepository.findOne(id);
+
+        String courseName = course.getName();
+        model.addAttribute("courseName", courseName);
+
+        List<Account> accountList = new ArrayList<>();
+        accountList = accountRepository.listAllTeacher("Teacher");
+
+        model.addAttribute("Course", course);
+        model.addAttribute("list", accountList);
+        return "admin/course/setTeacher";
+    }
+
+    @RequestMapping(value = RouteWeb.CourseSetTeacher, method = RequestMethod.POST)
+    public String CourseSetTeacherPost(Model model, HttpServletRequest request, HttpServletResponse response) {
+
+        int courseId = Integer.parseInt(request.getParameter("courseID"));
+//        out.println(courseId);
+        
+        Course course = courseRepository.findOne(courseId);
+        
+        int teacherId = Integer.parseInt(request.getParameter("teacher"));
+        Account account = accountRepository.findById(teacherId);
+        
+        
+        course.setTeacher(account);
+        courseRepository.saveCourse(course);
+
+        
         String redirectUrl = "/course/index";
         return "redirect:" + redirectUrl;
     }
