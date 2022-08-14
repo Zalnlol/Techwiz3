@@ -57,6 +57,7 @@ public class NotificationUser implements Serializable {
     public NotificationUser() {
     }
 
+
     public NotificationUser(Integer id) {
         this.id = id;
     }

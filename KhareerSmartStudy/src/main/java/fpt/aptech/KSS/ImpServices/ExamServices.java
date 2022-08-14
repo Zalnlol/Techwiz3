@@ -25,5 +25,22 @@ public class ExamServices implements IExam{
     public List<Exam> findListByClass(Classroom classroom) {
         return examRepository.findByClass(classroom);
     }
+
+    public  List<Exam> findAAll(){
+      return   examRepository.findAll();
+    }
+
+    public  Exam findOne(int id){
+        return   examRepository.findByID(id);
+    }
+
+
+    public  Exam Create(Exam exam){
+        return   examRepository.save(exam);
+    }
+
+    public  Exam Edit(Exam exam){
+        return   examRepository.save(exam);
+    }
     
 }

@@ -10,6 +10,7 @@ import fpt.aptech.hss.Model.ModelString;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -40,5 +41,48 @@ public interface DataAPI {
     @GET("getMyClasses")
     Call<List<ModelString>> GetMyClasses (@Query("mail") String mail);
 
+    @GET("getTeacer/myresource")
+    Call<List<ModelString>> GetTeacherMyResource (@Query("id") String id);
 
+    @GET("getTeacer/mytest")
+    Call<List<ModelString>> GetTeacherMyTest (@Query("id") String id);
+
+    @GET("getTeacer/getsubject")
+    Call<List<ModelString>> GetSubject (@Query("id") String id);
+
+    @GET("getTeacer/getsubject/detail")
+    Call<ModelString> GetSubjectDetail (@Query("id") String id);
+
+    @GET("getTeacer/getsubject/reoucedetail")
+    Call<ModelString> GetReouceDetail (@Query("id") String id);
+
+    @POST("getTeacer/getsubject/postreouceedit")
+    Call<ModelString> PostReouceEdit (@Query("id") String id,
+                                      @Query("content") String content );
+    @GET("getTeacer/getexamlist")
+    Call<List<ModelString>> GetExem (@Query("id") String id);
+
+    @GET("getTeacer/getexamclassroom")
+    Call<List<ModelString>> Getclassroom (@Query("id") String id);
+
+
+    @POST("getTeacer/postcreateexam")
+    Call<ModelString> CreateExem (@Query("id") String id,
+                                  @Query("name") String name,
+                                  @Query("classroom") String classroom,
+                                  @Query("startday") String startday);
+
+    @GET("getTeacer/examdetail")
+    Call<ModelString> ExemDetail (@Query("id") String id);
+
+    @GET("getTeacer/marklist")
+    Call<List<ModelString>> MarkList (@Query("id") String id,
+                                        @Query("idcourse") String idcourse);
+
+    @GET("getTeacer/markcreate")
+    Call<List<ModelString>> MarkCreate (@Query("id") String id,
+                                        @Query("idcourse") String idcourse);
+
+    @POST("getTeacer/markcreatepost")
+    Call<List<ModelString>> MarkCreatePost (@Body List<ModelString> data);
 }

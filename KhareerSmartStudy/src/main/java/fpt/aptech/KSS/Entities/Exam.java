@@ -38,6 +38,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Exam.findByImage", query = "SELECT e FROM Exam e WHERE e.image = :image")})
 public class Exam implements Serializable {
 
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,8 +60,13 @@ public class Exam implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "image")
+    @Column(name = "image")    
     private String image;
+          @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5500)
+    @Column(name = "Name")
+     private String Name;
     @JoinColumn(name = "id_classroom", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Classroom idClassroom;

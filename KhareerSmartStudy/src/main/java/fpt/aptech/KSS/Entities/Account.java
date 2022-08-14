@@ -158,34 +158,40 @@ public class Account implements Serializable {
 //    public void setClassroomUserList(List<ClassroomUser> classroomUserList) {
 //        this.classroomUserList = classroomUserList;
 //    }
-
+    @JsonBackReference
     @XmlTransient
     public List<NotificationUser> getNotificationUserList() {
         return notificationUserList;
     }
 
+    @JsonBackReference
     public void setNotificationUserList(List<NotificationUser> notificationUserList) {
         this.notificationUserList = notificationUserList;
     }
 
+    @JsonBackReference
     @XmlTransient
     public List<Schedule> getScheduleList() {
         return scheduleList;
     }
 
+    @JsonBackReference
     public void setScheduleList(List<Schedule> scheduleList) {
         this.scheduleList = scheduleList;
     }
 
+    @JsonBackReference
     @XmlTransient
     public List<Mark> getMarkList() {
         return markList;
     }
 
+    @JsonBackReference
     public void setMarkList(List<Mark> markList) {
         this.markList = markList;
     }
 
+    @JsonBackReference
     @Override
     public int hashCode() {
         int hash = 0;
