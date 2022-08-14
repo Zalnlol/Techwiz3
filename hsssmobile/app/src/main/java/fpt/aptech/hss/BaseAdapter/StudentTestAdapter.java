@@ -24,10 +24,13 @@ import fpt.aptech.hss.Screen.TestDetailsActivity;
 public class StudentTestAdapter extends RecyclerView.Adapter<StudentTestAdapter.StudentTestHolder>{
     List<ModelString> Studentlist;
     Context context;
+    String data,idSelect1 ;
 
-    public StudentTestAdapter(List<ModelString> Studentlist, Context context) {
+    public StudentTestAdapter(List<ModelString> Studentlist, Context context, String data, String idSelect) {
         this.Studentlist=Studentlist;
         this.context=context;
+        this.data =data;
+        this.idSelect1 =idSelect;
     }
 
     @NonNull
@@ -77,6 +80,10 @@ public class StudentTestAdapter extends RecyclerView.Adapter<StudentTestAdapter.
                     String idSelect = classed.getData5();
                     Intent intent = new Intent(context, TestDetailsActivity.class);
                     intent.putExtra("idSelect", idSelect);
+                    intent.putExtra("idSelect1", idSelect1);
+                    intent.putExtra("data", data);
+
+
                     context.startActivity(intent);
 
                 }

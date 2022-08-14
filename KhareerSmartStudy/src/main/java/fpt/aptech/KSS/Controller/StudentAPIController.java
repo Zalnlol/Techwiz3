@@ -227,6 +227,7 @@ public class StudentAPIController {
                     out.setData2(mark.getIdExam().getStartDate().toString());
                     out.setData3(String.valueOf(mark.getMark()));
                     out.setData4(mark.getRemark());
+
         if (out != null) {
             JsonServices.dd(JsonServices.ParseToJson(out), response);
         } else {

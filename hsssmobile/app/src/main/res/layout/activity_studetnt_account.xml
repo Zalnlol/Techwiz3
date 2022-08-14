@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".Screen.AccountActivity">
+    tools:context=".Screen.StudetntAccountActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -25,15 +25,6 @@
             android:orientation="vertical">
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="140dp"
-                android:layout_marginTop="50dp"
-                android:text="Account"
-                android:textColor="@color/white"
-                android:textSize="23sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,39 +85,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
 
-                    android:padding="10dp">
+                    android:padding="10dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_Logout"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="30dp"
-                        android:text="Class Room"
-                        android:textColor="#000000"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcv_Ac_st"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="#EC1D1D"
+                        android:text="Logout"
+                        android:textColor="@color/white" />
                 </LinearLayout>
-                <Button
-                    android:id="@+id/btn_Login"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="30dp"
-                    android:backgroundTint="#EC1D1D"
-                    android:text="Logout"
-                    android:textColor="@color/white" />
 
             </LinearLayout>
 

@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(Gender, response.body().getData6());
                             editor.putString(Role, response.body().getData7());
                             editor.putString(Avatar, response.body().getData8());
+                            editor.putString(Mail, user);
                             editor.commit();
 
                             if(response.body().getData7().equals("Student")){
