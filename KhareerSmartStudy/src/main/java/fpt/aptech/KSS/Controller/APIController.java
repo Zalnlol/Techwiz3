@@ -105,9 +105,32 @@ public class APIController {
         Account account = accountRepository.checkUniqueCode(modelString.getData3());
 
         if (account != null) {
-            if (!account.getRole().equals(modelString.getData4())) {
+            if (!account.getRole().equals(modelString.getData4())&& !modelString.getData4().equals("Parent") ) {
                 modelStringout.setData1("Registered wrong Role");
                 JsonServices.dd(JsonServices.ParseToJson(modelStringout), response);
+                return "";
+            }else if(modelString.getData4().equals("Parent")){
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                Account account1 = new Account();
+                account1.setMail(modelString.getData1());
+                account1.setPassword(encoder.encode(modelString.getData2()));
+                account1.setRole(modelString.getData4());
+                account1.setName(modelString.getData5());
+                account1.setCode(modelString.getData3());
+//            account.setDob(new Date(modelString.getData6()));
+
+                try {
+                    Date date1 = new SimpleDateFormat("MM-dd-yyyy").parse(modelString.getData6());
+
+                    account1.setDob(date1);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
+                accountRepository.save(account1);
+                modelStringout.setData1("Done");
+                JsonServices.dd(JsonServices.ParseToJson(modelStringout), response);
+                return "";
             }
 
             Account account1 = accountRepository.findByMail(modelString.getData1());
@@ -135,14 +158,16 @@ public class APIController {
 //            JsonServices.dd(modelString.getData6(),response);
             modelStringout.setData1("Done");
             JsonServices.dd(JsonServices.ParseToJson(modelStringout), response);
+            return "";
         } else {
             modelStringout.setData1("Invalid QR");
             JsonServices.dd(JsonServices.ParseToJson(modelStringout), response);
+            return "";
         }
 
-        JsonServices.dd(JsonServices.ParseToJson(modelString), response);
 
-        return "admin/account/index";
+
+
     }
 
     @RequestMapping(value = {RouteAPI.APILogin}, method = RequestMethod.POST)

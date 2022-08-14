@@ -99,7 +99,7 @@ public class AccountController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         Account account = new Account(mail, name, phone, bday, gender, role, fileName, accountCodeGenerator(), encoder.encode("123"));
         if (fileName.equals("") || fileName == null) {
-            account.setAvatar("defaultUserIcon.png");
+            account.setAvatar("images/Website/user1.png");
         } else {
             String uploadDir = "src/main/resources/images/user-photos/";
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
