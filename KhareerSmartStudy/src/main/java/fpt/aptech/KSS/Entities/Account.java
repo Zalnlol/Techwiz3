@@ -143,16 +143,14 @@ public class Account implements Serializable {
     public void setDob(Date dob) {
         this.dob = dob;
     }
+    @XmlTransient
+    public List<ClassroomUser> getClassroomUserList() {
+        return classroomUserList;
+    }
 
-//
-//    @XmlTransient
-//    public List<ClassroomUser> getClassroomUserList() {
-//        return classroomUserList;
-//    }
-//
-//    public void setClassroomUserList(List<ClassroomUser> classroomUserList) {
-//        this.classroomUserList = classroomUserList;
-//    }
+    public void setClassroomUserList(List<ClassroomUser> classroomUserList) {
+        this.classroomUserList = classroomUserList;
+    }
 
     @XmlTransient
     public List<NotificationUser> getNotificationUserList() {

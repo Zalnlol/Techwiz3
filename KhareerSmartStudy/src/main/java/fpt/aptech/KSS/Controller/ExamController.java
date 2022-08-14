@@ -43,8 +43,10 @@ public class ExamController {
             List<Exam> examlist = iExam.findListByClass(listClass.get(i).getIdClassroom());
             for (int i2 = 0; i2 < examlist.size(); i2++) {
             ModelString out = new ModelString();
-            out.setData1(examlist.get(i).getIdCourse().getName());
-            out.setData2(examlist.get(i).getStartDate().toString());
+            out.setData1(examlist.get(i2).getIdCourse().getName());
+            out.setData2(examlist.get(i2).getStartDate().toString());
+            out.setData3(examlist.get(i2).getIdClassroom().getName());
+            out.setData4(examlist.get(i2).getIdCourse().getImage());
             modelStringout.add(out);
         }
         }
@@ -53,7 +55,7 @@ public class ExamController {
                 JsonServices.dd(JsonServices.ParseToJson(modelStringout),response);
 
         }else {
-                modelString.setData4("Unsusssess");
+                modelString.setData5("Unsusssess");
                 JsonServices.dd(JsonServices.ParseToJson(modelString),response);
 
         }
