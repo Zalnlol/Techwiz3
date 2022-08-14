@@ -141,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private  void Register_Role(){
         List<String> list = new ArrayList<>();
-        list.add("User");
+        list.add("Student");
         list.add("Teacher");
         list.add("Parent");
 

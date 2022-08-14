@@ -113,9 +113,13 @@ public class LoginActivity extends AppCompatActivity {
                             if(response.body().getData7().equals("Student")){
 
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            }else {
+                            }else if(response.body().getData7().equals("Teacher")) {
 
                                 startActivity(new Intent(LoginActivity.this, MainTecherScreenActivity.class));
+                            }
+                            if(response.body().getData7().equals("Parent")) {
+
+
                             }
 
 
