@@ -91,9 +91,10 @@ public class Account implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dob;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    @JsonBackReference
     private List<ClassroomUser> classroomUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    //@JsonBackReference
+//    @JsonBackReference
     private List<NotificationUser> notificationUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTeacher")
     private List<Schedule> scheduleList;
@@ -101,6 +102,11 @@ public class Account implements Serializable {
     private List<Mark> markList;
 
     public Account() {
+    }
+
+    public Account(Integer id) {
+        this.id = id;
+
     }
 
     public Account(Integer id, String role, String code) {
@@ -148,6 +154,10 @@ public class Account implements Serializable {
         return classroomUserList;
     }
 
+    @XmlTransient
+    public List<ClassroomUser> getClassroomUserList() {
+        return classroomUserList;
+    }
     public void setClassroomUserList(List<ClassroomUser> classroomUserList) {
         this.classroomUserList = classroomUserList;
     }

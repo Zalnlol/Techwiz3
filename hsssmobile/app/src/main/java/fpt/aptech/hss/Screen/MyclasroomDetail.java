@@ -2,6 +2,9 @@ package fpt.aptech.hss.Screen;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -9,16 +12,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+
+import fpt.aptech.hss.API.DataAPI;
+import fpt.aptech.hss.BaseAdapter.MainClassroomBase;
 import fpt.aptech.hss.Controller.CallNav;
+import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyclasroomDetail extends AppCompatActivity {
     String idSelect="";
     Button btn_Schedule;
+    TextView participantsNum;
+    TextView subjectNum;
+    TextView duration;
+    ImageView classImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +61,34 @@ public class MyclasroomDetail extends AppCompatActivity {
         n.setText(data_);
 
         btn_Schedule = findViewById(R.id.btn_Schedule);
-
         buttonBack();
         btn_Schedule();
-
-
+        showClassDetails();
     }
+
+    private void showClassDetails(){
+        DataAPI.api.GetMyClassesDetails(idSelect).enqueue(new Callback<ModelString>() {
+
+            @Override
+            public void onResponse(Call<ModelString> call, Response<ModelString> response) {
+                ModelString modelString = response.body();
+
+                participantsNum = findViewById(R.id.text1);
+                participantsNum.setText(modelString.getData1());
+                subjectNum = findViewById(R.id.text2);
+                subjectNum.setText(modelString.getData2());
+                duration = findViewById(R.id.text3);
+                duration.setText(modelString.getData3());
+            }
+
+            @Override
+            public void onFailure(Call<ModelString> call, Throwable t) {
+                Toast.makeText(MyclasroomDetail.this, "Connect error, unable to find class!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     private void btn_Schedule() {
         btn_Schedule.setOnClickListener(new View.OnClickListener() {
