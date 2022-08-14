@@ -154,6 +154,12 @@ public class Account implements Serializable {
         return classroomUserList;
     }
 
+    public void setClassroomUserList(List<ClassroomUser> classroomUserList) {
+        this.classroomUserList = classroomUserList;
+    }
+
+
+
 //
 //    @XmlTransient
 //    public List<ClassroomUser> getClassroomUserList() {
@@ -164,6 +170,7 @@ public class Account implements Serializable {
 //        this.classroomUserList = classroomUserList;
 //    }
     @JsonBackReference
+
     @XmlTransient
     public List<NotificationUser> getNotificationUserList() {
         return notificationUserList;

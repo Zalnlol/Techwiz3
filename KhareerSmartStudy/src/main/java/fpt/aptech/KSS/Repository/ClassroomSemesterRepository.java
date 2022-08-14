@@ -5,7 +5,9 @@
  */
 package fpt.aptech.KSS.Repository;
 
+import fpt.aptech.KSS.Entities.Classroom;
 import fpt.aptech.KSS.Entities.ClassroomSemester;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,5 +20,7 @@ public interface ClassroomSemesterRepository extends JpaRepository<ClassroomSeme
     
     @Query("SELECT c FROM ClassroomSemester c WHERE c.id = :id")
     ClassroomSemester findOne(@PathVariable("id") int id);
+    @Query("SELECT c FROM ClassroomSemester c WHERE c.idClassroom = :idClassroom")
+    List<ClassroomSemester> findByClassroom(@PathVariable("idClassroom") Classroom idClassroom);
     
 }

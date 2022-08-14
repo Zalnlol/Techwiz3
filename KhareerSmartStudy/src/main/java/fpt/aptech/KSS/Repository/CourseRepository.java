@@ -6,6 +6,7 @@
 package fpt.aptech.KSS.Repository;
 
 import fpt.aptech.KSS.Entities.Course;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,4 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query("select c from Course c where c.id = :id")
     Course findOne(@PathVariable("value") int id);
+//    @Query("select c from Course c where c.id = :id")
+//    List<Course> findOne(@PathVariable("value") int id);
 }

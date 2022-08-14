@@ -43,6 +43,7 @@
                 android:padding="10dp">
 
                 <ImageView
+                    android:id="@+id/iv_ac_avata"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:srcCompat="@tools:sample/avatars" />
@@ -56,6 +57,7 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/tv_ac_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -66,6 +68,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_ac_dbo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -76,6 +79,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_ac_mail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -85,41 +89,6 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:background="@xml/duongvien_goctron"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Class Room"
-                        android:textColor="#000000"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycleviewListRoom"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:orientation="horizontal" />
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/btn_Logout"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="5dp"
-                    android:backgroundTint="#EC1D1D"
-                    android:text="Logout"
-                    android:textColor="@color/white" />
 
             </LinearLayout>
 

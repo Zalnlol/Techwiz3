@@ -2,6 +2,7 @@ package fpt.aptech.hss.BaseAdapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
 import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
+import fpt.aptech.hss.Screen.MyclasroomDetail;
 
 public class MainClassroomBase   extends RecyclerView.Adapter<MainClassroomBase.MyViewHolder>{
 
@@ -69,7 +71,18 @@ public class MainClassroomBase   extends RecyclerView.Adapter<MainClassroomBase.
             super(view);
             title = view.findViewById(R.id.classroom_text_item);
             image = view.findViewById(R.id.classroom_image_item);
-
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MyclasroomDetail.class);
+                    ModelString classed =modelString.get(getAdapterPosition());
+                    String text = classed.getData3().toString();
+                    String idSelect = classed.getData2();
+                    intent.putExtra("data", text);
+                    intent.putExtra("idSelect", idSelect);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

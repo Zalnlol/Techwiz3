@@ -5,6 +5,7 @@
  */
 package fpt.aptech.KSS.Services;
 
+import fpt.aptech.KSS.Entities.Semester;
 import fpt.aptech.KSS.Entities.SemesterCourse;
 import fpt.aptech.KSS.Repository.SemesterCourseRepository;
 import java.util.List;
@@ -39,6 +40,11 @@ public class SemesterCourseServiceImp implements ISemesterCourseRepository {
     @Override
     public void delete(SemesterCourse semesterCourse) {
         semesterCourseRepository.delete(semesterCourse);
+    }
+
+    @Override
+    public List<SemesterCourse> findBySemester(Semester semester) {
+        return semesterCourseRepository.findBySemester(semester);
     }
 
 }

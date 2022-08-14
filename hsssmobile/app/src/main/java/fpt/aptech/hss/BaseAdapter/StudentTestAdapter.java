@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,28 +21,27 @@ import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.TestDetailsActivity;
 
-public class ChildrenTestAdapter extends RecyclerView.Adapter<ChildrenTestAdapter.ChildrenTestHolder>{
-    List<ModelString> Testlist;
+public class StudentTestAdapter extends RecyclerView.Adapter<StudentTestAdapter.StudentTestHolder>{
+    List<ModelString> Studentlist;
     Context context;
 
-    public ChildrenTestAdapter(List<ModelString> classlist, Context context) {
-        this.Testlist=classlist;
+    public StudentTestAdapter(List<ModelString> Studentlist, Context context) {
+        this.Studentlist=Studentlist;
         this.context=context;
     }
 
     @NonNull
     @Override
-    public ChildrenTestAdapter.ChildrenTestHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StudentTestAdapter.StudentTestHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.main_list_test_layout,parent,false);
-        return new ChildrenTestAdapter.ChildrenTestHolder(view);
+        View view = inflater.inflate(R.layout.classroom_list,parent,false);
+        return new StudentTestAdapter.StudentTestHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChildrenTestHolder holder, int position) {
-        ModelString modelStringsa = Testlist.get(position);
-        holder.tvtitle.setText(modelStringsa.getData1());
-        holder.tvdate.setText(modelStringsa.getData2());
+    public void onBindViewHolder(@NonNull StudentTestHolder holder, int position) {
+        ModelString modelStringsa = Studentlist.get(position);
+        holder.tvname.setText(modelStringsa.getData1());
 //        holder.image.setImageResource(Integer.parseInt(modelStringsa.getData4()));
 
 
@@ -54,31 +54,34 @@ public class ChildrenTestAdapter extends RecyclerView.Adapter<ChildrenTestAdapte
                 .into(holder.imageView);
     }
 
-
     @Override
     public int getItemCount() {
-        return Testlist.size();
+        return Studentlist.size();
     }
 
-    public class ChildrenTestHolder extends RecyclerView.ViewHolder {
+    public class StudentTestHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView tvtitle,tvdate;
-        public ChildrenTestHolder(@NonNull View itemView) {
+        TextView tvname;
+        LinearLayout layout;
+
+        public StudentTestHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.imageView);
-            tvtitle=itemView.findViewById(R.id.Title);
-            tvdate=itemView.findViewById(R.id.Date);
-            imageView.setOnClickListener(new View.OnClickListener() {
+            imageView = itemView.findViewById(R.id.classroom_image_item);
+            tvname = itemView.findViewById(R.id.classroom_text_item);
+            layout = itemView.findViewById(R.id.Classroomitem);
+            layout.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    ModelString classed =Testlist.get(getAdapterPosition());
+                public void onClick(View view) {
+                    ModelString classed =Studentlist.get(getAdapterPosition());
                     String text = classed.getData1().toString();
                     String idSelect = classed.getData5();
                     Intent intent = new Intent(context, TestDetailsActivity.class);
                     intent.putExtra("idSelect", idSelect);
                     context.startActivity(intent);
+
                 }
             });
+
 
         }
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,28 +19,27 @@ import java.util.List;
 import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
-import fpt.aptech.hss.Screen.MainParentActivity;
 import fpt.aptech.hss.Screen.MyclasroomDetail;
 
-public class ChildrenClassAdapter extends RecyclerView.Adapter<ChildrenClassAdapter.ChildrenClassHolder>{
+public class StudentClassroomAdapter extends RecyclerView.Adapter<StudentClassroomAdapter.StudentClassHolder> {
     List<ModelString> classlist;
     Context context;
 
-    public ChildrenClassAdapter(List<ModelString> classlist, Context context) {
+    public StudentClassroomAdapter(List<ModelString> classlist, Context context) {
         this.classlist=classlist;
         this.context=context;
     }
 
     @NonNull
     @Override
-    public ChildrenClassAdapter.ChildrenClassHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StudentClassroomAdapter.StudentClassHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.main_list_classroom,parent,false);
-        return new ChildrenClassAdapter.ChildrenClassHolder(view);
+        View view = inflater.inflate(R.layout.classroom_list,parent,false);
+        return new StudentClassroomAdapter.StudentClassHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChildrenClassAdapter.ChildrenClassHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StudentClassHolder holder, int position) {
         ModelString modelStringsa = classlist.get(position);
         holder.tvname.setText(modelStringsa.getData1());
 //        holder.image.setImageResource(Integer.parseInt(modelStringsa.getData4()));
@@ -54,19 +54,34 @@ public class ChildrenClassAdapter extends RecyclerView.Adapter<ChildrenClassAdap
                 .into(holder.imageView);
     }
 
+
     @Override
     public int getItemCount() {
         return classlist.size();
     }
 
-    public class ChildrenClassHolder extends RecyclerView.ViewHolder {
+    public class StudentClassHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView tvname;
-        public ChildrenClassHolder(@NonNull View itemView) {
+        LinearLayout layout;
+        public StudentClassHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.classroom_image_item);
             tvname=itemView.findViewById(R.id.classroom_text_item);
+            layout = itemView.findViewById(R.id.Classroomitem);
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, MyclasroomDetail.class);
+                    ModelString classed =classlist.get(getAdapterPosition());
+                    String text = classed.getData1().toString();
+                    String idSelect = classed.getData6();
+                    intent.putExtra("data", text);
+                    intent.putExtra("idSelect", idSelect);
+                    context.startActivity(intent);
 
+                }
+            });
 
 
         }

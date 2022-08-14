@@ -5,6 +5,7 @@
  */
 package fpt.aptech.KSS.Services;
 
+import fpt.aptech.KSS.Entities.Semester;
 import fpt.aptech.KSS.Entities.SemesterCourse;
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface ISemesterCourseRepository {
     public SemesterCourse findOne(int id);
 
     public void delete(SemesterCourse semesterCourse);
+    public List<SemesterCourse> findBySemester(Semester semester);
 }

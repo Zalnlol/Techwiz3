@@ -21,10 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fpt.aptech.hss.API.DataAPI;
+import fpt.aptech.hss.BaseAdapter.ChildrenTestAdapter;
 import fpt.aptech.hss.BaseAdapter.ClassroomListBase;
 import fpt.aptech.hss.BaseAdapter.MainClassroomBase;
 import fpt.aptech.hss.BaseAdapter.MainReourceBase;
 import fpt.aptech.hss.BaseAdapter.MainTestBase;
+import fpt.aptech.hss.BaseAdapter.StudentClassroomAdapter;
 import fpt.aptech.hss.Controller.CallNav;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
@@ -42,7 +44,8 @@ public class ClassroomListActivity extends AppCompatActivity {
     ClassroomListBase classroomListBase;
     ListView listView;
     SharedPreferences sharedPreferencesProfile;
-
+    List<ModelString> ClassList;
+    RecyclerView recyclerClass;
 
 
     @Override
@@ -59,8 +62,8 @@ public class ClassroomListActivity extends AppCompatActivity {
 
         ScrollView scrollView = findViewById(R.id.scrollView);
         callNav.setDisplay(scrollView, ClassroomListActivity.this, 0.8);
-
-        Adddata();
+        recyclerClass=findViewById(R.id.Classroom_listview);
+        showClass();
     }
 
 
@@ -72,6 +75,7 @@ public class ClassroomListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
                 List<ModelString> list = response.body();
+                System.out.println(list);
                 RecyclerView recyclerView = findViewById(R.id.recycleviewListClass);
                 mAdapter1 = new MainClassroomBase(list,ClassroomListActivity.this);
                 context = getApplicationContext();
@@ -125,5 +129,35 @@ public class ClassroomListActivity extends AppCompatActivity {
 
 
 
+    }
+    private void showClass(){
+        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferencesProfile.getString("user",null);
+        DataAPI.api.StudentGetClass(email).enqueue(new Callback<List<ModelString>>() {
+
+            @Override
+            public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
+                if (response.isSuccessful()){
+                    ClassList  = response.body();
+
+                    StudentClassroomAdapter adapter = new StudentClassroomAdapter(ClassList,ClassroomListActivity.this);
+                    Context context = getApplicationContext();
+
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerClass.setLayoutManager(mLayoutManager);
+                    recyclerClass.setItemAnimator(new DefaultItemAnimator());
+                    recyclerClass.setAdapter(adapter);
+                    System.out.println(ClassList);
+                }else {
+                    Toast.makeText(ClassroomListActivity.this,"Faill",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelString>> call, Throwable t) {
+                Toast.makeText(ClassroomListActivity.this, "Connect error, unable to find classes!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

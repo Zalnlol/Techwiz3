@@ -58,11 +58,11 @@
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Number of participants:"
+                        android:text="Subject:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/text1"
+                        android:id="@+id/tvtest_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -78,11 +78,11 @@
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Number of subjects:"
+                        android:text="Star tday:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/text2"
+                        android:id="@+id/tvtest_startdate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -98,11 +98,30 @@
                         android:layout_width="54dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Duration:"
+                        android:text="Mark:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/text3"
+                        android:id="@+id/tvtest_mark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Report:"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvtest_remark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -112,94 +131,18 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:orientation="horizontal">
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                tools:ignore="HardcodedText" >
 
-                <Button
-
-                    android:id="@+id/btn_Schedule"
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="1"
-                    android:background="@xml/duongvien_gocbo"
-                    android:drawableTop="@drawable/texticon1"
-                    android:paddingTop="10dp"
-                    android:text="\n Schedule"
-                    android:textSize="5pt"
-                    app:backgroundTint="#7388D4" />
-
-                <Button
-
-                    android:id="@+id/btn_Student"
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="1"
-                    android:background="@xml/duongvien_gocbo"
-                    android:drawableTop="@drawable/texticon2"
-                    android:paddingTop="10dp"
-                    android:text="\n Student"
-                    android:textSize="5pt"
-                    app:backgroundTint="#44A9CE" />
-
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:orientation="horizontal">
-
-                <Button
-
-                    android:id="@+id/btn_StudentTest"
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="1"
-                    android:background="@xml/duongvien_gocbo"
-                    android:drawableTop="@drawable/texticon3"
-                    android:paddingTop="10dp"
-                    android:text="\n My Test"
-                    android:textSize="5pt"
-                    app:backgroundTint="#53E9AA" />
-
-                <Button
-
-                    android:id="@+id/Home_btnTimekeeping"
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="1"
-                    android:background="@xml/duongvien_gocbo"
-                    android:drawableTop="@drawable/texticon4"
-                    android:paddingTop="10dp"
-                    android:text="\n Report mark"
-                    android:textSize="5pt"
-                    app:backgroundTint="#4754F0" />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="40dp"
-
-                android:orientation="horizontal">
-
-
-
-
-            </LinearLayout>
-
-
         </LinearLayout>
 
 

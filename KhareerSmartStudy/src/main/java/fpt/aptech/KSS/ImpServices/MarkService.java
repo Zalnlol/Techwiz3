@@ -8,6 +8,7 @@ package fpt.aptech.KSS.ImpServices;
 import fpt.aptech.KSS.Entities.Course;
 import fpt.aptech.KSS.Entities.Exam;
 import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.Exam;
 import fpt.aptech.KSS.Entities.Mark;
 import fpt.aptech.KSS.Repository.MarkRepository;
 import fpt.aptech.KSS.Services.IMark;
@@ -30,6 +31,11 @@ public class MarkService implements IMark {
         return markRepository.findAll();
     }
 
+    public Mark findByAccountAsExam(Account account,Exam exam) {
+        return markRepository.findByAccountAsExam(account, exam);
+    }
+
+
     @Override
     public List<Mark> findbyCourseExam(Course idCourse, Exam idExam) {
        return markRepository.findByExamCourse(idCourse,idExam);
@@ -49,5 +55,6 @@ public class MarkService implements IMark {
        public List<Mark> findByAccount(Account account) {
            return markRepository.findByAccount(account);
        }
+
     
 }

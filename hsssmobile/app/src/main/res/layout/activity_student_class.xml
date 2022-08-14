@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".Screen.ClassroomListActivity">
+    tools:context=".Screen.StudentClassActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Classroom_listview"
+                android:id="@+id/StidentClass_listview"
                 android:layout_width="330dp"
                 android:layout_height="522dp" />
 

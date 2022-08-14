@@ -23,5 +23,9 @@ public interface DocumentRepository extends JpaRepository<Document, Integer> {
     
      @Query("SELECT d FROM Document d WHERE d.id = :id")
     Document findOne(@PathVariable("id") int id);
-    
+
+
+    @Query("SELECT d FROM Document d WHERE d.idCourse = :idCourse")
+    Document findByCourse(@PathVariable("idCourse") Course idCourse);
+
 }

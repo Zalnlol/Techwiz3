@@ -26,6 +26,11 @@ public class ExamServices implements IExam{
         return examRepository.findByClass(classroom);
     }
 
+
+    @Override
+    public Exam findById(int id) {
+        return examRepository.findByID(id);
+
     public  List<Exam> findAAll(){
       return   examRepository.findAll();
     }
@@ -41,6 +46,7 @@ public class ExamServices implements IExam{
 
     public  Exam Edit(Exam exam){
         return   examRepository.save(exam);
+
     }
     
 }

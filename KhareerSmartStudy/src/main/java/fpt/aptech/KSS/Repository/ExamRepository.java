@@ -22,6 +22,6 @@ public interface ExamRepository extends JpaRepository<Exam, Integer> {
     List<Exam> findByClass(@PathVariable("idClassroom") Classroom idClassroom);
 
     @Query("SELECT e FROM Exam e WHERE e.id = :id")
-      Exam findByID(@PathVariable("id") int id);
-;
+    Exam findByID(@PathVariable("id") int id);
+
 }
