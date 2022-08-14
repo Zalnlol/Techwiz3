@@ -30,7 +30,7 @@ public class ExamServices implements IExam{
     @Override
     public Exam findById(int id) {
         return examRepository.findByID(id);
-
+    }
     public  List<Exam> findAAll(){
       return   examRepository.findAll();
     }
