@@ -44,7 +44,7 @@
                             <div class="col-sm-1"></div>
                             <div class="col">
                                 <input type="text" class="form-control input" th:value="${Account.getMail()}"
-                                       placeholder="Địa chỉ email" id="txtAccountMail" name="txtAccountMail" readonly>
+                                       placeholder="Email address" id="txtAccountMail" name="txtAccountMail" readonly>
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
@@ -96,15 +96,15 @@
                             <div class="col">
                                 <div th:switch="${Account.getGender()}">
                                     <div th:case="Male">
-                                        <input type="radio" id="Male" value="true" name="radioGender" checked>
+                                        <input type="radio" id="Male" value="Male" name="radioGender" checked>
                                         <label for="Male">Male</label><br>
-                                        <input type="radio" id="Female" value="false" name="radioGender">
+                                        <input type="radio" id="Female" value="Female" name="radioGender">
                                         <label for="Female">Female</label><br>
                                     </div>
                                     <div th:case="Female">
-                                        <input type="radio" id="Male" value="true" name="radioGender">
+                                        <input type="radio" id="Male" value="Male" name="radioGender">
                                         <label for="Male">Male</label><br>
-                                        <input type="radio" id="Female" value="false" name="radioGender"checked>
+                                        <input type="radio" id="Female" value="Female" name="radioGender"checked>
                                         <label for="Female">Female</label><br>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@
                             <div class="col-sm-5"></div>
                             <div class="col-sm-2" style="text-align: center ;">
                                 <input type="submit" class="btn btn-success form-control button-defualt"
-                                       value="Lưu dữ liệu">
+                                       value="Save">
                             </div>
                             <div class="col-sm-5"></div>
                         </div>
