@@ -14,7 +14,12 @@ import fpt.aptech.KSS.ImpServices.ClassroomServices;
 import fpt.aptech.KSS.ImpServices.MarkService;
 import fpt.aptech.KSS.Services.ClassroomUserServiceImp;
 import fpt.aptech.KSS.Services.IAccountRepository;
+import fpt.aptech.KSS.Services.IClassroomRepository;
+import fpt.aptech.KSS.Services.IClassroomSemesterRepository;
+import fpt.aptech.KSS.Services.ICourseRepository;
+import fpt.aptech.KSS.Services.IDocumentRepository;
 import fpt.aptech.KSS.Services.IExam;
+import fpt.aptech.KSS.Services.ISemesterCourseRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +49,16 @@ public class ParentAPIController {
     private MarkService markService; 
     @Autowired
     IExam iExam; 
+    @Autowired
+    IClassroomRepository classroomRepository;
+    @Autowired
+    IClassroomSemesterRepository classroomSemesterRepository;
+    @Autowired
+    ISemesterCourseRepository iSemesterCourseRepository;
+    @Autowired
+    IDocumentRepository documentRepository;
+    @Autowired
+    ICourseRepository courseRepository;
     @RequestMapping(value = {"api/parent/register"}, method = RequestMethod.POST)
     public String Parent(Model model, HttpServletResponse response, HttpServletRequest request) {
 
@@ -110,9 +125,10 @@ public class ParentAPIController {
         List<ModelString> modelStringout= new ArrayList<>();
 
 
-        modelString.setData1(request.getParameter("id"));
-        Account account = accountRepository.findById(Integer.valueOf(modelString.getData1()));
-        List<Mark> list = markService.findByAccount(account);
+        modelString.setData1(request.getParameter("mail"));
+        Account account = accountRepository.findByMail(modelString.getData1());
+        Account acc = accountRepository.findById(Integer.valueOf(account.getCode()));
+        List<Mark> list = markService.findByAccount(acc);
         for (int i = 0; i < list.size(); i++) {
             Mark get = list.get(i);
             ModelString out = new ModelString();
@@ -120,6 +136,8 @@ public class ParentAPIController {
             out.setData2(get.getIdExam().getStartDate().toString());
             out.setData3(String.valueOf(get.getMark()));
             out.setData4(get.getRemark());
+            out.setData5(account.getName());
+            out.setData6(get.getId().toString());
             modelStringout.add(out);
         }
         if (modelStringout!=null) {
@@ -127,6 +145,7 @@ public class ParentAPIController {
         }else{
             JsonServices.dd("faill",response);
         }
+        //JsonServices.dd(JsonServices.ParseToJson(acc),response); 
            
     }
     @RequestMapping(value = {"api/parent/get/class"}, method = RequestMethod.GET)
@@ -136,9 +155,10 @@ public class ParentAPIController {
         List<ModelString> modelStringout= new ArrayList<>();
 
 
-        modelString.setData1(request.getParameter("id"));
-        Account account = accountRepository.findById(Integer.valueOf(modelString.getData1()));
-        List<ClassroomUser> list = classroomUserServices.findClassesByUser(account);
+        modelString.setData1(request.getParameter("mail"));
+        Account account = accountRepository.findByMail(modelString.getData1());
+        Account acc = accountRepository.findById(Integer.valueOf(account.getCode()));
+        List<ClassroomUser> list = classroomUserServices.findClassesByUser(acc);
         //List<Mark> list = markService.findByAccount(account);
         for (int i = 0; i < list.size(); i++) {
             ClassroomUser get = list.get(i);
@@ -161,9 +181,10 @@ public class ParentAPIController {
     public void ParentGetExam(Model model, HttpServletResponse response, HttpServletRequest request) {
 
         ModelString modelString = new ModelString();
-        modelString.setData2(request.getParameter("id"));
-        Account a = accountRepository.findById(Integer.valueOf(modelString.getData2()));
-        List<ClassroomUser> listClass = a.getClassroomUserList();
+        modelString.setData1(request.getParameter("mail"));
+        Account account = accountRepository.findByMail(modelString.getData1());
+        Account acc = accountRepository.findById(Integer.valueOf(account.getCode()));
+        List<ClassroomUser> listClass = acc.getClassroomUserList();
         List<ModelString> modelStringout= new ArrayList<>();
         for (int i = 0; i < listClass.size(); i++) {
             List<Exam> examlist = iExam.findListByClass(listClass.get(i).getIdClassroom());
@@ -173,6 +194,7 @@ public class ParentAPIController {
             out.setData2(examlist.get(i2).getStartDate().toString());
             out.setData3(examlist.get(i2).getIdClassroom().getName());
             out.setData4(examlist.get(i2).getIdCourse().getImage());
+            out.setData5(examlist.get(i2).getId().toString());
             modelStringout.add(out);
         }
         }
@@ -187,5 +209,32 @@ public class ParentAPIController {
         }
            
     }
+    @RequestMapping(value = {"api/parent/mark/exam"}, method = RequestMethod.GET)
+    public void MarkByExam(Model model, HttpServletResponse response, HttpServletRequest request) {
+        ModelString modelString = new ModelString();
+//        ModelString modelStringout = new ModelString();
+        modelString.setData2(request.getParameter("exam"));
+                    modelString.setData3(request.getParameter("email"));
+        //Classroom class =
+        Exam exam = iExam.findById(Integer.valueOf(modelString.getData2()));
+        Account account = accountRepository.findByMail(modelString.getData3());
+        Account acc = accountRepository.findById(Integer.valueOf(account.getCode()));
+        //List<Mark> list = markService.findByAccount(account);
+         Mark mark = markService.findByAccountAsExam(acc, exam);
+         ModelString out = new ModelString();
+                    out.setData1(mark.getIdExam().getIdCourse().getName());
+                    out.setData2(mark.getIdExam().getStartDate().toString());
+                    out.setData3(String.valueOf(mark.getMark()));
+                    out.setData4(mark.getRemark());
+        if (out != null) {
+            JsonServices.dd(JsonServices.ParseToJson(out), response);
+        } else {
+            JsonServices.dd("faill", response);
+        }
+
+
+    }
+    
+    
     
 }

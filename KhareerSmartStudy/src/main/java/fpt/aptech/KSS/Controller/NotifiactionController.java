@@ -39,9 +39,9 @@ public class NotifiactionController {
     public void Test(HttpServletRequest request,HttpServletResponse response) throws ParseException{
         ModelString modelString = new ModelString();
         List<ModelString> modelStringout= new ArrayList<ModelString>();
-        modelString.setData1(request.getParameter("id"));
+        modelString.setData1(request.getParameter("email"));
         int id = Integer.valueOf(modelString.getData1());
-        Account a = accountRepository.findById(id);
+        Account a = accountRepository.findByMail(modelString.getData1());
         List<NotificationUser>  list = iNotification.findListNotifacationByAccount(a);
         for (int i = 0; i < list.size(); i++) {
             ModelString modelOut = new ModelString();

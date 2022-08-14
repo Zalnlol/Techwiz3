@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,6 +21,8 @@ import fpt.aptech.hss.BaseAdapter.ChildrenTestAdapter;
 import fpt.aptech.hss.BaseAdapter.MainClassroomBase;
 import fpt.aptech.hss.BaseAdapter.MarkTableAdapter;
 import fpt.aptech.hss.BaseAdapter.NotificationAdapter;
+import fpt.aptech.hss.BaseAdapter.ParentClassAdapter;
+import fpt.aptech.hss.BaseAdapter.ParentTestAdapter;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 import retrofit2.Call;
@@ -29,6 +33,8 @@ public class MainParentActivity extends AppCompatActivity {
     RecyclerView recyclerView,recyclerClass,recyclerTest;
     List<ModelString> marklist;
     List<ModelString> Classlist,ExamList;
+    SharedPreferences sharedPreferencesProfile;
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +43,21 @@ public class MainParentActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycleviewChildrenMark);
         recyclerClass = findViewById(R.id.recycleviewChildrenClass);
         recyclerTest = findViewById(R.id.recycleviewChildrenTest);
+        textView=findViewById(R.id.tv_hello_pr);
         showClasses();
         GetTokenData();
         showExam();
     }
+
     private void GetTokenData(){
-        ParentAPI.api.APIParentGetMark("5").enqueue(new Callback<List<ModelString>>() {
+        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferencesProfile.getString("user",null);
+        ParentAPI.api.APIParentGetMark(email).enqueue(new Callback<List<ModelString>>() {
             @Override
             public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
                 if (response.isSuccessful()){
                     marklist  = response.body();
+                    textView.setText(marklist.get(1).getData5());
                     SetRecycleView();
                     System.out.println(marklist);
                 }else {
@@ -62,13 +73,15 @@ public class MainParentActivity extends AppCompatActivity {
         });
     }
     private void showClasses(){
-        ParentAPI.api.ParentGetClass("5").enqueue(new Callback<List<ModelString>>() {
+        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferencesProfile.getString("user",null);
+        ParentAPI.api.ParentGetClass(email).enqueue(new Callback<List<ModelString>>() {
 
             @Override
             public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
                 if (response.isSuccessful()){
                     Classlist  = response.body();
-                    ChildrenClassAdapter adapter = new ChildrenClassAdapter(Classlist,MainParentActivity.this);
+                    ParentClassAdapter adapter = new ParentClassAdapter(Classlist,MainParentActivity.this);
                     Context context = getApplicationContext();
 
                     LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -88,13 +101,15 @@ public class MainParentActivity extends AppCompatActivity {
         });
     }
     private void showExam(){
-        ParentAPI.api.ParentGetExam("5").enqueue(new Callback<List<ModelString>>() {
+        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferencesProfile.getString("user",null);
+        ParentAPI.api.ParentGetExam(email).enqueue(new Callback<List<ModelString>>() {
 
             @Override
             public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
                 if (response.isSuccessful()){
                     ExamList  = response.body();
-                    ChildrenTestAdapter adapter = new ChildrenTestAdapter(ExamList,MainParentActivity.this);
+                    ParentTestAdapter adapter = new ParentTestAdapter(ExamList,MainParentActivity.this);
                     Context context = getApplicationContext();
 
                     LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

@@ -23,7 +23,7 @@ public interface NotificationAPI {
             .build()
             .create(NotificationAPI.class);
     @GET("notification/get")
-    Call<List<ModelString>> GetNotification(@Query("id") String id);
+    Call<List<ModelString>> GetNotification(@Query("email") String email);
 //    @POST("token/add")
 //    Call<ModelString> AddToken(@Body AccountToken token);
 }

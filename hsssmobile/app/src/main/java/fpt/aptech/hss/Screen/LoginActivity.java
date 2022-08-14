@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             if(response.body().getData7().equals("Parent")) {
 
-
+                                startActivity(new Intent(LoginActivity.this, MainParentActivity.class));
                             }
 
 

@@ -32,9 +32,11 @@ public interface ParentAPI {
 
     );
     @GET("parent/get/mark")
-    Call<List<ModelString>> APIParentGetMark (@Query("id") String id);
+    Call<List<ModelString>> APIParentGetMark (@Query("mail") String mail);
     @GET("parent/get/class")
-    Call<List<ModelString>> ParentGetClass (@Query("id") String id);
+    Call<List<ModelString>> ParentGetClass (@Query("mail") String mail);
     @GET("parent/get/test")
-    Call<List<ModelString>> ParentGetExam (@Query("id") String id);
+    Call<List<ModelString>> ParentGetExam (@Query("mail") String mail);
+    @GET("parent/mark/exam")
+    Call<ModelString> MarkByExam (@Query("exam") String exam, @Query("email") String email);
 }

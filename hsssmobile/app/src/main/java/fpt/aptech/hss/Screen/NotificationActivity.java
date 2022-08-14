@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -27,6 +29,10 @@ public class NotificationActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List<ModelString> accountNotifications;
+    SharedPreferences sharedPreferencesProfile;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +42,9 @@ public class NotificationActivity extends AppCompatActivity {
         GetTokenData();
     }
     private void GetTokenData(){
-       NotificationAPI.api.GetNotification("1").enqueue(new Callback<List<ModelString>>() {
+        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferencesProfile.getString("user",null);
+       NotificationAPI.api.GetNotification(email).enqueue(new Callback<List<ModelString>>() {
            @Override
            public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
               if (response.isSuccessful()){
