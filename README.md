@@ -15,6 +15,7 @@ Team members include:
 
 
 Documentation included in TechWiz3:
+
 Installation guide.docx
 SmartStudy-KhareerFPT.docx
 	
