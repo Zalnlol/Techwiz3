@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#F5F5F5"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:id="@+id/linearmarktable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        >
+            <TextView
+                android:id="@+id/tvMarkName"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:text="Notification Tile 1 "
+                android:textColor="#29303E"
+                android:textSize="10sp"
+                android:background="@xml/vien_bang"/>
+
+            <TextView
+                android:id="@+id/tvdMarkDate"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:text="Expires in 2 days"
+                android:textColor="#29303E"
+                android:textSize="10sp"
+                android:background="@xml/vien_bang"
+                />
+
+            <TextView
+                android:id="@+id/tvMarkScore"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:text="Expires in 2 days"
+                android:textColor="#29303E"
+                android:background="@xml/vien_bang"
+                android:textSize="10sp" />
+            <TextView
+                android:id="@+id/tvdMarkRemark"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:text="Expires in 2 days"
+                android:textColor="#29303E"
+                android:background="@xml/vien_bang"
+                android:textSize="10sp" />
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

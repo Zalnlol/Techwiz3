@@ -49,4 +49,10 @@ public class RouteAPI {
 
     public final static String MarkList = "api/getTeacer/marklist";
     public final static String MarkCreatePost = "api/getTeacer/markcreatepost";
+    
+    public final static String GetMyTestsList = "api/getMyTestsList";
+    
+    public final static String GetDocumentsLink = "api/getDocumentsLink";
+    
+    
 }

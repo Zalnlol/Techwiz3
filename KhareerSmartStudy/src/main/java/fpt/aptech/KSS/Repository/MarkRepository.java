@@ -21,5 +21,8 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 
     @Query("SELECT m FROM Mark m WHERE m.idCourse = :idCourse AND m.idExam = :idExam")
     List<Mark> findByExamCourse(@PathVariable("idCourse") Course idCourse ,@PathVariable("idExam") Exam idExam );
+
+    @Query("SELECT m FROM Mark m WHERE m.idUser = :idUser")
+    List<Mark> findByAccount(@PathVariable("idUser") Account idUser);
     
 }

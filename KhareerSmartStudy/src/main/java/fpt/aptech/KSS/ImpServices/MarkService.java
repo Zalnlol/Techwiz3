@@ -7,6 +7,7 @@ package fpt.aptech.KSS.ImpServices;
 
 import fpt.aptech.KSS.Entities.Course;
 import fpt.aptech.KSS.Entities.Exam;
+import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.Mark;
 import fpt.aptech.KSS.Repository.MarkRepository;
 import fpt.aptech.KSS.Services.IMark;
@@ -42,6 +43,11 @@ public class MarkService implements IMark {
     @Override
     public void removeMark(Mark id) {
         markRepository.delete(id);
+       }
+
+       @Override
+       public List<Mark> findByAccount(Account account) {
+           return markRepository.findByAccount(account);
        }
     
 }

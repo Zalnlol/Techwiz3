@@ -28,7 +28,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign up for free"
+                android:text="Sign up for Parent Account"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="12pt"
@@ -138,7 +138,7 @@
                 android:textColor="#808080" />
 
             <Button
-                android:id="@+id/btn_Register"
+                android:id="@+id/btn_Parent_Register"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"

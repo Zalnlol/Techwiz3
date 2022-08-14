@@ -43,6 +43,10 @@ public interface DataAPI {
 
     @GET("getTeacer/myresource")
     Call<List<ModelString>> GetTeacherMyResource (@Query("id") String id);
+    
+    @GET("getMyClassesDetails")
+    Call<ModelString> GetMyClassesDetails (@Query("id") String id);
+
 
     @GET("getTeacer/mytest")
     Call<List<ModelString>> GetTeacherMyTest (@Query("id") String id);

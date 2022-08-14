@@ -8,6 +8,7 @@ package fpt.aptech.KSS.Services;
 import fpt.aptech.KSS.Entities.Course;
 import fpt.aptech.KSS.Entities.Document;
 import fpt.aptech.KSS.Entities.Exam;
+import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.Mark;
 import java.util.List;
 
@@ -24,5 +25,6 @@ public interface IMark {
      public Mark saveMark(Mark mark);
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     public void removeMark(Mark id);
+    List<Mark> findByAccount(Account account);
     
 }

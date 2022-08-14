@@ -91,9 +91,10 @@ public class Account implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dob;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    @JsonBackReference
     private List<ClassroomUser> classroomUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    //@JsonBackReference
+//    @JsonBackReference
     private List<NotificationUser> notificationUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTeacher")
     private List<Schedule> scheduleList;
@@ -147,6 +148,10 @@ public class Account implements Serializable {
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+    @XmlTransient
+    public List<ClassroomUser> getClassroomUserList() {
+        return classroomUserList;
     }
 
 //
