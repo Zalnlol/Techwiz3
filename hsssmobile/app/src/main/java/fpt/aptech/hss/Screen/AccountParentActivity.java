@@ -16,23 +16,26 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Controller.CallNav;
+import fpt.aptech.hss.Controller.CallNavParent;
 import fpt.aptech.hss.Controller.CallNavTeacher;
 import fpt.aptech.hss.R;
-public class StudetntAccountActivity extends AppCompatActivity {
+import fpt.aptech.hss.TeacherAccountActivity;
+
+public class AccountParentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_studetnt_account);
+        setContentView(R.layout.activity_account_parent);
 
         getSupportActionBar().hide();
 
 
         BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        CallNav callNav = new CallNav();
-        callNav.call(bottom_navigation, R.id.page_4, StudetntAccountActivity.this);
+        CallNavParent callNav = new CallNavParent();
+        callNav.call(bottom_navigation, R.id.page_4, AccountParentActivity.this);
         ScrollView scrollView = findViewById(R.id.scrollView);
-        callNav.setDisplay(scrollView, StudetntAccountActivity.this, 0.88);
+        callNav.setDisplay(scrollView, AccountParentActivity.this, 0.88);
 
 
         SharedPreferences sharedPreferencesProfile = getSharedPreferences("profilepref", MODE_PRIVATE);
@@ -49,7 +52,7 @@ public class StudetntAccountActivity extends AppCompatActivity {
         tv_ac_dbo.setText("Birthday: "+birthKey);
         tv_ac_mail.setText("Mail: "+mailKey);
 
-        Glide.with(StudetntAccountActivity.this)
+        Glide.with(AccountParentActivity.this)
                 .load("http://" + ConfigData.IP + ":7777/"+avatarKey)
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
@@ -58,9 +61,6 @@ public class StudetntAccountActivity extends AppCompatActivity {
                 .into(imageView);
 
         btn_Logout();
-
-
-
     }
 
     private void btn_Logout() {
@@ -74,7 +74,7 @@ public class StudetntAccountActivity extends AppCompatActivity {
                 editor.clear();
                 editor.apply();
                 finish();
-                Intent intent = new Intent(StudetntAccountActivity.this, LoginActivity.class);
+                Intent intent = new Intent(AccountParentActivity.this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

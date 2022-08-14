@@ -61,13 +61,14 @@ public class MyclasroomDetail extends AppCompatActivity {
         showClassDetails();
         androidx.appcompat.widget.AppCompatTextView n = findViewById(R.id.tvTitile);
         n.setText(data_);
+        buttonBack();
 
         btn_Schedule = findViewById(R.id.btn_Schedule);
         btn_Student = findViewById(R.id.btn_Student);
         btn_Test=findViewById(R.id.btn_StudentTest);
 
 
-        buttonBack();
+
         btn_Schedule();
         btn_Student();
         btn_Test();
