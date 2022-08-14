@@ -1,17 +1,24 @@
 package fpt.aptech.hss.Screen;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fpt.aptech.hss.API.DataAPI;
 import fpt.aptech.hss.Config.ConfigData;
+import fpt.aptech.hss.Controller.CallNav;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 import retrofit2.Call;
@@ -20,18 +27,53 @@ import retrofit2.Response;
 
 public class AccountActivity extends AppCompatActivity {
     ModelString modelString;
-    String idSelect;
+    String idSelect, idSelect1,data_;
     TextView tv1,tv2,tv3;
     ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        getSupportActionBar().hide();
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_schedule);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.homecolor)));
+
+        BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        CallNav callNav = new CallNav();
+        callNav.call(bottom_navigation, R.id.page_2, AccountActivity.this);
+
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        callNav.setDisplay(scrollView, AccountActivity.this, 0.8);
+
         Intent intent = getIntent();
-        idSelect  = intent.getStringExtra("idSelect");
+
+        data_  = intent.getStringExtra("data");
+        idSelect  = intent.getStringExtra("id");
+        idSelect1  = intent.getStringExtra("idSelect1");
+
+        androidx.appcompat.widget.AppCompatTextView n = findViewById(R.id.tvTitile);
+        n.setText("Account");
+        buttonBack();
         showTest();
     }
+
+    private void buttonBack() {
+
+        ImageButton button = findViewById(R.id.btn_Work_schedule_back);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountActivity.this, StudentClassActivity.class);
+                intent.putExtra("data", data_);
+                intent.putExtra("id", idSelect1);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
     private void showTest() {
 //        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
 //        String email = sharedPreferencesProfile.getString("user", null);

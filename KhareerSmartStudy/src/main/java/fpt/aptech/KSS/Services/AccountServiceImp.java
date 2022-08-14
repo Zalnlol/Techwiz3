@@ -74,4 +74,9 @@ public class AccountServiceImp implements IAccountRepository {
         return repository.findByEmail(mail);
     }
 
+    @Override
+    public List<Account> listAllTeacher(String role) {
+        return repository.findAllTeacherList(role);
+    }
+
 }

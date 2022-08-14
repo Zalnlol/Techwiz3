@@ -40,4 +40,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     @Query("SELECT a FROM Account a WHERE a.mail = :mail AND a.role = 'Student'")
     Account findByEmailStudent(@PathVariable("mail") String mail);
+    
+    @Query("SELECT a FROM Account a WHERE a.role = 'Teacher' AND a.name != NULL")
+    List<Account> findAllTeacherList(@PathVariable("role") String role);
 }

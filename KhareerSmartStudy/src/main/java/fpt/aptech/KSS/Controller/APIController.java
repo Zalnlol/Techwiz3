@@ -116,7 +116,7 @@ public class APIController {
                 account1.setPassword(encoder.encode(modelString.getData2()));
                 account1.setRole(modelString.getData4());
                 account1.setName(modelString.getData5());
-                account1.setCode(modelString.getData3());
+                account1.setCode(account.getId().toString());
 //            account.setDob(new Date(modelString.getData6()));
 
                 try {

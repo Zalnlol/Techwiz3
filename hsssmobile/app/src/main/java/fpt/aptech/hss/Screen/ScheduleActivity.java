@@ -38,7 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ScheduleActivity extends AppCompatActivity {
-    String data;
+    String data,idSelect;
     Spinner spn_selectSem;
     ListView listView;
     List<ModelString> Semlist;
@@ -64,6 +64,7 @@ public class ScheduleActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         data  = intent.getStringExtra("data");
+        idSelect  = intent.getStringExtra("id");
         buttonBack();
 
         spn_selectSem = findViewById(R.id.spn_selectSem);
@@ -158,7 +159,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 }
                 else {
                     showCoures(data,items);
-                    Toast.makeText(ScheduleActivity.this,data,Toast.LENGTH_SHORT).show();
+//
                 }
             }
 
@@ -183,7 +184,9 @@ public class ScheduleActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ScheduleActivity.this, ClassroomListActivity.class);
+                Intent intent = new Intent(ScheduleActivity.this, MyclasroomDetail.class);
+                intent.putExtra("data", data);
+                intent.putExtra("idSelect", idSelect);
                 startActivity(intent);
             }
         });

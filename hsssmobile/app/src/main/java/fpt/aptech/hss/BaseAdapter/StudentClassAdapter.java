@@ -25,10 +25,13 @@ import fpt.aptech.hss.Screen.MyclasroomDetail;
 public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapter.StudentClassHolder> {
     List<ModelString> Studentlist;
     Context context;
+    String data_, idSelect1;
 
-    public StudentClassAdapter(List<ModelString> Studentlist, Context context) {
+    public StudentClassAdapter(List<ModelString> Studentlist, Context context, String data_, String idSelect) {
         this.Studentlist=Studentlist;
         this.context=context;
+        this.data_ =data_;
+        this.idSelect1 =idSelect;
     }
 
     @NonNull
@@ -77,8 +80,9 @@ public class StudentClassAdapter extends RecyclerView.Adapter<StudentClassAdapte
                     ModelString classed =Studentlist.get(getAdapterPosition());
                     String text = classed.getData1().toString();
                     String idSelect = classed.getData4();
-                    intent.putExtra("data", text);
-                    intent.putExtra("idSelect", idSelect);
+                    intent.putExtra("data", data_);
+                    intent.putExtra("id", idSelect);
+                    intent.putExtra("idSelect1", idSelect1);
                     context.startActivity(intent);
 
                 }
