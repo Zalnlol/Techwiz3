@@ -5,6 +5,7 @@
  */
 package fpt.aptech.KSS.Services;
 
+import fpt.aptech.KSS.Entities.Classroom;
 import fpt.aptech.KSS.Entities.ClassroomSemester;
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface IClassroomSemesterRepository {
     public ClassroomSemester findOne(int id);
     
     public void delete(ClassroomSemester classroomSemester);
+    public List<ClassroomSemester> findByClassroom(Classroom classroom);
 }

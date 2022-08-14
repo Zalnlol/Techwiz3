@@ -15,5 +15,6 @@ import java.util.List;
  */
 public interface IExam {
   List<Exam> findListByClass(Classroom classroom); 
+  Exam findById(int id); 
 //    List<Exam> findListExamByIdStudent()
 }

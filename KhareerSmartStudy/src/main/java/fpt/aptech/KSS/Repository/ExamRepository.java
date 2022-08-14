@@ -20,6 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ExamRepository extends JpaRepository<Exam, Integer> {
     @Query("SELECT e FROM Exam e WHERE e.idClassroom = :idClassroom")
     List<Exam> findByClass(@PathVariable("idClassroom") Classroom idClassroom);
-//    @Query("SELECT e FROM Exam e WHERE e.id = :id")
-//    Exam findByName(@PathVariable("name") String name);
+    @Query("SELECT e FROM Exam e WHERE e.id = :id")
+    Exam findByID(@PathVariable("id") int id);
 }

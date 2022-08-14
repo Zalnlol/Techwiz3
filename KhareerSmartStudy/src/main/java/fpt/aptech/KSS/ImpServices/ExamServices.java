@@ -25,5 +25,10 @@ public class ExamServices implements IExam{
     public List<Exam> findListByClass(Classroom classroom) {
         return examRepository.findByClass(classroom);
     }
+
+    @Override
+    public Exam findById(int id) {
+        return examRepository.findByID(id);
+    }
     
 }

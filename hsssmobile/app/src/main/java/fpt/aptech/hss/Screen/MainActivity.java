@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fpt.aptech.hss.API.DataAPI;
+import fpt.aptech.hss.API.ParentAPI;
+import fpt.aptech.hss.BaseAdapter.ChildrenResourchAdapter;
+import fpt.aptech.hss.BaseAdapter.ChildrenTestAdapter;
 import fpt.aptech.hss.BaseAdapter.MainClassroomBase;
 import fpt.aptech.hss.BaseAdapter.MainReourceBase;
 import fpt.aptech.hss.BaseAdapter.MainTestBase;
@@ -40,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Context context;
-
+    RecyclerView recyclerTest,recyclerResource;
+    List<ModelString> ExamList,ResourceList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,15 +59,18 @@ public class MainActivity extends AppCompatActivity {
         callNav.setDisplay(scrollView, MainActivity.this, 0.88);
 
         TextView username = findViewById(R.id.textView4);
+        recyclerTest=findViewById(R.id.recycleviewListTest);
+        recyclerResource=findViewById(R.id.recycleviewListResource);
 
         SharedPreferences sharedPreferencesProfile = getSharedPreferences("profilepref", MODE_PRIVATE);
         String nameKey = sharedPreferencesProfile.getString("nameKey",null);
         username.setText("Hello " + nameKey);
 
         showClasses();
-
-        AddTest();
-        AddResource();
+        showExam();
+        showResource();
+        //AddTest();
+        //AddResource();
     }
 
     private void AddTest() {
@@ -121,6 +128,34 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(mAdapter1);
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelString>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Connect error, unable to find classes!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void showExam(){
+        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferencesProfile.getString("user",null);
+        DataAPI.api.StudentGetExam(email).enqueue(new Callback<List<ModelString>>() {
+
+            @Override
+            public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
+                if (response.isSuccessful()){
+                    ExamList  = response.body();
+                    ChildrenTestAdapter adapter = new ChildrenTestAdapter(ExamList,MainActivity.this);
+                    Context context = getApplicationContext();
+
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                    recyclerTest.setLayoutManager(mLayoutManager);
+                    recyclerTest.setItemAnimator(new DefaultItemAnimator());
+                    recyclerTest.setAdapter(adapter);
+                }else {
+                    Toast.makeText(MainActivity.this,"Faill",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -205,6 +240,34 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter2);
 
 
+    }
+    private void showResource(){
+        sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferencesProfile.getString("user",null);
+        DataAPI.api.DoccumentAll(email).enqueue(new Callback<List<ModelString>>() {
+
+            @Override
+            public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
+                if (response.isSuccessful()){
+                    ResourceList  = response.body();
+                    ChildrenResourchAdapter adapter = new ChildrenResourchAdapter(ResourceList,MainActivity.this);
+                    Context context = getApplicationContext();
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                    recyclerResource.setLayoutManager(mLayoutManager);
+                    recyclerResource.setItemAnimator(new DefaultItemAnimator());
+                    recyclerResource.setAdapter(adapter);
+                }else {
+                    Toast.makeText(MainActivity.this,"Faill",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelString>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                System.out.println(t.toString());
+            }
+        });
     }
 
 

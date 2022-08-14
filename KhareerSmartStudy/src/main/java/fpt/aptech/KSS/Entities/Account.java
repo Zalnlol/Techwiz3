@@ -153,11 +153,6 @@ public class Account implements Serializable {
     public List<ClassroomUser> getClassroomUserList() {
         return classroomUserList;
     }
-
-    @XmlTransient
-    public List<ClassroomUser> getClassroomUserList() {
-        return classroomUserList;
-    }
     public void setClassroomUserList(List<ClassroomUser> classroomUserList) {
         this.classroomUserList = classroomUserList;
     }

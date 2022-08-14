@@ -23,6 +23,15 @@
         android:theme="@style/Theme.Hss"
         tools:targetApi="31">
         <activity
+            android:name=".Screen.TestDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.StudentTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.StudentClassActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screen.ParentAccountActivity"
             android:exported="false" />
         <activity
@@ -78,7 +87,6 @@
             android:theme="@style/Theme.Hss.NoActionBar" />
         <activity
             android:name=".Screen.FlashActivity"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

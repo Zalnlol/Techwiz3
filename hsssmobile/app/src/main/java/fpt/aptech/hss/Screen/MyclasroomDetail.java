@@ -31,8 +31,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyclasroomDetail extends AppCompatActivity {
-    String idSelect="";
-    Button btn_Schedule;
+    String idSelect;
+    String data_;
+    Button btn_Schedule,btn_Student,btn_Test;
     TextView participantsNum;
     TextView subjectNum;
     TextView duration;
@@ -55,18 +56,24 @@ public class MyclasroomDetail extends AppCompatActivity {
         callNav.setDisplay(scrollView, MyclasroomDetail.this, 0.8);
 
         Intent intent = getIntent();
-        String data_  = intent.getStringExtra("data");
+        data_  = intent.getStringExtra("data");
         idSelect  = intent.getStringExtra("idSelect");
+        showClassDetails();
         androidx.appcompat.widget.AppCompatTextView n = findViewById(R.id.tvTitile);
         n.setText(data_);
 
         btn_Schedule = findViewById(R.id.btn_Schedule);
+        btn_Student = findViewById(R.id.btn_Student);
+        btn_Test=findViewById(R.id.btn_StudentTest);
         buttonBack();
         btn_Schedule();
-        showClassDetails();
+        btn_Student();
+        btn_Test();
+
     }
 
     private void showClassDetails(){
+
         DataAPI.api.GetMyClassesDetails(idSelect).enqueue(new Callback<ModelString>() {
 
             @Override
@@ -95,7 +102,32 @@ public class MyclasroomDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyclasroomDetail.this, ScheduleActivity.class);
-                intent.putExtra("idSelect", idSelect);
+
+                intent.putExtra("data", data_);
+                intent.putExtra("id", data_);
+                startActivity(intent);
+            }
+        });
+
+    }
+    private void btn_Test() {
+        btn_Test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyclasroomDetail.this, StudentTestActivity.class);
+                intent.putExtra("data", data_);
+                intent.putExtra("id", idSelect);
+                startActivity(intent);
+            }
+        });
+
+    }
+    private void btn_Student(){
+        btn_Student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyclasroomDetail.this, StudentClassActivity.class);
+                intent.putExtra("data", data_);
                 startActivity(intent);
             }
         });

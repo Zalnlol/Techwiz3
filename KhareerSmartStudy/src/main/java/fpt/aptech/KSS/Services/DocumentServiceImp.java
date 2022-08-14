@@ -5,6 +5,7 @@
  */
 package fpt.aptech.KSS.Services;
 
+import fpt.aptech.KSS.Entities.Course;
 import fpt.aptech.KSS.Entities.Document;
 import fpt.aptech.KSS.Repository.DocumentRepository;
 import java.util.List;
@@ -44,6 +45,11 @@ public class DocumentServiceImp implements  IDocumentRepository{
     @Override
     public Document findOneByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Document findByCouser(Course course) {
+        return repository.findByCourse(course);
     }
     
 }

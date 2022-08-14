@@ -5,6 +5,7 @@
  */
 package fpt.aptech.KSS.Services;
 
+import fpt.aptech.KSS.Entities.Course;
 import fpt.aptech.KSS.Entities.Document;
 import java.util.List;
 
@@ -23,4 +24,5 @@ public interface IDocumentRepository {
     public void removeDocument(int id);
 
     public Document findOneByName(String name);
+    public Document findByCouser(Course course);
 }

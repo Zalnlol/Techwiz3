@@ -20,33 +20,32 @@ import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.TestDetailsActivity;
 
-public class ChildrenTestAdapter extends RecyclerView.Adapter<ChildrenTestAdapter.ChildrenTestHolder>{
+public class ChildrenResourchAdapter extends RecyclerView.Adapter<ChildrenResourchAdapter.ChildrenResourchHolder> {
     List<ModelString> Testlist;
     Context context;
 
-    public ChildrenTestAdapter(List<ModelString> classlist, Context context) {
+    public ChildrenResourchAdapter(List<ModelString> classlist, Context context) {
         this.Testlist=classlist;
         this.context=context;
     }
 
     @NonNull
     @Override
-    public ChildrenTestAdapter.ChildrenTestHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChildrenResourchAdapter.ChildrenResourchHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.main_list_test_layout,parent,false);
-        return new ChildrenTestAdapter.ChildrenTestHolder(view);
+        View view = inflater.inflate(R.layout.main_list_reource_layout,parent,false);
+        return new ChildrenResourchAdapter.ChildrenResourchHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChildrenTestHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChildrenResourchHolder holder, int position) {
         ModelString modelStringsa = Testlist.get(position);
-        holder.tvtitle.setText(modelStringsa.getData1());
-        holder.tvdate.setText(modelStringsa.getData2());
+        holder.tvtitle.setText(modelStringsa.getData5());
 //        holder.image.setImageResource(Integer.parseInt(modelStringsa.getData4()));
 
 
         Glide.with(context)
-                .load("http://" + ConfigData.IP + ":7777/"+modelStringsa.getData4())
+                .load("http://" + ConfigData.IP + ":7777/"+modelStringsa.getData1())
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
                 .override(600, 600)
@@ -60,25 +59,24 @@ public class ChildrenTestAdapter extends RecyclerView.Adapter<ChildrenTestAdapte
         return Testlist.size();
     }
 
-    public class ChildrenTestHolder extends RecyclerView.ViewHolder {
+    public class ChildrenResourchHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView tvtitle,tvdate;
-        public ChildrenTestHolder(@NonNull View itemView) {
+        TextView tvtitle;
+        public ChildrenResourchHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.imageView);
             tvtitle=itemView.findViewById(R.id.Title);
-            tvdate=itemView.findViewById(R.id.Date);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ModelString classed =Testlist.get(getAdapterPosition());
-                    String text = classed.getData1().toString();
-                    String idSelect = classed.getData5();
-                    Intent intent = new Intent(context, TestDetailsActivity.class);
-                    intent.putExtra("idSelect", idSelect);
-                    context.startActivity(intent);
-                }
-            });
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    ModelString classed =Testlist.get(getAdapterPosition());
+//                    String text = classed.getData1().toString();
+//                    String idSelect = classed.getData5();
+////                    Intent intent = new Intent(context, TestDetailsActivity.class);
+//////                    intent.putExtra("idSelect", idSelect);
+////                    context.startActivity(intent);
+//                }
+//            });
 
         }
     }
