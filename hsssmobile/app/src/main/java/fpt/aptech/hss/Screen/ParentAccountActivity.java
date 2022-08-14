@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import fpt.aptech.hss.R;
+
 public class ParentAccountActivity extends AppCompatActivity {
 
     @Override
@@ -11,6 +13,6 @@ public class ParentAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_account);
 
-        
+
     }
 }

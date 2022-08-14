@@ -23,10 +23,10 @@
         android:theme="@style/Theme.Hss"
         tools:targetApi="31">
         <activity
-            android:name=".ParentAccountActivity"
+            android:name=".Screen.ParentAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".Screen.FlashActivity"
+            android:name=".Screen.MainParentActivity"
             android:exported="false" />
         <activity
             android:name=".Screen.QRParentActivity"
@@ -77,7 +77,8 @@
             android:label="@string/title_activity_notification"
             android:theme="@style/Theme.Hss.NoActionBar" />
         <activity
-            android:name=".Screen.MainParentActivity"
+            android:name=".Screen.FlashActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
