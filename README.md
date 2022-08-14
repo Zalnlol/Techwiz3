@@ -1,11 +1,10 @@
 # Techwiz3
 
 Project Smart Study
+
 Technology used: Java - Spring boots - HTML/CSS/JS - Bootstrap3
 
 Team members include:
-
-
 
 1)Lê Nguyễn Thành Nhân - 1277226 - project lead
 
