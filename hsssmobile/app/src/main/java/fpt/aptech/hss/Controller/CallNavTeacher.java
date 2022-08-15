@@ -47,7 +47,7 @@ public class CallNavTeacher {
                     return true;
                 case R.id.page_3:
                    Intent viewProfile1 = new Intent(context, TeacherNotificataionActivity.class);
-/                   context.startActivity(viewProfile1);
+                   context.startActivity(viewProfile1);
                     return true;
                 case R.id.page_4:
                     Intent viewProfile = new Intent(context, TeacherAccountActivity.class);

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             data.add(modelString);
 
             RecyclerView recyclerView = findViewById(R.id.recycleviewListTest);
-            mAdapter = new MainTestBase(data);
+            mAdapter = new MainTestBase(data,MainActivity.this);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(mLayoutManager);
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         RecyclerView recyclerView = findViewById(R.id.recycleviewListResource);
-        mAdapter2 = new MainReourceBase(data);
+        mAdapter2 = new MainReourceBase(data,MainActivity.this);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(mLayoutManager);

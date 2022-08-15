@@ -50,7 +50,6 @@ public class Course implements Serializable {
     @Column(name = "duration")
     private int duration;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "image")
     private String image;
@@ -72,7 +71,7 @@ public class Course implements Serializable {
         this.name = name;
         this.description = description;
         this.duration = duration;
-        this.image = image;
+        this.image = "";
     }
 
     public Integer getId() {

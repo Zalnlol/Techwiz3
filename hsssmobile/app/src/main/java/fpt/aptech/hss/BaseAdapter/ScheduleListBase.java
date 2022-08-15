@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.MyclasroomDetail;
@@ -58,7 +61,16 @@ public class ScheduleListBase extends BaseAdapter {
         ImageView imageView = view.findViewById(R.id.classroom_image_item);
 
         Title.setText(modelString.getData2());
-        imageView.setImageResource(Integer.parseInt(modelString.getData1()));
+
+        Glide.with(context)
+                .load("http://" + ConfigData.IP + ":8080/KSS/"+modelString.getData1())
+//                .transform(new RoundedCorners(radius))
+//                .transform(new CircleCrop())
+                .override(600, 600)
+//                .error(R.drawable.icon5)
+                .into(imageView);
+
+
 
         LinearLayout Classroomitem = view.findViewById(R.id.Classroomitem);
         Classroomitem.setOnClickListener(new View.OnClickListener() {

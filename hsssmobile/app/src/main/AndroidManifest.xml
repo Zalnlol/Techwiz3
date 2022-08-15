@@ -30,20 +30,18 @@
             android:exported="false" />
         <activity
             android:name=".Screen.TestDetailsParentActivity"
-            android:name=".Screen.AccountParentActivity"
             android:exported="false" />
         <activity
-            android:name=".Screen.TestDetailsParentActivity"
+            android:name=".Screen.AccountParentActivity"
             android:exported="false" />
+
         <activity
             android:name=".TeacherAccountActivity"
             android:exported="false" />
         <activity
             android:name=".Screen.StudetntAccountActivity"
             android:exported="false" />
-        <activity
-            android:name=".TeacherAccountActivity"
-            android:exported="false" />
+
 
         <meta-data
             android:name="com.google.android.actions"
