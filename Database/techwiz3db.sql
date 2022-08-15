@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 14, 2022 at 12:34 PM
+-- Generation Time: Aug 15, 2022 at 04:45 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.18
 
@@ -26,10 +26,10 @@ CREATE TABLE `account` (
   `mail` varchar(50) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
+  `dob` date DEFAULT current_timestamp(),
   `gender` varchar(20) DEFAULT NULL,
   `role` varchar(50) NOT NULL,
-  `avatar` varchar(250) DEFAULT NULL,
+  `avatar` varchar(250) DEFAULT 'images/Website/user1.png',
   `code` varchar(255) NOT NULL,
   `password` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -39,21 +39,24 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `mail`, `name`, `phone`, `dob`, `gender`, `role`, `avatar`, `code`, `password`) VALUES
-(1, 'thiennnts2008038@fpt.edu.vn', 'Thien Nguyen', '+84989096911', '1993-01-14', 'Male', 'Admin', 'defaultUserIcon.png', 'SmartStudy001', '$2a$10$741hsE4nveWq7d1I3e.1FeZJGwvR2xCyYRPcdPztzQ/N5UOKT0w/2'),
-(2, 'j.thien1551@gmail.com', 'Thien Nguyen', '+84989096911', '2022-01-11', 'Male', 'Admin', 'defaultUserIcon.png', 'SmartStudy002', '$2a$10$mo7FXIx/VOrF9UDxwAaw8eXRBsCg0iZMI8DycIcwwWz3VwZTAWjD2'),
-(3, 'vuongpham@gmail.com', 'Viet Vuong', '+84373627828', '2022-01-01', 'Male', 'Admin', 'defaultUserIcon.png', 'SmartStudy003', '$2a$10$GeRGpaVGOzd6NEPFbcAQ0.6UjLrbm4xvmfNtlWFMgrblyElkn5pCq'),
-(4, 'vlogcuocsongvacongnghe@gmail.com', 'Lê Nhân', '+84375515819', '2022-01-16', 'Male', 'Admin', 'defaultUserIcon.png', 'SmartStudy004', '$2a$10$MRtC0vg5a.yxKOhaFC342uJHVSPyUPYlGRXrOM1oKS9/xl6eCzOa2'),
-(5, 'tamlhts2008005@fpt.edu.vn', 'Huu Tam', '+84912345678', '2002-06-01', 'Male', 'Admin', 'defaultUserIcon.png', 'SmartStudy005', '$2a$10$DrEv22d94dQtRb/I47m/kei/AKppycMgcBnkcWI0de0xHDqriRqjS'),
-(9, 'easter2015@fpt.edu.vn', 'Easter', '+84326024953', '2015-04-07', 'Male', 'Student', 'defaultUserIcon.png', 'SmartStudy233978', '$2a$10$dPwNy8mCP6GSgZ2MU610yOdSG.VEkN3/OmBtWDT76yvC05SAkD94q'),
-(10, 'sienna1990@fpt.edu.vn', 'Sienna', '+84353362394', '1990-08-02', 'Female', 'Teacher', 'defaultUserIcon.png', 'SmartStudy426937', '$2a$10$pf8rHy1kvJfeV25GvkHgL.EG7NPjqHF0izndQVYvCvV/AHaZ9445q'),
-(11, 'jonas2002@fpt.edu.vn', 'Jonas', '+84987654321', '2002-02-16', 'Female', 'Student', 'defaultUserIcon.png', 'SmartStudy220461', '$2a$10$2zeVRcd2OwcWwmVWx1kDQe3/VuL3j/HmsdSnZIr5vE88p/7TBxJIm'),
-(12, 'cordie2000@fpt.edu.vn', 'Cordie', '+84123456789', '2000-10-06', 'Female', 'Teacher', 'defaultUserIcon.png', 'SmartStudy832732', '$2a$10$LuA5ldvPcpaxrdgnheloUOa1yFD0x99V4UHEQiw7cH6sXd1EgO6b6'),
-(13, 'lenhannhan123@gmail.com', 'Thành Nhân', NULL, '0179-06-08', NULL, 'Student', 'defaultUserIcon.png', 'SmartStudy198014', '$2a$10$/V7ZePI.Avsf8S7rZVJPBuBSm74PxLnFZx2lD8UTiv51Q/IkZDNB2'),
-(14, NULL, NULL, NULL, NULL, NULL, 'Teacher', 'defaultUserIcon.png', 'SmartStudy522837', '$2a$10$gYszjpSAhH2iL15atzGo0eH6U943vpK0WOdfaS8z/ZWBtJIoSu1m.'),
-(15, 'thanhnhan123@gmail.com', 'Nhân Lê', NULL, '0181-06-08', NULL, 'Student', 'defaultUserIcon.png', 'SmartStudy659948', '$2a$10$SptiNDiMv66kOSLgtF1FBebYIb6gw81/dKgAX89EKFp3zc5nrevGW'),
-(17, 'reba1998@fpt.edu.vn', 'Willie', '+84962804039', '1998-11-20', 'Male', 'Student', 'defaultUserIcon.png', 'SmartStudy238519', '$2a$10$6hLgo6SMkGSIzL/9A.OECuQ/0nHwWLgw7skA5uPTYMZrYuCAmfJAS'),
-(18, 'jarrod9@fpt.edu.vn', 'Phyllis ', '+84375628419', '1996-08-20', 'Male', 'Student', 'defaultUserIcon.png', 'SmartStudy746926', '$2a$10$geeAFEVXCyhIlYqknEemcuBMzj974Af9VFIjLpZ7ov9uWZfjFDaFe'),
-(19, 'clement125@fpt.edu.vn', 'Clement', '+84538906863', '1995-06-14', 'Male', 'Student', 'defaultUserIcon.png', 'SmartStudy295230', '$2a$10$Ej43d/hTuKOJwIlAZys6D.h3HGc9HME5VzOqcJvUj1SMbaxSsLjje');
+(1, 'thiennnts2008038@fpt.edu.vn', 'Thien Nguyen', '+84989096119', '1992-01-28', 'Male', 'Admin', 'images/Website/user1.png', 'SmartStudy001', '$2a$10$741hsE4nveWq7d1I3e.1FeZJGwvR2xCyYRPcdPztzQ/N5UOKT0w/2'),
+(2, 'j.thien1551@gmail.com', 'Thien Nguyen', '+84989099632', '2022-01-11', 'Male', 'Admin', 'images/Website/user1.png', 'SmartStudy002', '$2a$10$mo7FXIx/VOrF9UDxwAaw8eXRBsCg0iZMI8DycIcwwWz3VwZTAWjD2'),
+(3, 'vuongpham@gmail.com', 'Viet Vuong', '+84373627828', '2022-01-01', 'Male', 'Admin', 'images/Website/user1.png', 'SmartStudy003', '$2a$10$GeRGpaVGOzd6NEPFbcAQ0.6UjLrbm4xvmfNtlWFMgrblyElkn5pCq'),
+(4, 'vlogcuocsongvacongnghe@gmail.com', 'Lê Nhân', '+84375515819', '2022-01-16', 'Male', 'Admin', 'images/Website/user1.png', 'SmartStudy004', '$2a$10$MRtC0vg5a.yxKOhaFC342uJHVSPyUPYlGRXrOM1oKS9/xl6eCzOa2'),
+(5, 'tamlhts2008005@fpt.edu.vn', 'Huu Tam', '+84912345678', '2002-06-01', 'Male', 'Admin', 'images/Website/user1.png', 'SmartStudy005', '$2a$10$DrEv22d94dQtRb/I47m/kei/AKppycMgcBnkcWI0de0xHDqriRqjS'),
+(6, 'admin@smartstudy.com', 'Admin', '+84989096911', '2022-01-01', 'Male', 'Admin', 'images/Website/user1.png', 'SmartStudy006', '$2a$10$sgjgfFpuVNN7Dyp.oSQ8ruML8ZGB.XQqqEExuBXNDzerqBpvsKxwK'),
+(9, 'easter2015@fpt.edu.vn', 'Easter', '+84326024953', '0183-06-08', 'Male', 'Student', 'images/Website/icon3.png', 'SmartStudy233978', '$2a$10$6kTtjjndV.Yi61XGGWaFyOzeUYZw1dAd4af9.BdQVV7EsUTuHTFFG'),
+(10, 'sienna1990@fpt.edu.vn', 'Sienna', '+84353362394', '1990-08-02', 'Female', 'Teacher', 'images/Website/icon0.png', 'SmartStudy426937', '$2a$10$pf8rHy1kvJfeV25GvkHgL.EG7NPjqHF0izndQVYvCvV/AHaZ9445q'),
+(11, 'jonas2002@fpt.edu.vn', 'Jonas', '+84987654321', '2002-02-16', 'Female', 'Student', 'images/Website/user1.png', 'SmartStudy220461', '$2a$10$2zeVRcd2OwcWwmVWx1kDQe3/VuL3j/HmsdSnZIr5vE88p/7TBxJIm'),
+(12, 'cordie2000@fpt.edu.vn', 'Cordie', '+84123456789', '2000-10-06', 'Female', 'Teacher', 'images/Website/user1.png', 'SmartStudy832732', '$2a$10$LuA5ldvPcpaxrdgnheloUOa1yFD0x99V4UHEQiw7cH6sXd1EgO6b6'),
+(13, 'lenhannhan123@gmail.com', 'Le Nhan', '+84645391817', '2000-01-08', 'Male', 'Student', 'images/Website/user1.png', 'SmartStudy198014', '$2a$10$/V7ZePI.Avsf8S7rZVJPBuBSm74PxLnFZx2lD8UTiv51Q/IkZDNB2'),
+(14, '', '', NULL, '2000-04-10', NULL, 'Teacher', 'images/Website/user1.png', 'SmartStudy522837', '$2a$10$/V7ZePI.Avsf8S7rZVJPBuBSm74PxLnFZx2lD8UTiv51Q/IkZDNB2'),
+(15, 'thanhnhan123@gmail.com', 'Nhân Lê', '+84428792380', '1995-01-08', 'Male', 'Student', 'images/Website/user1.png', 'SmartStudy659948', '$2a$10$SptiNDiMv66kOSLgtF1FBebYIb6gw81/dKgAX89EKFp3zc5nrevGW'),
+(17, 'reba1998@fpt.edu.vn', 'Willie', '+84962804039', '1998-11-20', 'Male', 'Student', 'images/Website/user1.png', 'SmartStudy238519', '$2a$10$6hLgo6SMkGSIzL/9A.OECuQ/0nHwWLgw7skA5uPTYMZrYuCAmfJAS'),
+(18, 'jarrod9@fpt.edu.vn', 'Phyllis ', '+84375628419', '1996-08-20', 'Male', 'Student', 'images/Website/user1.png', 'SmartStudy746926', '$2a$10$geeAFEVXCyhIlYqknEemcuBMzj974Af9VFIjLpZ7ov9uWZfjFDaFe'),
+(19, 'clement125@fpt.edu.vn', 'Clement', '+84538906863', '1995-06-14', 'Male', 'Student', 'images/Website/user1.png', 'SmartStudy295230', '$2a$10$Ej43d/hTuKOJwIlAZys6D.h3HGc9HME5VzOqcJvUj1SMbaxSsLjje'),
+(21, 'kanewalke8@fpt.edu.vn', 'Sarah', '+84437794136', '1982-11-04', 'Male', 'Teacher', 'images/Website/user1.png', 'SmartStudy941752', '$2a$10$15A3M70JopHdOOO7qOf7/.GVNyHEq7xObiP0OfQJf8AL18j0bQtvm'),
+(25, 'parenteaster@gmail.com', 'parent Easter', NULL, '0172-06-08', NULL, 'Parent', 'images/Website/user1.png', '9', '$2a$10$cLkTMNqhvv0OPO0ct2qiPu5RhsYfyjP96HiUZGYR6Wgz2fqqa8lZe');
 
 -- --------------------------------------------------------
 
@@ -73,9 +76,7 @@ CREATE TABLE `account_token` (
 INSERT INTO `account_token` (`token`, `id`) VALUES
 ('213', NULL),
 ('111', 1),
-('123', 1),
-('321', 1),
-('333', 1);
+('eF0SKzwQR3qxRwVTQcVxVd:APA91bHlYWjVOcvl9hoVfDE4GIARA4AT-_cC-Wbj7Oj9g8lwelV93vBSkFvmobdPjbyp_jtygaxHFM5PXRkkE_BEIodHVkDKygyTFHD3PN3gtxb2X2uRwZwBPO3wvGmVGg1Cski-D4YB', 10);
 
 -- --------------------------------------------------------
 
@@ -168,10 +169,10 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`id`, `name`, `description`, `duration`, `image`, `teacher`) VALUES
 (1, 'Programming with Python', 'Learning python', 2, 'images/Website/icon21.png', 10),
-(2, 'Tester ', 'Writing test for programming', 2, 'images/Website/icon20.png', 13),
+(2, 'Tester ', 'Writing test for programming', 2, 'images/Website/icon20.png', 21),
 (3, 'Mobile Android', 'Developing mobile apps for Android', 2, 'images/Website/icon18.png', 12),
-(4, 'Relational Database', 'Database programming', 1, 'images/Website/icon24.png', 13),
-(5, 'Front End programming', 'Website development', 3, 'images/Website/icon37.png', 13),
+(4, 'Relational Database', 'Database programming', 1, 'images/Website/icon24.png', 21),
+(5, 'Front End programming', 'Website development', 3, 'images/Website/icon37.png', 21),
 (6, 'Unity game development', 'Create game in c#', 1, 'images/Website/icon34.png', 10),
 (7, 'Data Structures & Design Pattern', 'General programming and software architecture', 3, 'images/Website/icon30.png', 12);
 
@@ -222,7 +223,9 @@ CREATE TABLE `exam` (
 INSERT INTO `exam` (`id`, `start_date`, `id_course`, `id_classroom`, `image`, `Name`) VALUES
 (5, '2022-08-02', 1, 7, 'images/Website/icon0.png', 'Test Python'),
 (7, '2022-08-03', 6, 7, 'images/Website/icon11.png', 'Unit Test Writing'),
-(9, '2022-08-15', 6, 8, 'images/Website/icon13.png', 'Unit Test 2 Writing');
+(9, '2022-08-15', 6, 8, 'images/Website/icon13.png', 'Unit Test 2 Writing'),
+(10, '0182-06-08', 6, 7, 'images/Website/icon19.png', 'Exam 1'),
+(11, '2022-06-08', 1, 7, 'images/Website/icon8.png', 'Test Python 1');
 
 -- --------------------------------------------------------
 
@@ -292,7 +295,7 @@ CREATE TABLE `mark` (
   `id_course` int(11) NOT NULL,
   `id_exam` int(11) NOT NULL,
   `mark` int(11) NOT NULL,
-  `remark` varchar(100) NOT NULL
+  `remark` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -300,8 +303,35 @@ CREATE TABLE `mark` (
 --
 
 INSERT INTO `mark` (`id`, `id_user`, `id_course`, `id_exam`, `mark`, `remark`) VALUES
-(2, 5, 1, 5, 10, ''),
-(6, 5, 2, 7, 20, '');
+(2, 5, 1, 5, 10, 'Very Good '),
+(6, 5, 2, 7, 8, ''),
+(7, 9, 1, 5, 9, 'Very Good'),
+(56, 17, 6, 10, 7, ' Good'),
+(57, 18, 6, 10, 10, ' Very Good'),
+(58, 15, 6, 10, 10, ' Very Good'),
+(59, 11, 6, 10, 10, ' Very Good'),
+(60, 13, 6, 10, 10, ' Very Good'),
+(61, 19, 6, 10, 9, ' Good'),
+(62, 5, 6, 10, 8, ' Good'),
+(63, 9, 6, 10, 8, ' Good'),
+(64, 5, 6, 9, 10, ' Good'),
+(65, 9, 6, 9, 8, ' Good'),
+(66, 17, 6, 7, 5, ' Good'),
+(67, 18, 6, 7, 6, ' Good'),
+(68, 15, 6, 7, 8, ' Good'),
+(69, 11, 6, 7, 10, ' Good'),
+(70, 13, 6, 7, 7, ' Good'),
+(71, 19, 6, 7, 6, ' Not Good'),
+(72, 5, 6, 7, 4, ' Bad'),
+(73, 9, 6, 7, 4, ' Bad'),
+(74, 17, 1, 11, 8, ' Good'),
+(75, 18, 1, 11, 9, ' Good Job'),
+(76, 15, 1, 11, 10, ' Very Good'),
+(77, 11, 1, 11, 5, ' Bad'),
+(78, 13, 1, 11, 7, ' Good'),
+(79, 19, 1, 11, 4, ' Bad'),
+(80, 5, 1, 11, 3, ' Very Bad'),
+(81, 9, 1, 11, 6, ' Normal');
 
 -- --------------------------------------------------------
 
@@ -348,7 +378,8 @@ INSERT INTO `notification_user` (`id`, `id_notification`, `id_user`, `create_dat
 (1, 1, 1, '2022-08-13'),
 (2, 2, 1, '2022-08-13'),
 (3, 3, 1, '2022-08-13'),
-(4, 1, 5, '2022-08-09');
+(4, 1, 5, '2022-08-09'),
+(5, 1, 9, '2022-08-15');
 
 -- --------------------------------------------------------
 
@@ -408,8 +439,7 @@ INSERT INTO `semester_course` (`id`, `id_semester`, `id_course`) VALUES
 (14, 12, 1),
 (15, 12, 2),
 (16, 13, 4),
-(17, 13, 5),
-(18, 12, 3);
+(17, 13, 6);
 
 -- --------------------------------------------------------
 
@@ -431,8 +461,7 @@ CREATE TABLE `student_parent` (
 -- Indexes for table `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `code` (`code`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `account_token`
@@ -554,7 +583,7 @@ ALTER TABLE `student_parent`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `classroom`
@@ -590,7 +619,7 @@ ALTER TABLE `document`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `libraryimage`
@@ -602,7 +631,7 @@ ALTER TABLE `libraryimage`
 -- AUTO_INCREMENT for table `mark`
 --
 ALTER TABLE `mark`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `notification`
@@ -614,7 +643,7 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT for table `notification_user`
 --
 ALTER TABLE `notification_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `semester`

@@ -12,7 +12,7 @@
         <aside class=" main-sidebar elevation-4 " th:fragment="sidebar">
             <!-- Brand Logo -->
             <a th:href="@{/home/index}" class="brand-link ">
-                <img src="/images/Website/Logo1.png" alt="Product Demo" style="max-width:230px ">
+                <img th:src="@{/images/Website/Logo1.png}" alt="Product Demo" style="max-width:230px ">
 
             </a>
 
@@ -57,20 +57,6 @@
 
                         </li>
 
-<!--                        <li class="nav-item sd ">-->
-<!--                            <a href="/semester/index" class="nav-link ">-->
-<!--                                <div class="nav-item-color ">-->
-<!--                                    <i class="fas fa-calendar-check"></i>-->
-
-<!--                                    <p style="margin-left: 8% ">-->
-<!--                                        Semester-->
-
-<!--                                    </p>-->
-<!--                                </div>-->
-
-<!--                            </a>-->
-
-<!--                        </li>-->
 
                         <li class="nav-item sd ">
                             <a th:href="@{/classroom/manager/list}" class="nav-link ">
@@ -95,23 +81,6 @@
 
                                     <p style="margin-left: 8% ">
                                         Course
-
-                                    </p>
-                                </div>
-
-                            </a>
-
-                        </li>
-
-
-                        <li class="nav-item sd ">
-                            <a th:href="@{/notification}" class="nav-link ">
-                                <div class="nav-item-color ">
-                                    <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
-                                    <i class="fas fa-comments "></i>
-
-                                    <p style="margin-left: 8% ">
-                                        Notification
 
                                     </p>
                                 </div>

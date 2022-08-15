@@ -10,8 +10,9 @@
     </parent>
     <groupId>fpt.aptech</groupId>
     <artifactId>KSS</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>KSS</name>
+    <!--<packaging>war</packaging>-->
     <description>KhareerSmartStudy</description>
     <properties>
         <java.version>1.8</java.version>
