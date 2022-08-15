@@ -1,5 +1,6 @@
 package fpt.aptech.hss.Screen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,6 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import fpt.aptech.hss.API.DataAPI;
 import fpt.aptech.hss.Model.ModelString;
@@ -122,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 startActivity(new Intent(LoginActivity.this, MainParentActivity.class));
                             }
-
+                            sendRegistrationToServer(user);
 
                         } else {
                             Toast.makeText(LoginActivity.this, response.body().getData1(), Toast.LENGTH_SHORT).show();
@@ -137,6 +143,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    private void sendRegistrationToServer(String smail){
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                DataAPI.api.TokenLogin(task.getResult().toString(),smail).enqueue(new Callback<ModelString>() {
+                    @Override
+                    public void onResponse(Call<ModelString> call, Response<ModelString> response) {
+                        //Toast.makeText(LoginActivity.this, "Register token Complete", Toast.LENGTH_SHORT).show();
+                        System.out.println("oke");
+                    }
 
+                    @Override
+                    public void onFailure(Call<ModelString> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this, "Register token Faill", Toast.LENGTH_SHORT).show();
+                        System.out.println(t);
+                    }
+                });
+
+            }
+        });
+    }
 
 }

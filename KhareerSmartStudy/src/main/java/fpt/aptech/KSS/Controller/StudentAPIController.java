@@ -5,7 +5,10 @@
  */
 package fpt.aptech.KSS.Controller;
 
+import com.google.firebase.messaging.BatchResponse;
+import com.google.firebase.messaging.FirebaseMessagingException;
 import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.AccountToken;
 import fpt.aptech.KSS.Entities.Classroom;
 import fpt.aptech.KSS.Entities.ClassroomSemester;
 import fpt.aptech.KSS.Entities.ClassroomUser;
@@ -14,16 +17,21 @@ import fpt.aptech.KSS.Entities.Document;
 import fpt.aptech.KSS.Entities.Exam;
 import fpt.aptech.KSS.Entities.Mark;
 import fpt.aptech.KSS.Entities.ModelString;
+import fpt.aptech.KSS.Entities.Notification;
+import fpt.aptech.KSS.Entities.NotificationUser;
 import fpt.aptech.KSS.Entities.Semester;
 import fpt.aptech.KSS.Entities.SemesterCourse;
+import fpt.aptech.KSS.ImpServices.FirebaseMessagingService;
 import fpt.aptech.KSS.ImpServices.MarkService;
 import fpt.aptech.KSS.Services.ClassroomUserServiceImp;
 import fpt.aptech.KSS.Services.IAccountRepository;
+import fpt.aptech.KSS.Services.IAccountToken;
 import fpt.aptech.KSS.Services.IClassroomRepository;
 import fpt.aptech.KSS.Services.IClassroomSemesterRepository;
 import fpt.aptech.KSS.Services.ICourseRepository;
 import fpt.aptech.KSS.Services.IDocumentRepository;
 import fpt.aptech.KSS.Services.IExam;
+import fpt.aptech.KSS.Services.INotification;
 import fpt.aptech.KSS.Services.ISemesterCourseRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +69,13 @@ public class StudentAPIController {
     IDocumentRepository documentRepository;
     @Autowired
     ICourseRepository courseRepository;
+    @Autowired
+    INotification iNotification;
+    @Autowired
+    IAccountToken iAccountToken;
+    @Autowired 
+    FirebaseMessagingService messagingService;
+
     @RequestMapping(value = {"api/student/get/test"}, method = RequestMethod.GET)
     public void StidentGetExam(Model model, HttpServletResponse response, HttpServletRequest request) {
 
@@ -93,7 +108,7 @@ public class StudentAPIController {
 
     }
 
-        @RequestMapping(value = {"api/student/get/class"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"api/student/get/class"}, method = RequestMethod.GET)
     public void StudentGetClass(Model model, HttpServletResponse response, HttpServletRequest request) {
 
         ModelString modelString = new ModelString();
@@ -181,15 +196,15 @@ public class StudentAPIController {
         ModelString modelString = new ModelString();
         List<ModelString> modelStringout = new ArrayList<>();
         modelString.setData2(request.getParameter("name"));
-                    modelString.setData3(request.getParameter("sname"));
+        modelString.setData3(request.getParameter("sname"));
         //Classroom class =
         Classroom classed = classroomRepository.findOneByName(modelString.getData2());
         //List<Mark> list = markService.findByAccount(account);
         List<ClassroomSemester> semeterlist = classroomSemesterRepository.findByClassroom(classed);
-        
-        for (int i = 0; i < semeterlist.size(); i++) {          
+
+        for (int i = 0; i < semeterlist.size(); i++) {
             ClassroomSemester cs = semeterlist.get(i);
-            if ((cs.getIdSemester().getName()).equals(modelString.getData3())){
+            if ((cs.getIdSemester().getName()).equals(modelString.getData3())) {
                 Semester sm = cs.getIdSemester();
                 List<SemesterCourse> smlist = iSemesterCourseRepository.findBySemester(sm);
                 for (int j = 0; j < smlist.size(); j++) {
@@ -201,7 +216,7 @@ public class StudentAPIController {
                     out.setData5(get.getIdCourse().getImage());
                     modelStringout.add(out);
                 }
-            }    
+            }
         }
         if (modelStringout != null) {
             JsonServices.dd(JsonServices.ParseToJson(modelStringout), response);
@@ -209,24 +224,24 @@ public class StudentAPIController {
             JsonServices.dd("faill", response);
         }
 
-
     }
+
     @RequestMapping(value = {"api/student/mark/exam"}, method = RequestMethod.GET)
     public void MarkByExam(Model model, HttpServletResponse response, HttpServletRequest request) {
         ModelString modelString = new ModelString();
 //        ModelString modelStringout = new ModelString();
         modelString.setData2(request.getParameter("exam"));
-                    modelString.setData3(request.getParameter("email"));
+        modelString.setData3(request.getParameter("email"));
         //Classroom class =
         Exam exam = iExam.findById(Integer.valueOf(modelString.getData2()));
         Account account = accountRepository.findByMail(modelString.getData3());
         //List<Mark> list = markService.findByAccount(account);
         Mark mark = markService.findByAccountAsExam(account, exam);
-         ModelString out = new ModelString();
-                    out.setData1(mark.getIdExam().getIdCourse().getName());
-                    out.setData2(mark.getIdExam().getStartDate().toString());
-                    out.setData3(String.valueOf(mark.getMark()));
-                    out.setData4(mark.getRemark());
+        ModelString out = new ModelString();
+        out.setData1(mark.getIdExam().getIdCourse().getName());
+        out.setData2(mark.getIdExam().getStartDate().toString());
+        out.setData3(String.valueOf(mark.getMark()));
+        out.setData4(mark.getRemark());
 
         if (out != null) {
             JsonServices.dd(JsonServices.ParseToJson(out), response);
@@ -234,8 +249,8 @@ public class StudentAPIController {
             JsonServices.dd("faill", response);
         }
 
-
     }
+
     @RequestMapping(value = {"api/document/get"}, method = RequestMethod.GET)
     public void DoccumentById(Model model, HttpServletResponse response, HttpServletRequest request) {
         ModelString modelString = new ModelString();
@@ -247,19 +262,19 @@ public class StudentAPIController {
         Document document = documentRepository.findByCouser(course);
         // Account account = accountRepository.findByMail(modelString.getData3());
         //List<Mark> list = markService.findByAccount(account);
-         ModelString out = new ModelString();
-                    out.setData1(document.getIdCourse().getTeacher().getAvatar());
-                    out.setData2(document.getIdCourse().getTeacher().getName());
-                    out.setData3(document.getLink());
-                    out.setData4(String.valueOf(document.getId()));
+        ModelString out = new ModelString();
+        out.setData1(document.getIdCourse().getTeacher().getAvatar());
+        out.setData2(document.getIdCourse().getTeacher().getName());
+        out.setData3(document.getLink());
+        out.setData4(String.valueOf(document.getId()));
         if (out != null) {
             JsonServices.dd(JsonServices.ParseToJson(out), response);
         } else {
             JsonServices.dd("faill", response);
         }
 
-
     }
+
     @RequestMapping(value = {"api/student/get/test/class"}, method = RequestMethod.GET)
     public void StudentExamClass(Model model, HttpServletResponse response, HttpServletRequest request) {
 
@@ -273,16 +288,16 @@ public class StudentAPIController {
             List<Exam> examlist = iExam.findListByClass(listClass.get(i).getIdClassroom());
             for (int i2 = 0; i2 < examlist.size(); i2++) {
                 ModelString out = new ModelString();
-                if(examlist.get(i2).getIdClassroom().getName().equals(modelString.getData3())){
-                out.setData1(examlist.get(i2).getIdCourse().getName());
-                out.setData2(examlist.get(i2).getStartDate().toString());
-                out.setData3(examlist.get(i2).getIdClassroom().getName());
-                out.setData4(examlist.get(i2).getIdCourse().getImage());
-                out.setData5(examlist.get(i2).getId().toString());
-                out.setData6(examlist.get(i2).getName());
-                modelStringout.add(out);
+                if (examlist.get(i2).getIdClassroom().getName().equals(modelString.getData3())) {
+                    out.setData1(examlist.get(i2).getIdCourse().getName());
+                    out.setData2(examlist.get(i2).getStartDate().toString());
+                    out.setData3(examlist.get(i2).getIdClassroom().getName());
+                    out.setData4(examlist.get(i2).getIdCourse().getImage());
+                    out.setData5(examlist.get(i2).getId().toString());
+                    out.setData6(examlist.get(i2).getName());
+                    modelStringout.add(out);
                 }
-                
+
             }
         }
         //JsonServices.dd(JsonServices.ParseToJson(modelStringout),response);
@@ -296,6 +311,7 @@ public class StudentAPIController {
         }
 
     }
+
     @RequestMapping(value = {"api/student/get/account"}, method = RequestMethod.GET)
     public void StudentGetAccount(Model model, HttpServletResponse response, HttpServletRequest request) {
 
@@ -303,13 +319,13 @@ public class StudentAPIController {
         List<ModelString> modelStringout = new ArrayList<>();
         modelString.setData2(request.getParameter("email"));
         Account acc = accountRepository.findByMail(modelString.getData2());
-            ModelString out = new ModelString();
-            out.setData1(acc.getAvatar());
-            out.setData2(acc.getName());
-            out.setData3(acc.getDob().toString());
-            out.setData4(acc.getMail());
-            out.setData5(String.valueOf(acc.getId()));
-            modelStringout.add(out);
+        ModelString out = new ModelString();
+        out.setData1(acc.getAvatar());
+        out.setData2(acc.getName());
+        out.setData3(acc.getDob().toString());
+        out.setData4(acc.getMail());
+        out.setData5(String.valueOf(acc.getId()));
+        modelStringout.add(out);
         if (modelStringout != null) {
             JsonServices.dd(JsonServices.ParseToJson(out), response);
         } else {
@@ -317,6 +333,7 @@ public class StudentAPIController {
         }
 
     }
+
     @RequestMapping(value = {"api/document/get/mail"}, method = RequestMethod.GET)
     public void DoccumentAll(Model model, HttpServletResponse response, HttpServletRequest request) {
         ModelString modelString = new ModelString();
@@ -332,12 +349,12 @@ public class StudentAPIController {
             List<ClassroomSemester> classroomSemesters = classroomSemesterRepository.findByClassroom(c);
             for (int j = 0; j < classroomSemesters.size(); j++) {
                 ClassroomSemester get1 = classroomSemesters.get(j);
-                Semester sm= get1.getIdSemester();
+                Semester sm = get1.getIdSemester();
                 List<SemesterCourse> cl = iSemesterCourseRepository.findBySemester(sm);
                 for (int k = 0; k < cl.size(); k++) {
                     SemesterCourse get2 = cl.get(k);
                     Course couser = get2.getIdCourse();
-                    Document documents =  documentRepository.findByCouser(couser);
+                    Document documents = documentRepository.findByCouser(couser);
                     ModelString out = new ModelString();
                     out.setData1(documents.getIdCourse().getTeacher().getAvatar());
                     out.setData2(documents.getIdCourse().getTeacher().getName());
@@ -346,16 +363,104 @@ public class StudentAPIController {
                     out.setData5(documents.getIdCourse().getName());
                     modelStrings.add(out);
                 }
-                
+
             }
-            
+
         }
-        
+
         if (modelStrings != null) {
             JsonServices.dd(JsonServices.ParseToJson(modelStrings), response);
         } else {
             JsonServices.dd("faill", response);
         }
+
+    }
+
+    @RequestMapping(value = {"api/notification/get/mail"}, method = RequestMethod.GET)
+    public void NotificationMail(Model model, HttpServletResponse response, HttpServletRequest request) {
+        ModelString modelString = new ModelString();
+        List<ModelString> modelStrings = new ArrayList<>();
+//        ModelString modelStringout = new ModelString();
+        modelString.setData2(request.getParameter("mail"));
+//                    modelString.setData3(request.getParameter("email"));
+        Account ac = accountRepository.findByMail(modelString.getData2());
+        List<NotificationUser> list = iNotification.findListNotifacationByAccount(ac);
+        for (int i = 0; i < list.size(); i++) {
+            NotificationUser get = list.get(i);
+            ModelString out = new ModelString();
+            out.setData1(get.getIdNotification().getName());
+            out.setData2(get.getIdNotification().getContent());
+            out.setData3(get.getCreateDate().toString());
+            out.setData4(get.getId().toString());
+            modelStrings.add(out);
+        }
+
+        if (modelStrings != null) {
+            JsonServices.dd(JsonServices.ParseToJson(modelStrings), response);
+        } else {
+            JsonServices.dd("faill", response);
+        }
+
+    }
+
+    @RequestMapping(value = {"api/notification/add"}, method = RequestMethod.GET)
+    public void TokenAdd(Model model, HttpServletResponse response, HttpServletRequest request) {
+        ModelString modelString = new ModelString();
+        List<ModelString> modelStrings = new ArrayList<>();
+//        ModelString modelStringout = new ModelString();
+        modelString.setData2(request.getParameter("token"));
+//                    modelString.setData3(request.getParameter("email"));
+        AccountToken ac = new AccountToken();
+        ac.setToken(modelString.getData2());
+        
+        if (ac != null) {
+            iAccountToken.NewToken(ac);
+            JsonServices.dd(JsonServices.ParseToJson(ac), response);
+        } else {
+            JsonServices.dd("faill", response);
+        }
+
+    }
+
+    @RequestMapping(value = {"api/notification/add/mail"}, method = RequestMethod.GET)
+    public void TokenLogin(Model model, HttpServletResponse response, HttpServletRequest request) {
+        ModelString modelString = new ModelString();
+        List<ModelString> modelStrings = new ArrayList<>();
+//        ModelString modelStringout = new ModelString();
+        modelString.setData1(request.getParameter("mail"));
+        modelString.setData2(request.getParameter("token"));
+        Account account = accountRepository.findByMail(modelString.getData1());
+        AccountToken ac = new AccountToken();
+        ac.setToken(modelString.getData2());
+        ac.setId(account);
+        if (ac != null) {
+            iAccountToken.NewToken(ac);
+            JsonServices.dd(JsonServices.ParseToJson(ac), response);
+        } else {
+            JsonServices.dd("faill", response);
+        }
+
+    }
+    @RequestMapping(value = {"api/send/notification"}, method = RequestMethod.GET)
+    public BatchResponse Sennotification(Model model, HttpServletResponse response, HttpServletRequest request) throws FirebaseMessagingException {
+        ModelString modelString = new ModelString();
+        List<ModelString> modelStrings = new ArrayList<>();
+//        ModelString modelStringout = new ModelString();
+        //modelString.setData1(request.getParameter("mail"));
+        modelString.setData2(request.getParameter("token"));
+        Notification notification = new Notification();
+        notification.setName(" thanh cong my man");
+        notification.setContent("Met Qua di thoi");
+        List<String> list = new ArrayList<>();
+        list.add(modelString.getData2());
+       return  messagingService.sendNotification(list, notification);
+            //JsonServices.dd(JsonServices.ParseToJson(n), response);
+//        if (ac != null) {
+//            iAccountToken.NewToken(ac);
+//            JsonServices.dd(JsonServices.ParseToJson(ac), response);
+//        } else {
+//            JsonServices.dd("faill", response);
+//        }
 
 
     }

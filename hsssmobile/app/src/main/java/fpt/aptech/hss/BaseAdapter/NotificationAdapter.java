@@ -36,10 +36,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         ModelString notification = notifactionlist.get(position);
         holder.tvtitle.setText(notification.getData1());
         holder.tvcontent.setText(notification.getData2());
-        if(Integer.valueOf(notification.getData3())==0){
+        if(Integer.valueOf(notification.getData4())==0){
             holder.tvdatesend.setText("Today");
         }else{
-            holder.tvdatesend.setText(notification.getData3() + " Days before");
+            holder.tvdatesend.setText(notification.getData4() + " Days before");
         }
         boolean check = Boolean.valueOf(notifactionlist.get(position).getData7());
         boolean isExpandable = check;

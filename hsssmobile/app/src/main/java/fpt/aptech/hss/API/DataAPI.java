@@ -109,4 +109,8 @@ public interface DataAPI {
 
     @POST("getTeacer/markcreatepost")
     Call<List<ModelString>> MarkCreatePost (@Body List<ModelString> data);
+    @GET("notification/add/")
+    Call<ModelString> TokenAdd (@Query("token") String token);
+    @GET("notification/add/mail")
+    Call<ModelString> TokenLogin (@Query("token") String token,@Query("mail") String mail);
 }
