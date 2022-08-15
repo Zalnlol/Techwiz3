@@ -5,6 +5,8 @@
  */
 package fpt.aptech.KSS.Controller;
 
+import com.google.firebase.messaging.BatchResponse;
+import com.google.firebase.messaging.FirebaseMessagingException;
 import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.AccountToken;
 import fpt.aptech.KSS.Entities.Classroom;
@@ -439,25 +441,27 @@ public class StudentAPIController {
         }
 
     }
-//    @RequestMapping(value = {"api/send/notification"}, method = RequestMethod.GET)
-//    public void Sennotification(Model model, HttpServletResponse response, HttpServletRequest request) {
-//        ModelString modelString = new ModelString();
-//        List<ModelString> modelStrings = new ArrayList<>();
-////        ModelString modelStringout = new ModelString();
-//        //modelString.setData1(request.getParameter("mail"));
-//        modelString.setData2(request.getParameter("token"));
-//        Notification notification = new Notification();
-//        notification.
-//        Account account = accountRepository.findByMail(modelString.getData1());
-//        AccountToken ac = new AccountToken();
-//        ac.setToken(modelString.getData2());
-//        ac.setId(account);
+    @RequestMapping(value = {"api/send/notification"}, method = RequestMethod.GET)
+    public BatchResponse Sennotification(Model model, HttpServletResponse response, HttpServletRequest request) throws FirebaseMessagingException {
+        ModelString modelString = new ModelString();
+        List<ModelString> modelStrings = new ArrayList<>();
+//        ModelString modelStringout = new ModelString();
+        //modelString.setData1(request.getParameter("mail"));
+        modelString.setData2(request.getParameter("token"));
+        Notification notification = new Notification();
+        notification.setName(" thanh cong my man");
+        notification.setContent("Met Qua di thoi");
+        List<String> list = new ArrayList<>();
+        list.add(modelString.getData2());
+       return  messagingService.sendNotification(list, notification);
+            //JsonServices.dd(JsonServices.ParseToJson(n), response);
 //        if (ac != null) {
 //            iAccountToken.NewToken(ac);
 //            JsonServices.dd(JsonServices.ParseToJson(ac), response);
 //        } else {
 //            JsonServices.dd("faill", response);
 //        }
+
 
     }
 }

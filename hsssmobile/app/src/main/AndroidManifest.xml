@@ -23,16 +23,20 @@
         android:theme="@style/Theme.Hss"
         tools:targetApi="31">
         <activity
+            android:name=".ParentNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TeacherNotificataionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screen.TestDetailsParentActivity"
-
-
             android:exported="false" />
         <activity
             android:name=".Screen.StudetntAccountActivity"
             android:exported="false" />
         <activity
             android:name=".TeacherAccountActivity"
-        android:exported="false" />
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -120,7 +124,7 @@
             android:exported="false" />
         <activity
             android:name=".Screen.NotificationActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Screen.FlashActivity"
             android:exported="true">
