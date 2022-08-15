@@ -117,7 +117,7 @@ public class TestDetailsActivity extends AppCompatActivity {
                 tv2.setText(Mark.getData2());
                 tv3.setText(Mark.getData3()+"/10");
                 tv4.setText(Mark.getData4());
-//                s=Integer.valueOf(Mark.getData3());
+                s=Integer.valueOf(Mark.getData3());
 
 
 
