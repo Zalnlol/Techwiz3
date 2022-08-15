@@ -117,6 +117,7 @@ public class APIController {
                 account1.setRole(modelString.getData4());
                 account1.setName(modelString.getData5());
                 account1.setCode(account.getId().toString());
+                account1.setAvatar("images/Website/user1.png");
 //            account.setDob(new Date(modelString.getData6()));
 
                 try {

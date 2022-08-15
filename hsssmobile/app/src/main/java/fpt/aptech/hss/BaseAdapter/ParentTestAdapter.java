@@ -77,6 +77,7 @@ public class ParentTestAdapter extends RecyclerView.Adapter<ParentTestAdapter.Ch
                     String idSelect = classed.getData5();
                     Intent intent = new Intent(context, TestDetailsParentActivity.class);
                     intent.putExtra("idSelect", idSelect);
+                    intent.putExtra("data", text);
                     context.startActivity(intent);
                 }
             });

@@ -16,7 +16,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Controller.CallNav;
+import fpt.aptech.hss.Controller.CallNavParent;
 import fpt.aptech.hss.Controller.CallNavTeacher;
+import fpt.aptech.hss.Screen.AccountParentActivity;
 import fpt.aptech.hss.Screen.LoginActivity;
 import fpt.aptech.hss.Screen.StudetntAccountActivity;
 
@@ -27,11 +29,12 @@ public class TeacherAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_account);
 
+        getSupportActionBar().hide();
+
 
         BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         CallNavTeacher callNav = new CallNavTeacher();
         callNav.call(bottom_navigation, R.id.page_4, TeacherAccountActivity.this);
-
         ScrollView scrollView = findViewById(R.id.scrollView);
         callNav.setDisplay(scrollView, TeacherAccountActivity.this, 0.88);
 

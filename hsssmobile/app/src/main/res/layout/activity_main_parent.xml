@@ -129,7 +129,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleviewChildrenMark"
                     android:layout_width="match_parent"
-                    android:layout_height="134dp"
+                    android:layout_height="2000dp"
                     android:layout_gravity="center_vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
             </LinearLayout>
@@ -146,6 +146,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@xml/duongvien_goctron"
-        app:menu="@xml/bottom_navigation_menu" />
+        app:menu="@xml/bottom_navigation_menu_parent" />
 
 </LinearLayout>

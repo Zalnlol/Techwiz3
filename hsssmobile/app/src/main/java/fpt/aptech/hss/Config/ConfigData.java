@@ -8,6 +8,7 @@ public class ConfigData {
 
 
     public static String IP ="172.16.2.163";
+
     public static final String profilePreferences = "profilepref";
     public static final String Mail = "mailKey";
     public static final String ID = "idKey";

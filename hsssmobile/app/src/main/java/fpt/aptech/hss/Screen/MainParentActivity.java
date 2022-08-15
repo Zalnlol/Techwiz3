@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -23,6 +26,8 @@ import fpt.aptech.hss.BaseAdapter.MarkTableAdapter;
 import fpt.aptech.hss.BaseAdapter.NotificationAdapter;
 import fpt.aptech.hss.BaseAdapter.ParentClassAdapter;
 import fpt.aptech.hss.BaseAdapter.ParentTestAdapter;
+import fpt.aptech.hss.Controller.CallNav;
+import fpt.aptech.hss.Controller.CallNavParent;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 import retrofit2.Call;
@@ -40,6 +45,13 @@ public class MainParentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_parent);
         getSupportActionBar().hide();
+//        setDisplay();
+        BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        CallNavParent callNav = new CallNavParent();
+        callNav.call(bottom_navigation, R.id.page_1, MainParentActivity.this);
+
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        callNav.setDisplay(scrollView, MainParentActivity.this, 0.88);
         recyclerView = findViewById(R.id.recycleviewChildrenMark);
         recyclerClass = findViewById(R.id.recycleviewChildrenClass);
         recyclerTest = findViewById(R.id.recycleviewChildrenTest);

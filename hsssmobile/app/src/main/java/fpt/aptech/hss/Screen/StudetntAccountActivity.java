@@ -31,7 +31,6 @@ public class StudetntAccountActivity extends AppCompatActivity {
         BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         CallNav callNav = new CallNav();
         callNav.call(bottom_navigation, R.id.page_4, StudetntAccountActivity.this);
-
         ScrollView scrollView = findViewById(R.id.scrollView);
         callNav.setDisplay(scrollView, StudetntAccountActivity.this, 0.88);
 
