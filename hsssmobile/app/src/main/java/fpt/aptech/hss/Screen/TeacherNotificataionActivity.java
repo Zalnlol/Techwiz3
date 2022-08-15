@@ -32,9 +32,11 @@ public class TeacherNotificataionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_teacher_notificataion);
         BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         CallNavTeacher callNav = new CallNavTeacher();
+        getSupportActionBar().hide();
         callNav.call(bottom_navigation, R.id.page_3, TeacherNotificataionActivity.this);
         recyclerView = findViewById(R.id.rcvnotifiactionteacher);
         GetTokenData();

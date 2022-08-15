@@ -48,7 +48,7 @@ public class MainTeacherTestBase extends RecyclerView.Adapter<MainTeacherTestBas
         holder.date.setText(modelStringsa.getData3());
 
         Glide.with(context)
-                .load("http://" + ConfigData.IP + ":7777/" + modelStringsa.getData1())
+                .load("http://" + ConfigData.IP + ":8080/KSS/" + modelStringsa.getData1())
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
                 .override(600, 600)

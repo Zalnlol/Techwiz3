@@ -133,7 +133,7 @@ public class SubjectDetailActivity extends AppCompatActivity {
                 Duration.setText("Duratiion: " +data.getData4());
 
                 Glide.with(SubjectDetailActivity.this)
-                        .load("http://" + ConfigData.IP + ":7777/"+data.getData5())
+                        .load("http://" + ConfigData.IP + ":8080/KSS/"+data.getData5())
                         .override(600, 600)
                         .into(Avatars);
 

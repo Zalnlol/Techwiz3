@@ -1,5 +1,6 @@
 package fpt.aptech.hss.BaseAdapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import fpt.aptech.hss.Config.ConfigData;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 
@@ -19,9 +23,11 @@ public class MainTestBase extends RecyclerView.Adapter<MainTestBase.MyViewHolder
 
 
     private List<ModelString> modelString;
+    Context context;
 
-    public MainTestBase(List<ModelString> modelString) {
+    public MainTestBase(List<ModelString> modelString, Context context) {
         this.modelString = modelString;
+        this.context = context;
     }
 
     @NonNull
@@ -38,7 +44,16 @@ public class MainTestBase extends RecyclerView.Adapter<MainTestBase.MyViewHolder
         ModelString modelStringsa = modelString.get(position);
         holder.title.setText(modelStringsa.getData2());
         holder.date.setText(modelStringsa.getData3());
-        holder.image.setImageResource(Integer.parseInt(modelStringsa.getData1()));
+
+        Glide.with(context)
+                .load("http://" + ConfigData.IP + ":8080/KSS/" + modelStringsa.getData1())
+//                .transform(new RoundedCorners(radius))
+//                .transform(new CircleCrop())
+                .override(600, 600)
+//                .error(R.drawable.icon5)
+                .into(holder.image);
+
+
     }
 
     @Override

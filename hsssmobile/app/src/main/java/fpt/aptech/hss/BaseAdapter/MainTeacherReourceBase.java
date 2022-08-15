@@ -50,7 +50,7 @@ public class MainTeacherReourceBase extends RecyclerView.Adapter<MainTeacherReou
 
 
         Glide.with(context)
-                .load("http://" + ConfigData.IP + ":7777/"+modelStringsa.getData1())
+                .load("http://" + ConfigData.IP + ":8080/KSS/"+modelStringsa.getData1())
                 .override(600, 600)
                 .into(holder.image);
 
