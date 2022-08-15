@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -16,8 +17,14 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 //import fpt.aptech.hss.API.TokenAPI;
+import fpt.aptech.hss.API.DataAPI;
+import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
+import fpt.aptech.hss.Screen.FlashActivity;
 import fpt.aptech.hss.Screen.MainActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MessageFirebaseService extends FirebaseMessagingService {
     @Override
@@ -31,7 +38,7 @@ public class MessageFirebaseService extends FirebaseMessagingService {
         }
     }
     private void sendNotification(String messageTitle, String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, FlashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, /* Request code */intent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -64,24 +71,21 @@ public class MessageFirebaseService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String token) {
         //tokenServices = TokenUtilAPI.getTokenServices();
-        //sendRegistrationToServer(token);
+        sendRegistrationToServer(token);
         System.out.println(token);
 
     }
     private void sendRegistrationToServer(String token) {
-//        AccountToken tk = new AccountToken();
-//        tk.setToken(token);
-//        tk.setId(null);
-//        TokenAPI.AddToken(tk).enqueue(new Callback<AccountToken>() {
-//            @Override
-//            public void onResponse(Call<AccountToken> call, Response<AccountToken> response) {
-//                System.out.println("thanh cong");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<AccountToken> call, Throwable t) {
-//                System.out.println("Thất bại");
-//            }
-//        });
+        DataAPI.api.TokenAdd(token).enqueue(new Callback<ModelString>() {
+            @Override
+            public void onResponse(Call<ModelString> call, Response<ModelString> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ModelString> call, Throwable t) {
+
+            }
+        });
     }
 }

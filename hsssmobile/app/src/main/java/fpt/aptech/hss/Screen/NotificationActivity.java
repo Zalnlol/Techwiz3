@@ -12,12 +12,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fpt.aptech.hss.BaseAdapter.NotificationAdapter;
+import fpt.aptech.hss.Controller.CallNav;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 import retrofit2.Call;
@@ -36,15 +38,18 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_notification);
+        BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        CallNav callNav = new CallNav();
+        callNav.call(bottom_navigation, R.id.page_3, NotificationActivity.this);
         recyclerView = findViewById(R.id.rcvnotifiaction);
+        getSupportActionBar().hide();
         GetTokenData();
     }
     private void GetTokenData(){
         sharedPreferencesProfile = getSharedPreferences("login", MODE_PRIVATE);
         String email = sharedPreferencesProfile.getString("user",null);
-       NotificationAPI.api.GetNotification(email).enqueue(new Callback<List<ModelString>>() {
+        NotificationAPI.api.GetNotification(email).enqueue(new Callback<List<ModelString>>() {
            @Override
            public void onResponse(Call<List<ModelString>> call, Response<List<ModelString>> response) {
               if (response.isSuccessful()){

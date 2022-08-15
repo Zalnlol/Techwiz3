@@ -22,8 +22,8 @@ public interface NotificationAPI {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(NotificationAPI.class);
-    @GET("notification/get")
-    Call<List<ModelString>> GetNotification(@Query("email") String email);
+    @GET("notification/get/mail")
+    Call<List<ModelString>> GetNotification(@Query("mail") String email);
 //    @POST("token/add")
 //    Call<ModelString> AddToken(@Body AccountToken token);
 }
