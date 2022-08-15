@@ -94,7 +94,7 @@
           <td th:text="${item.getIdSemester()} + ' Sem'"></td>
 
           <td>
-            <a th:href="'/classroom/addstudent?id='+${item.getId()}">
+            <a th:href="@{'/classroom/addstudent?id='+${item.getId()}}">
               Add Student
             </a>
           </td>
