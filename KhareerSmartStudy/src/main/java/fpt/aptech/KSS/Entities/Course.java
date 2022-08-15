@@ -71,7 +71,6 @@ public class Course implements Serializable {
         this.name = name;
         this.description = description;
         this.duration = duration;
-        this.image = "";
     }
 
     public Integer getId() {
