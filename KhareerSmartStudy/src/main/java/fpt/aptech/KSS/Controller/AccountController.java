@@ -6,7 +6,9 @@
 package fpt.aptech.KSS.Controller;
 
 import fpt.aptech.KSS.Entities.Account;
+import fpt.aptech.KSS.Entities.Libraryimage;
 import fpt.aptech.KSS.FileUpload.FileUploadUtil;
+import fpt.aptech.KSS.ImpServices.ImageServices;
 import fpt.aptech.KSS.Routes.RouteWeb;
 import fpt.aptech.KSS.Services.AccountServiceImp;
 import fpt.aptech.KSS.Services.IAccountRepository;
@@ -49,6 +51,9 @@ public class AccountController {
 
     @Autowired
     private IAccountRepository accountRepository;
+    
+       @Autowired
+    private ImageServices imageServices;
 
     @RequestMapping(value = {RouteWeb.accountManageURL}, method = RequestMethod.GET)
     public String AccountList(Model model, @Param("keyword") String keyword, HttpServletResponse response, HttpServletRequest request) {
@@ -139,6 +144,17 @@ public class AccountController {
         String id = accountCodeGenerator();
         out.println(id);
         Account account = new Account(role, id);
+        
+            List<Libraryimage> libraryimageList = new ArrayList<>();
+        libraryimageList = imageServices.findAll();
+        double randomDouble = Math.random();
+        randomDouble = randomDouble * libraryimageList.size() + 1;
+        int randomInt = (int) randomDouble;
+        randomInt -=1;
+        
+
+        
+        account.setAvatar(libraryimageList.get(randomInt).getImage());
         accountRepository.save(account);
 
         String redirectUrl = "/account/index";

@@ -68,7 +68,7 @@ public class ScheduleDetailActivity extends AppCompatActivity {
                 tv1.setText(modelString.getData2());
                 tv2.setText(modelString.getData3());
                 Glide.with(ScheduleDetailActivity.this)
-                        .load("http://" + ConfigData.IP + ":8080/KSS/"+modelString.getData1())
+                        .load("http://" + ConfigData.IP + ":7777/"+modelString.getData1())
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
                         .override(600, 600)

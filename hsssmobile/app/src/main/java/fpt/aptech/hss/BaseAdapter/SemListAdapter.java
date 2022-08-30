@@ -47,7 +47,7 @@ public class SemListAdapter extends RecyclerView.Adapter<SemListAdapter.Semester
 
 
         Glide.with(context)
-                .load("http://" + ConfigData.IP + ":8080/KSS/"+modelStringsa.getData5())
+                .load("http://" + ConfigData.IP + ":7777/"+modelStringsa.getData5())
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
                 .override(600, 600)

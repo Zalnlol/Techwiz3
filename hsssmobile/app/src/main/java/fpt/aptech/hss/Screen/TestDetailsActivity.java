@@ -113,11 +113,14 @@ public class TestDetailsActivity extends AppCompatActivity {
                 tv2=findViewById(R.id.tvtest_startdate);
                 tv3=findViewById(R.id.tvtest_mark);
                 tv4=findViewById(R.id.tvtest_remark);
-                tv1.setText(Mark.getData1());
-                tv2.setText(Mark.getData2());
-                tv3.setText(Mark.getData3()+"/10");
-                tv4.setText(Mark.getData4());
-                s=Integer.valueOf(Mark.getData3());
+                if(Mark!=null){
+                    tv1.setText(Mark.getData1());
+                    tv2.setText(Mark.getData2());
+                    tv3.setText(Mark.getData3()+"/10");
+                    tv4.setText(Mark.getData4());
+                    s=Integer.valueOf(Mark.getData3());
+                }
+
 
 
 

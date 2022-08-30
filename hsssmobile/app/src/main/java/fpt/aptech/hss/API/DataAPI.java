@@ -18,7 +18,7 @@ import retrofit2.http.Query;
 public interface DataAPI {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     DataAPI api = new Retrofit.Builder()
-            .baseUrl("http://"+ ConfigData.IP +":8080/KSS/api/")
+            .baseUrl("http://"+ ConfigData.IP +":7777/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(DataAPI.class);

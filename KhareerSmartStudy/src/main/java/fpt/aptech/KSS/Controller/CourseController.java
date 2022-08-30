@@ -7,8 +7,12 @@ package fpt.aptech.KSS.Controller;
 
 import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.Course;
+import fpt.aptech.KSS.Entities.Libraryimage;
 import fpt.aptech.KSS.Entities.ModelString;
 import fpt.aptech.KSS.FileUpload.FileUploadUtil;
+import fpt.aptech.KSS.ImpServices.AccountService;
+import fpt.aptech.KSS.ImpServices.CourseServices;
+import fpt.aptech.KSS.ImpServices.ImageServices;
 import fpt.aptech.KSS.Routes.RouteWeb;
 import fpt.aptech.KSS.Services.IAccountRepository;
 import fpt.aptech.KSS.Services.ICourseRepository;
@@ -32,6 +36,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+
+
 /**
  *
  * @author backs
@@ -41,9 +47,15 @@ public class CourseController {
 
     @Autowired
     private ICourseRepository courseRepository;
+    
+     @Autowired
+    private AccountService accountService;
+
 
     @Autowired
     private IAccountRepository accountRepository;
+        @Autowired
+    private ImageServices imageServices;
 
 //    @RequestMapping(value = "/course/index", method = RequestMethod.GET)
 //    public String index(Model model) {
@@ -73,6 +85,9 @@ public class CourseController {
 
     @RequestMapping(value = {RouteWeb.CourseGetCreateURL}, method = RequestMethod.GET)
     public String GetCreate(Model model) {
+     
+        
+        
         return "admin/course/create";
     }
 
@@ -82,6 +97,16 @@ public class CourseController {
         String description = request.getParameter("txtDescription");
         int duration = Integer.parseInt(request.getParameter("txtDuration"));
         Course course = new Course(name, description, duration);
+        
+         List<Libraryimage> libraryimageList = new ArrayList<>();
+        libraryimageList = imageServices.findAll();
+        double randomDouble = Math.random();
+        randomDouble = randomDouble * libraryimageList.size() + 1;
+        int randomInt = (int) randomDouble;
+        randomInt -=1;
+        
+        course.setImage(libraryimageList.get(randomInt).getImage());
+        
         courseRepository.saveCourse(course);
         String redirectUrl = "/course/index";
         return "redirect:" + redirectUrl;

@@ -87,6 +87,14 @@ public class APIController {
     private IExam examRepository;
 
     @Autowired
+    NotificationServices ns;
+
+    @Autowired
+    IAccountToken accToken;
+
+    @Autowired
+    FirebaseMessagingService firebaseMessagingService;
+    @Autowired
     private IDocumentRepository documentRepository;
 
     @RequestMapping(value = {RouteAPI.APICreateAccount}, method = RequestMethod.POST)
@@ -729,7 +737,7 @@ public class APIController {
     }
 
     @RequestMapping(value = {RouteAPI.MarkCreatePost}, method = RequestMethod.POST)
-    public void MarkCreatePost(Model model, HttpServletResponse response, HttpServletRequest request, @RequestBody List<ModelString> data) {
+    public void MarkCreatePost(Model model, HttpServletResponse response, HttpServletRequest request, @RequestBody List<ModelString> data) throws Exception {
 
         for (ModelString item:data ) {
             Mark mark = new Mark();
@@ -740,7 +748,30 @@ public class APIController {
             mark.setIdExam(new Exam(Integer.parseInt(item.getData5())));
             mark.setIdCourse(new Course(Integer.parseInt(item.getData6())));
             markService.saveMark(mark);
+
+            Notification n = new Notification();
+            Date date = new Date();
+            n.setName( "The subject "+courseServices.findOne(Integer.parseInt(data.get(0).getData6())).getName()+" has been given extra points ");
+            n.setContent( "The subject "+courseServices.findOne(Integer.parseInt(data.get(0).getData6())).getName()+" has been given extra points.Please check your score " );
+            n.setCreateDate(date);
+            Notification ni = ns.AddNotification(n);
+            List<AccountToken> listToken = accToken.GetTokenById(Integer.parseInt(item.getData8()));
+            List<String> listtokenstring = new ArrayList<>();
+            for (AccountToken accountToken : listToken) {
+                listtokenstring.add(accountToken.getToken());
+            }
+            NotificationUser accountNotification = new NotificationUser();
+            accountNotification.setIdNotification(ni);
+            accountNotification.setIdUser(mark.getIdUser());
+            NotificationUser s = ns.AddAccountNotification(accountNotification);
+            if (listtokenstring.size()>0){
+                firebaseMessagingService.sendMorePeople(ni, listtokenstring);
+            }
+
+
         }
+
+
 
 
         ModelString modelString = new ModelString();

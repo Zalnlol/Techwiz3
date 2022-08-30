@@ -46,7 +46,7 @@ public class ChildrenTestAdapter extends RecyclerView.Adapter<ChildrenTestAdapte
 
 
         Glide.with(context)
-                .load("http://" + ConfigData.IP + ":8080/KSS/"+modelStringsa.getData4())
+                .load("http://" + ConfigData.IP + ":7777/"+modelStringsa.getData4())
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
                 .override(600, 600)

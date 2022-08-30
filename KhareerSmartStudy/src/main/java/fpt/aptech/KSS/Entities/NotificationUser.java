@@ -43,7 +43,6 @@ public class NotificationUser implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "create_date")
     @Temporal(TemporalType.DATE)
     private Date createDate;
