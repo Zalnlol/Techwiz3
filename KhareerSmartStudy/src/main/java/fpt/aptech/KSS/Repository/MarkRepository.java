@@ -22,7 +22,7 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
     @Query("SELECT m FROM Mark m WHERE m.idCourse = :idCourse AND m.idExam = :idExam")
     List<Mark> findByExamCourse(@PathVariable("idCourse") Course idCourse ,@PathVariable("idExam") Exam idExam );
 
-    @Query("SELECT m FROM Mark m WHERE m.idUser = :idUser")
+    @Query("SELECT m FROM Mark m WHERE m.idUser = :idUser ORDER BY m.idCourse.name ASC")
     List<Mark> findByAccount(@PathVariable("idUser") Account idUser);
 
     @Query("SELECT m FROM Mark m WHERE m.idUser = :idUser AND m.idExam =:idExam")

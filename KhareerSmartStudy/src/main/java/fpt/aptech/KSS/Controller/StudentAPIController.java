@@ -33,7 +33,12 @@ import fpt.aptech.KSS.Services.IDocumentRepository;
 import fpt.aptech.KSS.Services.IExam;
 import fpt.aptech.KSS.Services.INotification;
 import fpt.aptech.KSS.Services.ISemesterCourseRepository;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -377,7 +382,7 @@ public class StudentAPIController {
     }
 
     @RequestMapping(value = {"api/notification/get/mail"}, method = RequestMethod.GET)
-    public void NotificationMail(Model model, HttpServletResponse response, HttpServletRequest request) {
+    public void NotificationMail(Model model, HttpServletResponse response, HttpServletRequest request) throws ParseException {
         ModelString modelString = new ModelString();
         List<ModelString> modelStrings = new ArrayList<>();
 //        ModelString modelStringout = new ModelString();
@@ -385,13 +390,22 @@ public class StudentAPIController {
 //                    modelString.setData3(request.getParameter("email"));
         Account ac = accountRepository.findByMail(modelString.getData2());
         List<NotificationUser> list = iNotification.findListNotifacationByAccount(ac);
+
+        Date date = new Date() ;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate= formatter.format(date);
+
         for (int i = 0; i < list.size(); i++) {
+
             NotificationUser get = list.get(i);
             ModelString out = new ModelString();
+            String datel = list.get(i).getIdNotification().getCreateDate().toString();
+            Date dateStart = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+            Date dateEnd = new SimpleDateFormat("yyyy-MM-dd").parse(datel);
             out.setData1(get.getIdNotification().getName());
             out.setData2(get.getIdNotification().getContent());
             out.setData3(get.getCreateDate().toString());
-            out.setData4(get.getId().toString());
+            out.setData4(String.valueOf(Numday(dateEnd, dateStart)));
             modelStrings.add(out);
         }
 
@@ -401,6 +415,16 @@ public class StudentAPIController {
             JsonServices.dd("faill", response);
         }
 
+    }
+
+
+    private int Numday(Date st, Date end){
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(st);
+        c2.setTime(end);
+        int noDay = (int) ((c2.getTime().getTime() - c1.getTime().getTime()) / (24 * 3600 * 1000));
+        return noDay;
     }
 
     @RequestMapping(value = {"api/notification/add"}, method = RequestMethod.GET)
