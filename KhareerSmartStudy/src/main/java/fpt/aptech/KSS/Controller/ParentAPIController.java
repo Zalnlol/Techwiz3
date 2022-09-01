@@ -8,6 +8,7 @@ package fpt.aptech.KSS.Controller;
 import fpt.aptech.KSS.Entities.Account;
 import fpt.aptech.KSS.Entities.ClassroomUser;
 import fpt.aptech.KSS.Entities.Exam;
+import fpt.aptech.KSS.Entities.ExcelExporter;
 import fpt.aptech.KSS.Entities.Mark;
 import fpt.aptech.KSS.Entities.ModelString;
 import fpt.aptech.KSS.ImpServices.ClassroomServices;
@@ -20,6 +21,8 @@ import fpt.aptech.KSS.Services.ICourseRepository;
 import fpt.aptech.KSS.Services.IDocumentRepository;
 import fpt.aptech.KSS.Services.IExam;
 import fpt.aptech.KSS.Services.ISemesterCourseRepository;
+import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -233,6 +236,27 @@ public class ParentAPIController {
             JsonServices.dd("faill", response);
         }
 
+
+    }
+
+
+    @RequestMapping(value = {"api/parent/mark/exportExcel"}, method = RequestMethod.GET)
+    public void MarkExportExcel(Model model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Mark> listmark = markService.findAll();
+
+        JsonServices.dd(JsonServices.ParseToJson(listmark), response);
+
+        ExcelExporter excelExporter = new ExcelExporter(listmark);
+
+        excelExporter.export(response);
 
     }
     

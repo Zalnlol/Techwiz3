@@ -107,6 +107,14 @@
                     android:orientation="horizontal" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/SendMailParent"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:backgroundTint="#3b8760"
+                android:text="Send me by email" />
+
             <LinearLayout
 
                 android:layout_marginTop="20dp"
