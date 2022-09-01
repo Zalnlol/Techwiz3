@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +37,8 @@ public class MarkTableAdapter extends RecyclerView.Adapter<MarkTableAdapter.Mark
         holder.tvdate.setText(mark.getData2());
         holder.tvMark.setText(mark.getData3());
         holder.tvRemark.setText(mark.getData4());
+        holder.tvMarkName2.setText(mark.getData7());
+//        Toast.makeText(context, "mark:"+mark.getData7(), Toast.LENGTH_SHORT).show();
 
     }
     @Override
@@ -45,7 +46,7 @@ public class MarkTableAdapter extends RecyclerView.Adapter<MarkTableAdapter.Mark
         return marklist.size();
     }
     public class MarkTableHolder extends RecyclerView.ViewHolder {
-        TextView tvname,tvdate,tvMark,tvRemark;
+        TextView tvname,tvdate,tvMark,tvRemark,tvMarkName2;
         LinearLayout linearLayout;
         public MarkTableHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,7 +55,7 @@ public class MarkTableAdapter extends RecyclerView.Adapter<MarkTableAdapter.Mark
             tvMark=itemView.findViewById(R.id.tvMarkScore);
             tvRemark=itemView.findViewById(R.id.tvdMarkRemark);
             linearLayout=itemView.findViewById(R.id.linearnotification);
-
+            tvMarkName2=itemView.findViewById(R.id.tvName1);
         }
     }
 }

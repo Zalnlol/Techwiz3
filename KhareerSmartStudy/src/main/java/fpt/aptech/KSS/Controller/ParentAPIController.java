@@ -138,6 +138,7 @@ public class ParentAPIController {
             out.setData4(get.getRemark());
             out.setData5(account.getName());
             out.setData6(get.getId().toString());
+            out.setData7(get.getIdExam().getName());
             modelStringout.add(out);
         }
         if (modelStringout!=null) {
@@ -190,7 +191,7 @@ public class ParentAPIController {
             List<Exam> examlist = iExam.findListByClass(listClass.get(i).getIdClassroom());
             for (int i2 = 0; i2 < examlist.size(); i2++) {
             ModelString out = new ModelString();
-            out.setData1(examlist.get(i2).getIdCourse().getName());
+            out.setData1(examlist.get(i2).getName());
             out.setData2(examlist.get(i2).getStartDate().toString());
             out.setData3(examlist.get(i2).getIdClassroom().getName());
             out.setData4(examlist.get(i2).getIdCourse().getImage());
@@ -213,7 +214,7 @@ public class ParentAPIController {
     public void MarkByExam(Model model, HttpServletResponse response, HttpServletRequest request) {
         ModelString modelString = new ModelString();
 //        ModelString modelStringout = new ModelString();
-        modelString.setData2(request.getParameter("exam"));
+            modelString.setData2(request.getParameter("exam"));
                     modelString.setData3(request.getParameter("email"));
         //Classroom class =
         Exam exam = iExam.findById(Integer.valueOf(modelString.getData2()));
