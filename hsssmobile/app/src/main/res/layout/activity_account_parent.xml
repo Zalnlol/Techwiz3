@@ -91,6 +91,15 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical">
+                    <Button
+                        android:id="@+id/btn_Report"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="#33b410"
+                        android:text="Report"
+                        android:textColor="@color/white" />
+
 
                     <Button
                         android:id="@+id/btn_Logout"

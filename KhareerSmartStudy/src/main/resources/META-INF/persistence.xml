@@ -15,6 +15,7 @@
     <class>fpt.aptech.KSS.Entities.Mark</class>
     <class>fpt.aptech.KSS.Entities.AccountToken</class>
     <class>fpt.aptech.KSS.Entities.Libraryimage</class>
+    <class>fpt.aptech.KSS.Entities.Contact</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://14.225.192.224:3306/techwiz3db?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="khareerserver"/>

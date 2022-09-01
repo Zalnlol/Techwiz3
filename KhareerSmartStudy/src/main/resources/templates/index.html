@@ -5,126 +5,144 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<html lang="en" 
+<html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/_layout}">
 
-    <head>
-        <title>Admin Dashboard</title>
+<head>
+    <title>Admin Dashboard</title>
 
-        <style>
+    <style>
 
-            .title-card{
-                padding-top: 11%; 
-                padding-bottom: 11%; 
-                margin-left: 4%; 
-                font-weight: bold
-            }
-            .title-page{
-                text-align: center; 
-                margin-top: 2%; 
-                margin-bottom: 3%;
-                font-weight: bold
-            }
+        .title-card {
+            padding-top: 11%;
+            padding-bottom: 11%;
+            margin-left: 4%;
+            font-weight: bold
+        }
 
-
-        </style>
-
-    </head>
-
-    <body>
-
-        <div layout:fragment="content">
+        .title-page {
+            text-align: center;
+            margin-top: 2%;
+            margin-bottom: 3%;
+            font-weight: bold
+        }
 
 
-            <h2 class="title-page" >Admin Dashboard</h2>
+    </style>
 
-            <div class="row">
+</head>
 
-                <div class="col-lg-4 col-6" >
+<body>
 
-                    <div class="small-box"  style="width: 18rem; margin: 0 auto; color: white ;background-color: #1ab8db">
-                        <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
-                            <h5 class="title-card" >Account</h5>
+<div layout:fragment="content">
 
 
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-user" style="color: white"></i>
-                        </div>
-                        <a href="/account/index" class="small-box-footer">Account Management <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
+    <h2 class="title-page">Admin Dashboard</h2>
+
+    <div class="row">
+
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box" style="width: 18rem; margin: 0 auto; color: white ;background-color: #1ab8db">
+                <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
+                    <h5 class="title-card">Account</h5>
 
 
                 </div>
-                
-                                <div class="col-lg-4 col-6" >
-
-                    <div class="small-box"  style="width: 18rem;margin: 0 auto;background-color: #f73c16">
-                        <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
-                            <h5 class="title-card" style="color: white" >Classroom</h5>
-
-
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-users" style="color: white"></i>
-                        </div>
-                        <a href="/classroom/index" class="small-box-footer" style="color: white">Classroom management<i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-
-
+                <div class="icon">
+                    <i class="fas fa-user" style="color: white"></i>
                 </div>
-
-
-
-
-
-
-
-
-
+                <a href="/account/index" class="small-box-footer">Account Management <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <div class="row" style=" margin-top: 10%;">
-                <div class="col-lg-4 col-6" >
 
-                    <div class="small-box "  style="width: 18rem;margin: 0 auto;background-color: #e6b410">
-                        <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
-                            <h5 class="title-card" style="color: white" >Course</h5>
-
-
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-university" style="color: white" ></i>
-                        </div>
-                        <a th:href="@{/course/index}" class="small-box-footer">Course Management <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-
-
-                </div>
-                
-                                <div class="col-lg-4 col-6" >
-
-                    <div class="small-box"  style="width: 18rem;margin: 0 auto;background-color: #EE5B5B">
-                        <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
-                            <h5 class="title-card" style="color: white" >Semester</h5>
-
-
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-calendar-check" style="color: white"></i>
-                        </div>
-                        <a href="/semester/index" class="small-box-footer" style="color: white">Semester management<i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-
-
-                </div>
-                
-                
-                
-
-            </div>
 
         </div>
-    </body>
+
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box" style="width: 18rem;margin: 0 auto;background-color: #f73c16">
+                <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
+                    <h5 class="title-card" style="color: white">Classroom</h5>
+
+
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users" style="color: white"></i>
+                </div>
+                <a href="/classroom/index" class="small-box-footer" style="color: white">Classroom management<i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box" style="width: 18rem;margin: 0 auto;background-color: #1ac512">
+                <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
+                    <h5 class="title-card" style="color: white">Report</h5>
+
+
+                </div>
+                <div class="icon">
+                    <i class="fas fa-flag" style="color: white"></i>
+                </div>
+                <a th:href="@{/contact/index}" class="small-box-footer" style="color: white">Report management<i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+    <div class="row" style=" margin-top: 10%;">
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box " style="width: 18rem;margin: 0 auto;background-color: #e6b410">
+                <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
+                    <h5 class="title-card" style="color: white">Course</h5>
+
+
+                </div>
+                <div class="icon">
+                    <i class="fas fa-university" style="color: white"></i>
+                </div>
+                <a th:href="@{/course/index}" class="small-box-footer">Course Management <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box" style="width: 18rem;margin: 0 auto;background-color: #EE5B5B">
+                <div class="inner" style="padding-top: 2%; padding-bottom: 3%">
+                    <h5 class="title-card" style="color: white">Semester</h5>
+
+
+                </div>
+                <div class="icon">
+                    <i class="fas fa-calendar-check" style="color: white"></i>
+                </div>
+                <a href="/semester/index" class="small-box-footer" style="color: white">Semester management<i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+</body>
 
 </html>

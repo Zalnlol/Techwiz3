@@ -52,7 +52,7 @@ public class Notification implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 500)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
@@ -62,11 +62,9 @@ public class Notification implements Serializable {
     @Column(name = "content")
     private String content;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "isAll")
     private boolean isAll;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "create_date")
     @Temporal(TemporalType.DATE)
     private Date createDate;

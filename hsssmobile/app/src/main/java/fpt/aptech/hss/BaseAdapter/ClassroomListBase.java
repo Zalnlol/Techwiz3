@@ -64,7 +64,7 @@ public class ClassroomListBase extends BaseAdapter {
         Title.setText(modelString.getData2());
 
         Glide.with(context)
-                .load("http://" + ConfigData.IP + ":8080/KSS/" + modelString.getData1())
+                .load("http://" + ConfigData.IP + ":7777/" + modelString.getData1())
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
                 .override(600, 600)

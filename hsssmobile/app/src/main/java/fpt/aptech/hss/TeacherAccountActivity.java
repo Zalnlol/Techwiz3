@@ -54,7 +54,7 @@ public class TeacherAccountActivity extends AppCompatActivity {
         tv_ac_mail.setText("Mail: "+mailKey);
 
         Glide.with(TeacherAccountActivity.this)
-                .load("http://" + ConfigData.IP + ":8080/KSS/"+avatarKey)
+                .load("http://" + ConfigData.IP + ":7777/"+avatarKey)
 //                .transform(new RoundedCorners(radius))
 //                .transform(new CircleCrop())
                 .override(600, 600)

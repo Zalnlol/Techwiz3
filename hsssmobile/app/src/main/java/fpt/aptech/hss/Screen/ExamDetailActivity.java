@@ -133,7 +133,7 @@ public class ExamDetailActivity extends AppCompatActivity {
 
                 Name.setText(modelString.getData2());
                 Glide.with(ExamDetailActivity.this)
-                        .load("http://" + ConfigData.IP + ":8080/KSS/"+modelString.getData3())
+                        .load("http://" + ConfigData.IP + ":7777/"+modelString.getData3())
                         .override(600, 600)
 
                         .into(avatar);

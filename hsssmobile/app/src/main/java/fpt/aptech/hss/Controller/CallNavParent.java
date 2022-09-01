@@ -14,6 +14,7 @@ import fpt.aptech.hss.R;
 import fpt.aptech.hss.Screen.AccountParentActivity;
 import fpt.aptech.hss.Screen.MainParentActivity;
 import fpt.aptech.hss.Screen.MainTecherScreenActivity;
+import fpt.aptech.hss.Screen.ParentNotificationActivity;
 import fpt.aptech.hss.Screen.SubjectListTecherActivity;
 import fpt.aptech.hss.TeacherAccountActivity;
 
@@ -41,8 +42,8 @@ public class CallNavParent {
                     context.startActivity(intent);
                     return true;
                 case R.id.page_3:
-//                    Intent viewProfile = new Intent(context, MainAccountActivity.class);
-//                    context.startActivity(viewProfile);
+                    Intent intent1 = new Intent(context, ParentNotificationActivity.class);
+                    context.startActivity(intent1);
                     return true;
                 case R.id.page_4:
                     Intent viewProfile = new Intent(context, AccountParentActivity.class);

@@ -13,7 +13,7 @@ import retrofit2.http.Body;
 public interface TokenAPI {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     TokenAPI api = new Retrofit.Builder()
-            .baseUrl("http://"+ ConfigData.IP +":7777/api/")
+            .baseUrl("http://"+ ConfigData.IP +"::7777/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(TokenAPI.class);

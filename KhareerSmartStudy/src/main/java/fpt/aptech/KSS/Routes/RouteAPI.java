@@ -53,6 +53,9 @@ public class RouteAPI {
     public final static String GetMyTestsList = "api/getMyTestsList";
     
     public final static String GetDocumentsLink = "api/getDocumentsLink";
-    
-    
+
+    public final static String GetContact = "api/getContact";
+    public final static String GetContactDetail = "api/getContact/detail";
+
+    public final static String CreateContact = "api/getContact/create";
 }

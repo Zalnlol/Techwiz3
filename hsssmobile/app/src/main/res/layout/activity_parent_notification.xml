@@ -63,6 +63,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@xml/duongvien_goctron"
-        app:menu="@xml/bottom_navigation_menu" />
+        app:menu="@xml/bottom_navigation_menu_parent" />
 
 </LinearLayout>

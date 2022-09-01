@@ -18,4 +18,6 @@ public interface INotification {
     List<Notification> findAll();
     List<NotificationUser> findListNotifacationByAccount(Account acccount);
     List<NotificationUser> findListNotifacationByNotification(Notification notification);
+
+    Notification AddNotification(Notification notification);
 }

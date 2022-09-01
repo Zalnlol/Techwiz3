@@ -18,7 +18,7 @@ import retrofit2.http.Query;
 public interface DataAPI {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     DataAPI api = new Retrofit.Builder()
-            .baseUrl("http://"+ ConfigData.IP +":8080/KSS/api/")
+            .baseUrl("http://"+ ConfigData.IP +":7777/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(DataAPI.class);
@@ -113,4 +113,17 @@ public interface DataAPI {
     Call<ModelString> TokenAdd (@Query("token") String token);
     @GET("notification/add/mail")
     Call<ModelString> TokenLogin (@Query("token") String token,@Query("mail") String mail);
+
+    @GET("getContact")
+    Call<List<ModelString>> GetContact (@Query("idUser") String idUser);
+
+    @GET("getContact/detail")
+    Call<ModelString> GetContactDetail (@Query("id") String id);
+
+    @POST("getContact/create")
+    Call<ModelString> CreateContact (@Query("name") String name,
+                                     @Query("contact") String contact,
+                                     @Query("style") String style,
+                                     @Query("idaccount") String idaccount
+    );
 }

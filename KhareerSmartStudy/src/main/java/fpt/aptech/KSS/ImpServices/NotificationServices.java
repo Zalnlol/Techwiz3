@@ -11,6 +11,8 @@ import fpt.aptech.KSS.Entities.NotificationUser;
 import fpt.aptech.KSS.Repository.NotificationRepository;
 import fpt.aptech.KSS.Repository.NotificationUserRepository;
 import fpt.aptech.KSS.Services.INotification;
+
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,13 @@ public class NotificationServices implements INotification{
     public List<NotificationUser> findListNotifacationByNotification(Notification notification) {
         return notificationUserRepository.findByNotificationID(notification);
     }
-    
+    @Override
+    public Notification AddNotification(Notification notification) {
+        return notificationRepository.save(notification);
+    }
+
+    public NotificationUser AddAccountNotification(NotificationUser accountNotification) {
+        accountNotification.setCreateDate(new Date());
+        return notificationUserRepository.save(accountNotification);
+    }
 }
