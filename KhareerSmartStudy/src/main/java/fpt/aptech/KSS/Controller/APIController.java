@@ -97,6 +97,9 @@ public class APIController {
     @Autowired
     private IDocumentRepository documentRepository;
 
+    @Autowired
+    private ContactService contactService;
+
     @RequestMapping(value = {RouteAPI.APICreateAccount}, method = RequestMethod.POST)
     public String AccountList(Model model, HttpServletResponse response, HttpServletRequest request) {
 
@@ -113,11 +116,11 @@ public class APIController {
         Account account = accountRepository.checkUniqueCode(modelString.getData3());
 
         if (account != null) {
-            if (!account.getRole().equals(modelString.getData4())&& !modelString.getData4().equals("Parent") ) {
+            if (!account.getRole().equals(modelString.getData4()) && !modelString.getData4().equals("Parent")) {
                 modelStringout.setData1("Registered wrong Role");
                 JsonServices.dd(JsonServices.ParseToJson(modelStringout), response);
                 return "";
-            }else if(modelString.getData4().equals("Parent")){
+            } else if (modelString.getData4().equals("Parent")) {
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                 Account account1 = new Account();
                 account1.setMail(modelString.getData1());
@@ -173,8 +176,6 @@ public class APIController {
             JsonServices.dd(JsonServices.ParseToJson(modelStringout), response);
             return "";
         }
-
-
 
 
     }
@@ -288,11 +289,11 @@ public class APIController {
     public void GetDocumentsLink(Model model, HttpServletResponse response, HttpServletRequest request) {
 
         List<Document> listDocuments = new ArrayList();
-        
+
         listDocuments = documentRepository.findAll();
 
         List<ModelString> modelStrings = new ArrayList<>();
-        
+
         for (Document item : listDocuments) {
             ModelString modelString = new ModelString();
             modelString.setData1(item.getLink());
@@ -309,28 +310,27 @@ public class APIController {
 
         int id = Integer.parseInt(request.getParameter("id"));
 
-        List<Course> list  = courseServices.findAll();
+        List<Course> list = courseServices.findAll();
 
-        for (int i = 0; i <list.size() ; i++) {
-            if(list.get(i).getTeacher().getId() == id){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getTeacher().getId() == id) {
 
-            }else {
+            } else {
                 list.remove(list.get(i));
-                i-=1;
+                i -= 1;
             }
         }
 
 
-
         List<ModelString> modelStringList = new ArrayList<>();
-        if(list.size()>0){
+        if (list.size() > 0) {
 
-            for (Course item:list   ) {
+            for (Course item : list) {
 
                 List<Exam> examList = examServices.findAAll();
 
                 for (int i = 0; i < examList.size(); i++) {
-                    if (examList.get(i).getIdCourse().getId().toString().equals(item.getId().toString())){
+                    if (examList.get(i).getIdCourse().getId().toString().equals(item.getId().toString())) {
                         ModelString modelString = new ModelString();
                         modelString.setData1(examList.get(i).getImage());
                         modelString.setData2(examList.get(i).getName());
@@ -350,8 +350,6 @@ public class APIController {
         }
 
 
-
-
         JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
     }
 
@@ -361,28 +359,27 @@ public class APIController {
 
         int id = Integer.parseInt(request.getParameter("id"));
 
-        List<Course> list  = courseServices.findAll();
+        List<Course> list = courseServices.findAll();
 
-        for (int i = 0; i <list.size() ; i++) {
-            if(list.get(i).getTeacher().getId() == id){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getTeacher().getId() == id) {
 
-            }else {
+            } else {
                 list.remove(list.get(i));
-                i-=1;
+                i -= 1;
             }
         }
 
 
-
         List<ModelString> modelStringList = new ArrayList<>();
-        if(list.size()>0){
+        if (list.size() > 0) {
 
-            for (Course item:list   ) {
+            for (Course item : list) {
 
                 List<Document> documentsList = documentService.findAll();
 
                 for (int i = 0; i < documentsList.size(); i++) {
-                    if (documentsList.get(i).getIdCourse().getId().toString().equals(item.getId().toString())){
+                    if (documentsList.get(i).getIdCourse().getId().toString().equals(item.getId().toString())) {
                         ModelString modelString = new ModelString();
                         modelString.setData1(documentsList.get(i).getIdCourse().getImage()
                         );
@@ -401,8 +398,6 @@ public class APIController {
         }
 
 
-
-
         JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
     }
 
@@ -410,14 +405,14 @@ public class APIController {
     public void GetSubject(Model model, HttpServletResponse response, HttpServletRequest request) {
 
         int id = Integer.parseInt(request.getParameter("id"));
-        List<Course> list  = courseServices.findAll();
+        List<Course> list = courseServices.findAll();
 
-        for (int i = 0; i <list.size() ; i++) {
-            if(list.get(i).getTeacher().getId() == id){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getTeacher().getId() == id) {
 
-            }else {
+            } else {
                 list.remove(list.get(i));
-                i-=1;
+                i -= 1;
             }
         }
 
@@ -425,16 +420,15 @@ public class APIController {
 
         for (int i = 0; i < list.size(); i++) {
 
-                ModelString modelString = new ModelString();
-                modelString.setData1(list.get(i).getImage()
-                );
-                modelString.setData2(list.get(i).getName());
-                modelString.setData3("");
-                modelString.setData4(list.get(i).getId().toString());
-                modelStringList.add(modelString);
+            ModelString modelString = new ModelString();
+            modelString.setData1(list.get(i).getImage()
+            );
+            modelString.setData2(list.get(i).getName());
+            modelString.setData3("");
+            modelString.setData4(list.get(i).getId().toString());
+            modelStringList.add(modelString);
 
         }
-
 
 
         JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
@@ -444,17 +438,16 @@ public class APIController {
     public void GetSubjectDetail(Model model, HttpServletResponse response, HttpServletRequest request) {
 
         int idCourse = Integer.parseInt(request.getParameter("id"));
-        List<Course> list  = courseServices.findAll();
+        List<Course> list = courseServices.findAll();
 
-        for (int i = 0; i <list.size() ; i++) {
-            if(list.get(i).getId() == idCourse){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId() == idCourse) {
 
-            }else {
+            } else {
                 list.remove(list.get(i));
-                i-=1;
+                i -= 1;
             }
         }
-
 
 
         ModelString modelString = new ModelString();
@@ -464,10 +457,9 @@ public class APIController {
             modelString.setData1(list.get(i).getId().toString());
             modelString.setData2(list.get(i).getName().toString());
             modelString.setData3(list.get(i).getDescription().toString());
-            modelString.setData4(String.valueOf(list.get(i).getDuration()) +  " Month");
+            modelString.setData4(String.valueOf(list.get(i).getDuration()) + " Month");
             modelString.setData5(list.get(i).getImage().toString());
         }
-
 
 
         JsonServices.dd(JsonServices.ParseToJson(modelString), response);
@@ -478,14 +470,14 @@ public class APIController {
     public void GetReouceDetail(Model model, HttpServletResponse response, HttpServletRequest request) {
 
         int idCourse = Integer.parseInt(request.getParameter("id"));
-        List<Document> list  = documentService.findAll();
+        List<Document> list = documentService.findAll();
 
-        for (int i = 0; i <list.size() ; i++) {
-            if(list.get(i).getIdCourse().getId() == idCourse){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getIdCourse().getId() == idCourse) {
 
-            }else {
+            } else {
                 list.remove(list.get(i));
-                i-=1;
+                i -= 1;
             }
         }
 
@@ -498,7 +490,6 @@ public class APIController {
         }
 
 
-
         JsonServices.dd(JsonServices.ParseToJson(modelString), response);
     }
 
@@ -508,14 +499,14 @@ public class APIController {
         int idCourse = Integer.parseInt(request.getParameter("id"));
         String Content = request.getParameter("content");
 
-        List<Document> list  = documentService.findAll();
+        List<Document> list = documentService.findAll();
 
-        for (int i = 0; i <list.size() ; i++) {
-            if(list.get(i).getIdCourse().getId() == idCourse){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getIdCourse().getId() == idCourse) {
 
-            }else {
+            } else {
                 list.remove(list.get(i));
-                i-=1;
+                i -= 1;
             }
         }
 
@@ -529,7 +520,6 @@ public class APIController {
         modelString.setData1("Done");
 
 
-
         JsonServices.dd(JsonServices.ParseToJson(modelString), response);
     }
 
@@ -541,16 +531,16 @@ public class APIController {
 
         List<Exam> examList = examServices.findAAll();
 
-        for (int i = 0; i <examList.size() ; i++) {
-            if(examList.get(i).getIdCourse().getId() == idCourse){
+        for (int i = 0; i < examList.size(); i++) {
+            if (examList.get(i).getIdCourse().getId() == idCourse) {
 
-            }else {
+            } else {
                 examList.remove(examList.get(i));
-                i-=1;
+                i -= 1;
             }
         }
 
-      List<ModelString> modelStringList =new ArrayList<>();
+        List<ModelString> modelStringList = new ArrayList<>();
         for (int i = 0; i < examList.size(); i++) {
             ModelString modelString = new ModelString();
             modelString.setData2(examList.get(i).getName());
@@ -570,20 +560,20 @@ public class APIController {
         List<SemesterCourse> coursesList = semesterCourseServiceImp.findAll();
         List<ClassroomSemester> classroomSemesterList = classroomSemesterService.findAll();
 
-        for (int i = 0; i <coursesList.size() ; i++) {
-            if(coursesList.get(i).getIdCourse().getId() == idCourse){
-            }else {
+        for (int i = 0; i < coursesList.size(); i++) {
+            if (coursesList.get(i).getIdCourse().getId() == idCourse) {
+            } else {
                 coursesList.remove(coursesList.get(i));
-                i-=1;
+                i -= 1;
             }
         }
 
-        List<ModelString> modelStringList =new ArrayList<>();
+        List<ModelString> modelStringList = new ArrayList<>();
         for (int i = 0; i < coursesList.size(); i++) {
 
-            for (ClassroomSemester item:classroomSemesterList   ) {
+            for (ClassroomSemester item : classroomSemesterList) {
 
-                if(coursesList.get(i).getIdSemester().getId() == item.getIdSemester().getId() ){
+                if (coursesList.get(i).getIdSemester().getId() == item.getIdSemester().getId()) {
 
                     ModelString modelString = new ModelString();
                     modelString.setData1(item.getIdClassroom().getId().toString());
@@ -592,7 +582,6 @@ public class APIController {
                 }
 
             }
-
 
 
         }
@@ -604,7 +593,7 @@ public class APIController {
     public void CreateExem(Model model, HttpServletResponse response, HttpServletRequest request) {
 
         int idCourse = Integer.parseInt(request.getParameter("id"));
-        String NameExam= request.getParameter("name");
+        String NameExam = request.getParameter("name");
         int IdClassroom = Integer.parseInt(request.getParameter("classroom"));
         String StartDay = request.getParameter("startday");
 
@@ -613,7 +602,7 @@ public class APIController {
         double randomDouble = Math.random();
         randomDouble = randomDouble * libraryimageList.size() + 1;
         int randomInt = (int) randomDouble;
-        randomInt -=1;
+        randomInt -= 1;
 
         Exam exam = new Exam();
 
@@ -621,8 +610,6 @@ public class APIController {
         exam.setIdCourse(new Course(idCourse));
         exam.setIdClassroom(new Classroom(IdClassroom));
         exam.setImage(libraryimageList.get(randomInt).getImage());
-
-
 
 
         try {
@@ -646,9 +633,9 @@ public class APIController {
 
         int idExam = Integer.parseInt(request.getParameter("id"));
 
-      Exam examList = examServices.findOne(idExam);
+        Exam examList = examServices.findOne(idExam);
 
-      ModelString modelString =new ModelString();
+        ModelString modelString = new ModelString();
         modelString.setData1(examList.getId().toString());
         modelString.setData2(examList.getName());
         modelString.setData3(examList.getImage());
@@ -666,9 +653,9 @@ public class APIController {
 
         int idCourse = Integer.parseInt(request.getParameter("idcourse"));
 
-        List<Mark> markList = markService.findbyCourseExam(new Course(idCourse),new Exam(idExam));
+        List<Mark> markList = markService.findbyCourseExam(new Course(idCourse), new Exam(idExam));
 
-        if(markList.isEmpty()){
+        if (markList.isEmpty()) {
 
 
             int id_class = examServices.findOne(idExam).getIdClassroom().getId();
@@ -676,9 +663,7 @@ public class APIController {
             List<ClassroomUser> classroomUser = classroomUserServiceImp.findUsersByClass(new Classroom(id_class));
 
 
-
-
-            for (ClassroomUser item:classroomUser ) {
+            for (ClassroomUser item : classroomUser) {
                 Mark mark = new Mark();
                 mark.setMark(0);
                 mark.setIdCourse(new Course(idCourse));
@@ -694,8 +679,8 @@ public class APIController {
 
         List<ModelString> modelStringList = new ArrayList<>();
 
-        for (Mark item: markList  ) {
-            ModelString modelString =new ModelString();
+        for (Mark item : markList) {
+            ModelString modelString = new ModelString();
             modelString.setData1(item.getId().toString());
             modelString.setData2(item.getIdUser().getName().toString());
             modelString.setData3(String.valueOf(item.getMark()));
@@ -704,7 +689,7 @@ public class APIController {
             modelStringList.add(modelString);
         }
 
-        JsonServices.dd(JsonServices.ParseToJson(modelStringList),response);
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
 
     }
 
@@ -715,15 +700,13 @@ public class APIController {
 
         int idCourse = Integer.parseInt(request.getParameter("idcourse"));
 
-        List<Mark> markList = markService.findbyCourseExam(new Course(idCourse),new Exam(idExam));
-
-
+        List<Mark> markList = markService.findbyCourseExam(new Course(idCourse), new Exam(idExam));
 
 
         List<ModelString> modelStringList = new ArrayList<>();
 
-        for (Mark item: markList  ) {
-            ModelString modelString =new ModelString();
+        for (Mark item : markList) {
+            ModelString modelString = new ModelString();
             modelString.setData1(item.getId().toString());
             modelString.setData2(item.getIdUser().getName().toString());
             modelString.setData3(String.valueOf(item.getMark()));
@@ -732,14 +715,16 @@ public class APIController {
             modelStringList.add(modelString);
         }
 
-        JsonServices.dd(JsonServices.ParseToJson(modelStringList),response);
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
 
     }
 
     @RequestMapping(value = {RouteAPI.MarkCreatePost}, method = RequestMethod.POST)
     public void MarkCreatePost(Model model, HttpServletResponse response, HttpServletRequest request, @RequestBody List<ModelString> data) throws Exception {
 
-        for (ModelString item:data ) {
+        List<Account> accountList = accountRepository.findAll();
+
+        for (ModelString item : data) {
             Mark mark = new Mark();
             mark.setId(Integer.parseInt(item.getData1()));
             mark.setIdUser(new Account(Integer.parseInt(item.getData8())));
@@ -751,8 +736,8 @@ public class APIController {
 
             Notification n = new Notification();
             Date date = new Date();
-            n.setName( "The subject "+courseServices.findOne(Integer.parseInt(data.get(0).getData6())).getName()+" has been given extra points ");
-            n.setContent( "The subject "+courseServices.findOne(Integer.parseInt(data.get(0).getData6())).getName()+" has been given extra points.Please check your score " );
+            n.setName("The subject " + courseServices.findOne(Integer.parseInt(data.get(0).getData6())).getName() + " has been given extra points ");
+            n.setContent("The subject " + courseServices.findOne(Integer.parseInt(data.get(0).getData6())).getName() + " has been given extra points.Please check your score ");
             n.setCreateDate(date);
             Notification ni = ns.AddNotification(n);
             List<AccountToken> listToken = accToken.GetTokenById(Integer.parseInt(item.getData8()));
@@ -764,19 +749,134 @@ public class APIController {
             accountNotification.setIdNotification(ni);
             accountNotification.setIdUser(mark.getIdUser());
             NotificationUser s = ns.AddAccountNotification(accountNotification);
-            if (listtokenstring.size()>0){
+            if (listtokenstring.size() > 0) {
                 firebaseMessagingService.sendMorePeople(ni, listtokenstring);
+            }
+
+
+            for (Account item1 : accountList) {
+                if (item1.getCode().trim().equals(item.getData8())) {
+                    System.out.println("nhhan");
+                    n = new Notification();
+                    date = new Date();
+                    n.setName("The subject " + courseServices.findOne(Integer.parseInt(data.get(0).getData6())).getName() + " has been given extra points ");
+                    n.setContent("The subject " + courseServices.findOne(Integer.parseInt(data.get(0).getData6())).getName() + " has been given extra points.Please check your score ");
+                    n.setCreateDate(date);
+                    ni = ns.AddNotification(n);
+                    listToken = accToken.GetTokenById(item1.getId());
+                    listtokenstring = new ArrayList<>();
+                    for (AccountToken accountToken : listToken) {
+                        listtokenstring.add(accountToken.getToken());
+                    }
+                    accountNotification = new NotificationUser();
+                    accountNotification.setIdNotification(ni);
+                    accountNotification.setIdUser(item1);
+                    s = ns.AddAccountNotification(accountNotification);
+                    if (listtokenstring.size() > 0) {
+                        firebaseMessagingService.sendMorePeople(ni, listtokenstring);
+                    }
+
+                }
             }
 
 
         }
 
 
+        ModelString modelString = new ModelString();
+        modelString.setData1("Done");
+        JsonServices.dd(JsonServices.ParseToJson(modelString), response);
+
+    }
+
+
+    @RequestMapping(value = {RouteAPI.GetContact}, method = RequestMethod.GET)
+    public void GetContact(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+            int id = Integer.parseInt(request.getParameter("idUser"));
+
+            List<Contact> contactList = contactService.findAll();
+
+        for (int i = 0; i <contactList.size() ; i++) {
+
+            if(contactList.get(i).getIdaccount().getId() == id){}
+            else {
+                contactList.remove(contactList.get(i));
+            }
+        }
+
+        List<ModelString> modelStringList = new ArrayList<>();
+
+        for (Contact item :contactList  ) {
+            ModelString modelString = new ModelString();
+            modelString.setData1(item.getId().toString());
+            modelString.setData2(item.getName());
+            modelStringList.add(modelString);
+        }
+
+
+
+        JsonServices.dd(JsonServices.ParseToJson(modelStringList), response);
+
+    }
+
+    @RequestMapping(value = {RouteAPI.GetContactDetail}, method = RequestMethod.GET)
+    public void GetContactDetail(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+       Contact contact = contactService.findOne(id);
+
+
+        ModelString modelString = new ModelString();
+        modelString.setData1(contact.getId().toString());
+        modelString.setData2(contact.getName());
+        String  str = "";
+        switch (contact.getStyle()){
+            case 1:
+                str="App Error" ; 
+                break;
+
+            case 2:
+                str="Error data" ;
+                break;
+
+            case 3:
+                str="Orther" ;
+                break;
+
+
+        }
+
+        modelString.setData3(str);
+        modelString.setData4(contact.getContact());
+
+        JsonServices.dd(JsonServices.ParseToJson(modelString), response);
+
+    }
+
+
+    @RequestMapping(value = {RouteAPI.CreateContact}, method = RequestMethod.POST)
+    public void CreateContact(Model model, HttpServletResponse response, HttpServletRequest request) {
+
+        int style = Integer.parseInt(request.getParameter("style"));
+        int idaccount  = Integer.parseInt(request.getParameter("idaccount"));
+        String name  = request.getParameter("name");
+        String contact  = request.getParameter("contact");
+
+        Contact contact1 = new Contact();
+        contact1.setName(name);
+        contact1.setStyle(style);
+        contact1.setContact(contact);
+        contact1.setIdaccount(new Account(idaccount));
+        contactService.saveContact(contact1);
 
 
         ModelString modelString = new ModelString();
         modelString.setData1("Done");
         JsonServices.dd(JsonServices.ParseToJson(modelString),response);
 
+
     }
+
 }

@@ -41,7 +41,7 @@ public class RouteWeb {
     public final static String CourseGetCreateURL = "/course/create";
     
     public final static String CourseGetUpdateURL = "/course/update";
-    
+
         //Route Course
     public final static String SemesterManageURL = "/semester/index";
     
@@ -58,5 +58,8 @@ public class RouteWeb {
     public final static String ClassroomAddStudent = "classroom/addstudent";
     
     public final static String CourseSetTeacher = "course/setTeacher";
+
+
+    public final static String ContactIndex = "contact/index";
 
 }

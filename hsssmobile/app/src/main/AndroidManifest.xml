@@ -23,6 +23,15 @@
         android:theme="@style/Theme.Hss"
         tools:targetApi="31">
         <activity
+            android:name=".CreateReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.DetailContactActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ContactActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screen.ParentNotificationActivity"
             android:exported="false" />
         <activity
@@ -31,11 +40,9 @@
         <activity
             android:name=".Screen.TestDetailsParentActivity"
             android:exported="false" />
-
         <activity
             android:name=".Screen.AccountParentActivity"
             android:exported="false" />
-
         <activity
             android:name=".TeacherAccountActivity"
             android:exported="false" />
@@ -43,10 +50,10 @@
             android:name=".Screen.StudetntAccountActivity"
             android:exported="false" />
 
-
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/goc_bo_mautim" />
+
         <activity
             android:name=".Screen.AddMarkActivity"
             android:exported="false" />

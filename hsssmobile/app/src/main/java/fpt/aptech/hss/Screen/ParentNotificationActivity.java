@@ -1,11 +1,14 @@
 package fpt.aptech.hss.Screen;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +18,7 @@ import java.util.List;
 import fpt.aptech.hss.API.NotificationAPI;
 import fpt.aptech.hss.BaseAdapter.NotificationAdapter;
 import fpt.aptech.hss.Controller.CallNav;
+import fpt.aptech.hss.Controller.CallNavParent;
 import fpt.aptech.hss.Model.ModelString;
 import fpt.aptech.hss.R;
 import retrofit2.Call;
@@ -32,10 +36,22 @@ public class ParentNotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_notification);
+        getSupportActionBar().hide();
         BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        CallNav callNav = new CallNav();
+        CallNavParent callNav = new CallNavParent();
         callNav.call(bottom_navigation, R.id.page_3, ParentNotificationActivity.this);
         recyclerView = findViewById(R.id.rcvnotifiactionparent);
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_schedule);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.homecolor)));
+        androidx.appcompat.widget.AppCompatTextView n = findViewById(R.id.tvTitile);
+        ScrollView scrollView = findViewById(R.id.scrollView);
+
+        callNav.setDisplay(scrollView, ParentNotificationActivity.this,0.88);
+        n.setText("Notification");
+
+        GetTokenData();
 
     }
     private void GetTokenData(){

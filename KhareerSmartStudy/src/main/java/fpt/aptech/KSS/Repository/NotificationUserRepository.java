@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author LÊ HỮU TÂM
  */
 public interface NotificationUserRepository extends JpaRepository<NotificationUser, Integer> {
-    @Query("SELECT n FROM NotificationUser n WHERE n.idUser = :idUser")
+    @Query("SELECT n FROM NotificationUser n WHERE n.idUser = :idUser ORDER BY n.createDate DESC")
     List<NotificationUser> findByAccount(@PathVariable("idUser") Account idUser);
-    @Query("SELECT n FROM NotificationUser n WHERE n.idNotification = :idNotification")
-    List<NotificationUser> findByNotificationID(@PathVariable("idNotification") Notification idNotification);
+    @Query("SELECT n FROM NotificationUser n WHERE n.idNotification = :idNotification ORDER BY n.createDate DESC")
+    List<NotificationUser> findByNotificationID(@PathVariable("idNotification") Notification idNotification );
 }

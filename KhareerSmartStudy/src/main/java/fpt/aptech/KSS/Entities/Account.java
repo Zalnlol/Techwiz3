@@ -56,6 +56,7 @@ public class Account implements Serializable {
     @Column(name = "name")
     private String name;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 20)
     @Column(name = "phone")
     private String phone;
@@ -78,6 +79,8 @@ public class Account implements Serializable {
     @Size(max = 250)
     @Column(name = "password")
     private String password;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idaccount")
+    private List<Contact> contactList;
     @OneToMany(mappedBy = "id")
     private List<AccountToken> accountTokenList;
 
@@ -228,6 +231,14 @@ public class Account implements Serializable {
     public String toString() {
         return "fpt.aptech.KSS.Entities.Account[ id=" + id + " ]";
     }
+    @JsonBackReference
+    @XmlTransient
+    public List<AccountToken> getAccountTokenList() {
+        return accountTokenList;
+    }
+    public void setAccountTokenList(List<AccountToken> accountTokenList) {
+        this.accountTokenList = accountTokenList;
+    }
 
     public String getMail() {
         return mail;
@@ -284,7 +295,6 @@ public class Account implements Serializable {
     public void setCode(String code) {
         this.code = code;
     }
-
     public String getPassword() {
         return password;
     }
@@ -292,14 +302,15 @@ public class Account implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    @JsonBackReference
-    @XmlTransient
-    public List<AccountToken> getAccountTokenList() {
-        return accountTokenList;
-    }
 
-    public void setAccountTokenList(List<AccountToken> accountTokenList) {
-        this.accountTokenList = accountTokenList;
-    }
+
+//    @XmlTransient
+//    public List<Contact> getContactList() {
+//        return contactList;
+//    }
+//    @XmlTransient
+//    public void setContactList(List<Contact> contactList) {
+//        this.contactList = contactList;
+//    }
     
 }

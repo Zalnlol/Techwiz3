@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".Screen.ParentNotificationActivity">
+    tools:context=".ContactActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="621dp"
+        android:layout_height="632dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,37 +21,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="vertical">
 
 
-            <TextView
+            <Button
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="50dp"
-                android:text="Notification"
-                android:textColor="@color/white"
-                android:textSize="12pt"
-                android:textStyle="bold" />
+                android:text="Create Report" />
 
-
-            <LinearLayout
+            <ListView
+                android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="508dp"
-                android:background="@xml/duongvien_goctron"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcvnotifiactionparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="502dp"
-                    android:layout_gravity="center_vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-            </LinearLayout>
-
+                android:layout_height="586dp" />
         </LinearLayout>
     </ScrollView>
 
