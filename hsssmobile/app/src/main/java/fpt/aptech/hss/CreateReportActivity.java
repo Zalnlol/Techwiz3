@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ public class CreateReportActivity extends AppCompatActivity {
         BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         CallNavParent callNav = new CallNavParent();
         callNav.call(bottom_navigation, R.id.page_4, CreateReportActivity.this);
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        callNav.setDisplay(scrollView, CreateReportActivity.this, 0.8);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_schedule);

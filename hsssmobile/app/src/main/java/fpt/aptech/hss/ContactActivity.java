@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -46,11 +47,14 @@ public class ContactActivity extends AppCompatActivity {
         BottomNavigationView bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         CallNavParent callNav = new CallNavParent();
         callNav.call(bottom_navigation, R.id.page_4, ContactActivity.this);
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        callNav.setDisplay(scrollView, ContactActivity.this, 0.8);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_schedule);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.homecolor)));
         androidx.appcompat.widget.AppCompatTextView n = findViewById(R.id.tvTitile);
+
         n.setText("Contact");
 
 
